@@ -1,0 +1,42 @@
+<div class="content">
+  <div class="login-container">
+    <form [formGroup]="loginForm" (ngSubmit)="logging()">
+      <h2>Zaloguj się na konto</h2>
+      <div class="input-box">
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            class="login"
+            placeholder="Login"
+            autocomplete="off"
+            formControlName="login"
+            required
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            type="password"
+            class="password"
+            placeholder="Hasło"
+            autocomplete="off"
+            formControlName="password"
+            required
+          />
+        </mat-form-field>
+      </div>
+      <input
+        type="submit"
+        value="Zaloguj"
+        class="loginButton"
+        [disabled]="!loginForm.valid"
+      />
+      <div class="separator">
+        <span>Lub</span>
+      </div>
+      <a routerLink="/register"><input type="reset" value="Zarejestruj" /></a>
+    </form>
+  </div>
+</div>

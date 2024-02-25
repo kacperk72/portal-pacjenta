@@ -1,0 +1,64 @@
+<div id="content">
+  <div id="register-container">
+    <h2>Zarejestruj się</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+      <div class="input-box">
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            id="name"
+            placeholder="Imie"
+            autocomplete="off"
+            formControlName="name"
+            required
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            id="surname"
+            placeholder="Nazwisko"
+            autocomplete="off"
+            formControlName="surname"
+            required
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            id="login"
+            placeholder="Login"
+            autocomplete="off"
+            formControlName="login"
+            required
+          />
+          <mat-error>Minimalna długość 3 znaki</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            type="password"
+            id="password"
+            placeholder="Hasło"
+            autocomplete="off"
+            formControlName="password"
+            required
+          />
+          <mat-error>Minimalna długość 4 znaki</mat-error>
+        </mat-form-field>
+      </div>
+      <input
+        type="submit"
+        value="Zarejestruj"
+        id="registerInput"
+        [disabled]="!registerForm.valid"
+      />
+    </form>
+  </div>
+</div>
