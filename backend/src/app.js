@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const patientRoutes = require("./routes/patientRoutes");
 const doctorRoutes = require("./routes/doctorRoutes");
+const userRoutes = require("./routes/authRoutes");
 const sequelize = require("./config/db");
 const session = require("express-session");
 const passport = require("./config/passportConfig");
@@ -31,6 +32,7 @@ sequelize
 
 app.use("/patients", patientRoutes);
 app.use("/doctor", doctorRoutes);
+app.use("/user", userRoutes);
 
 app.use((req, res, next) => {
   res.status(404).send("Nie znaleziono strony");

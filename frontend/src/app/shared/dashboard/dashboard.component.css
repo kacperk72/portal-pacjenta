@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  justify-content: center;
+  border: 1px solid black;
+}
+
+.content {
+  margin-top: 50px;
+  width: 80vw;
+  min-height: 60vh;
+  text-align: center;
+  border: 1px solid red;
+  display: flex;
+}
+
+.profile-img {
+  width: 40%;
+  min-height: 60vh;
+  padding: 10px;
+
+  border: 1px solid green;
+}
+
+.dashboard-data {
+  width: 60%;
+  min-height: 60vh;
+  padding: 10px;
+  font-size: 25px;
+  border: 1px solid green;
+}

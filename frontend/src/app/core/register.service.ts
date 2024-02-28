@@ -1,26 +1,24 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { UserRegister } from './login.service';
 
 export interface RegisterUser {
-  name: string;
-  surname: string;
-  login: string;
+  username: string;
   password: string;
+  email: string;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class RegisterService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  registerUser(userData: RegisterUser): Observable<any> {
-    const mockResponse = {
-      success: true,
-      message: 'Rejestracja zakończona sukcesem',
-      data: { userId: '123', token: 'abc123' },
-    };
-
-    return of(mockResponse);
+  registerUser(userData: UserRegister): Observable<any> {
+    return this.http.post<{ token: string }>(
+      'http://localhost:3000/user/register',
+      userData
+    );
   }
 }

@@ -7,37 +7,12 @@
           <input
             matInput
             type="text"
-            id="name"
-            placeholder="Imie"
+            id="username"
+            placeholder="Nazwa użytkownika"
             autocomplete="off"
-            formControlName="name"
+            formControlName="username"
             required
           />
-        </mat-form-field>
-
-        <mat-form-field>
-          <input
-            matInput
-            type="text"
-            id="surname"
-            placeholder="Nazwisko"
-            autocomplete="off"
-            formControlName="surname"
-            required
-          />
-        </mat-form-field>
-
-        <mat-form-field>
-          <input
-            matInput
-            type="text"
-            id="login"
-            placeholder="Login"
-            autocomplete="off"
-            formControlName="login"
-            required
-          />
-          <mat-error>Minimalna długość 3 znaki</mat-error>
         </mat-form-field>
 
         <mat-form-field>
@@ -51,6 +26,18 @@
             required
           />
           <mat-error>Minimalna długość 4 znaki</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            id="email"
+            placeholder="Email"
+            autocomplete="off"
+            formControlName="email"
+            required
+          />
         </mat-form-field>
       </div>
       <input

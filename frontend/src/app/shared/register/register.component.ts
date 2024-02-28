@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { RegisterService } from '../../core/register.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -19,44 +20,52 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   selected = 'pacjent';
   daneUsera = {
-    name: '',
-    surname: '',
-    login: '',
+    username: '',
     password: '',
+    email: '',
   };
-  userId = '';
-  userName = '';
-  userSurname = '';
-  userLogin = '';
+  username = '';
   userPassword = '';
-  userRole = '';
+  email = '';
+  responsedata: any;
+  actualRole = '';
 
-  constructor(private fb: FormBuilder, private service: RegisterService) {}
+  constructor(
+    private fb: FormBuilder,
+    private service: RegisterService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      name: [this.userName, Validators.required],
-      surname: [this.userSurname, Validators.required],
-      login: [this.userLogin, [Validators.required, Validators.minLength(3)]],
+      username: [this.username, Validators.required],
       password: [
         this.userPassword,
         [Validators.required, Validators.minLength(4)],
       ],
+      email: [this.email, Validators.required],
     });
   }
 
   register() {
-    this.userName = this.registerForm.get('name')?.value;
-    this.userSurname = this.registerForm.get('surname')?.value;
-    this.userLogin = this.registerForm.get('login')?.value;
+    this.username = this.registerForm.get('username')?.value;
     this.userPassword = this.registerForm.get('password')?.value;
+    this.email = this.registerForm.get('email')?.value;
+
     this.daneUsera = {
-      name: this.userName,
-      surname: this.userSurname,
-      login: this.userLogin,
+      username: this.username,
+      email: this.email,
       password: this.userPassword,
     };
 
-    this.service.registerUser(this.daneUsera).subscribe(() => {});
+    this.service.registerUser(this.daneUsera).subscribe((res) => {
+      if (res != null) {
+        this.responsedata = res;
+        localStorage.setItem('token', this.responsedata.token);
+        localStorage.setItem('rola', this.responsedata.user.Role);
+        localStorage.setItem('username', this.responsedata.user.Username);
+        this.router.navigate(['/']);
+      }
+    });
   }
 }

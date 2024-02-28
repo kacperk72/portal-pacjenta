@@ -1,24 +1,28 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 export interface User {
-  login: string;
+  username: string;
   password: string;
+}
+
+export interface UserRegister {
+  username: string;
+  password: string;
+  email: string;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   proceedLogin(userData: User): Observable<any> {
-    const mockResponse = {
-      success: true,
-      message: 'Logowanie zakończone sukcesem',
-      data: { userId: '123', token: 'abc123' },
-    };
-
-    return of(mockResponse);
+    return this.http.post<{ token: string }>(
+      'http://localhost:3000/user/login',
+      userData
+    );
   }
 }

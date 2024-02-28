@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   userLogin = '';
   userPassword = '';
   loginData = {
-    login: '',
+    username: '',
     password: '',
   };
   subscription1$!: Subscription;
@@ -45,18 +45,16 @@ export class LoginComponent implements OnInit {
   logging() {
     this.userLogin = this.loginForm.get('login')?.value;
     this.userPassword = this.loginForm.get('password')?.value;
-    this.loginData = { login: this.userLogin, password: this.userPassword };
+    this.loginData = { username: this.userLogin, password: this.userPassword };
 
     this.subscription1$ = this.service
       .proceedLogin(this.loginData)
       .subscribe((response: any) => {
         if (response != null) {
           this.responsedata = response;
-          // console.log(this.responsedata);
-          this.actualRole = this.responsedata.result.role;
-          // console.log(this.actualRole);
           localStorage.setItem('token', this.responsedata.token);
-          localStorage.setItem('rola', this.actualRole);
+          localStorage.setItem('rola', this.responsedata.user.Role);
+          localStorage.setItem('username', this.responsedata.user.Username);
           this.router.navigate(['/']);
         } else {
           window.alert('nieudana próba logowania');

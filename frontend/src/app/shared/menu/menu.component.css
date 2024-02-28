@@ -4,10 +4,12 @@ mat-toolbar {
   left: 0;
   right: 0;
   z-index: 1000;
+  background-color: white;
+  justify-content: space-between;
 }
 
-.spacer {
-  flex: 1 1 auto;
+mat-toolbar a img {
+  margin-top: 20px;
 }
 
 .menu-container {
@@ -16,9 +18,8 @@ mat-toolbar {
 }
 
 .menu-option {
-  height: 30px;
   margin-top: 25px;
-  margin-right: 60px;
+  margin-right: 30px;
 }
 
 .logo {
@@ -31,11 +32,50 @@ mat-toolbar {
 
 .logo-text {
   font-size: 30px;
-  margin-top: 20px;
+  margin-top: 40px;
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 a {
   text-decoration: none;
   color: black;
+}
+
+.userName {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 30px;
+  margin-top: 15px;
+  color: black;
+}
+
+button {
+  background-color: #56baed;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 13px;
+  -webkit-box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+  box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #39ace7;
+}
+
+button:active {
+  -moz-transform: scale(0.95);
+  -webkit-transform: scale(0.95);
+  -o-transform: scale(0.95);
+  -ms-transform: scale(0.95);
+  transform: scale(0.95);
 }
