@@ -1,10 +1,58 @@
 <div class="container">
-  <div>1. filtrowanie</div>
+  <!-- <div>1. filtrowanie</div>
   <div>2. wybieranie wizyty i terminu</div>
   <div>3. zatwierdzenie</div>
   <div>4. ankieta przed wizytą</div>
   <div>
     5. przekierowanie na AI-doctor gdzie będą zalecenia wygenerowane prze AI na
     podstawie objawów
+  </div> -->
+  <div class="content">
+    <div class="head-text">Umów wizytę u najlepszego specjalisty</div>
+    <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+      <div class="visit-selects">
+        <p-dropdown
+          formControlName="specialization"
+          [options]="specializations"
+          optionLabel="specialization"
+          placeholder="Specjalizacja"
+          autoWidth="false"
+          [style]="{ width: '200px' }"
+        >
+          <ng-template pTemplate="selectedItem" let-selectedOption>
+            <div>{{ selectedOption }}</div>
+          </ng-template>
+          <ng-template let-specialization pTemplate="item">
+            <div>{{ specialization }}</div>
+          </ng-template>
+        </p-dropdown>
+
+        <p-dropdown
+          formControlName="location"
+          [options]="locations"
+          optionLabel="location"
+          placeholder="Miasto"
+          [style]="{ width: '200px' }"
+        >
+          <ng-template pTemplate="selectedItem" let-selectedOption>
+            <div>{{ selectedOption }}</div>
+          </ng-template>
+          <ng-template let-location pTemplate="item">
+            <div>{{ location }}</div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+      <div class="visit-switch">
+        <mat-icon>apartment</mat-icon> W gabinecie
+        <p-inputSwitch formControlName="appointmentType"></p-inputSwitch>
+        <mat-icon>home</mat-icon> Online
+      </div>
+      <div>
+        @if (searchForm.get('specialization')?.value &&
+        searchForm.get('location')?.value) {
+        <p-button label="Szukaj" severity="secondary"></p-button>
+        }
+      </div>
+    </form>
   </div>
 </div>

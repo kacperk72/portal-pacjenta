@@ -1,11 +1,54 @@
 .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 94vh;
+  justify-content: center;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.2)
+    ),
+    url("../../../assets/img/tło1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.content {
+  width: 30vw;
+  min-height: 20vh;
+  text-align: center;
   display: block;
-  position: absolute;
-  top: 30%;
-  left: 40%;
-  font-size: 25px;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 4vh;
 }
 
 .container div {
   margin-bottom: 10px;
+}
+
+.head-text {
+  font-size: 30px;
+  color: white;
+}
+
+.visit-switch {
+  margin: 10px;
+  font-size: 20px;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+p-inputSwitch,
+p-button {
+  margin: 10px;
+}
+
+.visit-selects p-dropdown {
+  margin: 10px;
+}
+
+.visit-selects {
+  margin-top: 30px;
 }

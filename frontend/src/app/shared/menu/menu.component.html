@@ -1,7 +1,7 @@
 <div class="menu-container">
   <mat-toolbar color="primary">
     <a class="logo-link" routerLink="/">
-      <img class="logo" src="../../../assets/img/logo.png" />
+      <img class="logo" src="../../../assets/img/logo2.jpg" />
       <div class="logo-text">Portal pacjenta</div>
     </a>
     @if(username) {
@@ -10,24 +10,24 @@
 
     <div>
       <button class="menu-option" mat-button routerLink="/book-visit">
-        Umów wizytę
+        <mat-icon>search</mat-icon> Umów wizytę
       </button>
       <button class="menu-option" mat-button routerLink="/ai-doctor">
-        AI-Doctor
+        <mat-icon>developer_board</mat-icon> AI-Doctor
       </button>
       <button class="menu-option" mat-button routerLink="/my-account">
-        Moje konto
+        <mat-icon>person</mat-icon> Moje konto
       </button>
       @if(!username) {
       <button class="menu-option" mat-button routerLink="/login">
-        Zaloguj
+        <mat-icon aria-hidden="false">login</mat-icon> Zaloguj
       </button>
       <button class="menu-option" mat-button routerLink="/register">
-        Zarejestruj się
+        <mat-icon aria-hidden="false">person_add</mat-icon>Zarejestruj się
       </button>
       } @else {
       <button class="menu-option" mat-button (click)="logout()">
-        Wyloguj się
+        <mat-icon aria-hidden="false">logout</mat-icon> Wyloguj się
       </button>
       }
     </div>
