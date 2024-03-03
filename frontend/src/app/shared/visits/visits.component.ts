@@ -10,7 +10,9 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { MatIconModule } from '@angular/material/icon';
 import { ButtonModule } from 'primeng/button';
-
+import { ToolbarModule } from 'primeng/toolbar';
+import { CardModule } from 'primeng/card';
+import { CalendarModule } from 'primeng/calendar';
 @Component({
   selector: 'app-visits',
   standalone: true,
@@ -25,6 +27,9 @@ import { ButtonModule } from 'primeng/button';
     InputSwitchModule,
     MatIconModule,
     ButtonModule,
+    ToolbarModule,
+    CardModule,
+    CalendarModule,
   ],
   templateUrl: './visits.component.html',
   styleUrl: './visits.component.css',
@@ -34,13 +39,16 @@ export class VisitsComponent implements OnInit {
     specialization: new FormControl(''),
     location: new FormControl(''),
     appointmentType: new FormControl(true),
+    date: new FormControl(''),
   });
   specializations = ['Ginekolog'];
   locations = ['Kraków'];
+  showDoctors: boolean = false;
 
   ngOnInit(): void {}
 
   onSubmit() {
+    this.showDoctors = true;
     console.log(this.searchForm.value);
   }
 }
