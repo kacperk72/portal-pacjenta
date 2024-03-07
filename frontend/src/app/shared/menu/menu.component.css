@@ -60,7 +60,7 @@ a {
 }
 
 button {
-  background-color: #56baed;
+  background-color: #2563eb;
   border: none;
   color: white;
   padding: 10px 25px;
@@ -81,7 +81,7 @@ button {
 }
 
 button:hover {
-  background-color: #39ace7;
+  background-color: #1f55c7;
 }
 
 button:active {
