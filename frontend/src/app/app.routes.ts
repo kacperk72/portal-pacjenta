@@ -4,7 +4,6 @@ import { RegisterComponent } from './shared/register/register.component';
 import { DashboardComponent } from './shared/dashboard/dashboard.component';
 import { VisitsComponent } from './shared/visits/visits.component';
 import { AiDoctorComponent } from './shared/ai-doctor/ai-doctor.component';
-import { AccountComponent } from './shared/account/account.component';
 
 export const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -12,5 +11,5 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'book-visit', component: VisitsComponent },
   { path: 'ai-doctor', component: AiDoctorComponent },
-  { path: 'my-account', component: AccountComponent },
+  { path: 'my-account', component: DashboardComponent },
 ];
