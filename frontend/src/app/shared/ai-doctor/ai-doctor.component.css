@@ -2,7 +2,7 @@
   color: black;
 }
 
-.container {
+.background {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,7 +14,7 @@
   background-position: right center;
 }
 
-.container div {
+.background div {
   margin-bottom: 10px;
 }
 

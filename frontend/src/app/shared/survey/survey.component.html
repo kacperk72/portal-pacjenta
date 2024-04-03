@@ -1,8 +1,187 @@
 <div class="modal-header">
   <h4 class="modal-title">Wypełnij ankietę przed wizytą</h4>
 </div>
-<div class="modal-body"></div>
+<div class="modal-body">
+  @if(step===0){
+  <div class="mb-3">
+    <label class="survey-label" for="dropdownId">Powód wizyty</label>
+    <p-dropdown
+      class="dropdown-select"
+      [options]="visitOptions"
+      [(ngModel)]="selectedVisitReason"
+      optionLabel="name"
+      [showClear]="true"
+      placeholder="Powód wizyty"
+      id="dropdownId"
+    ></p-dropdown>
+  </div>
+  } @if(step===1){
+  <div class="mb-3">
+    <label class="survey-label" for="dropdownId"
+      >Jak długo trwają objawy?</label
+    >
+    <p-dropdown
+      class="dropdown-select"
+      [options]="symptomsTime"
+      [(ngModel)]="symptomsTimeChoosen"
+      optionLabel="name"
+      [showClear]="true"
+      placeholder="Powód wizyty"
+      id="dropdownId"
+    ></p-dropdown>
+  </div>
+  <div class="mb-3">
+    <label class="survey-label" for="dropdownId"
+      >Czy występowała podwyższona temperatura?</label
+    >
+    <p-dropdown
+      class="dropdown-select"
+      [options]="highTemperature"
+      [(ngModel)]="highTemperatureChoosen"
+      optionLabel="name"
+      [showClear]="true"
+      placeholder="Powód wizyty"
+      id="dropdownId"
+    ></p-dropdown>
+  </div>
+  <div class="mb-3">
+    <label class="survey-label" for="dropdownId"
+      >Czy ma Pan/Pani kaszel? Jeśli tak to jaki?</label
+    >
+    <p-dropdown
+      class="dropdown-select"
+      [options]="haveCough"
+      [(ngModel)]="haveCoughChoosen"
+      optionLabel="name"
+      [showClear]="true"
+      placeholder="Powód wizyty"
+      id="dropdownId"
+    ></p-dropdown>
+  </div>
+  <div class="mb-3">
+    <label class="survey-label" for="dropdownId"
+      >Czy odczuwasz duszności?</label
+    >
+    <p-dropdown
+      class="dropdown-select"
+      [options]="haveNoBreath"
+      [(ngModel)]="haveNoBreathChoosen"
+      optionLabel="name"
+      [showClear]="true"
+      placeholder="Powód wizyty"
+      id="dropdownId"
+    ></p-dropdown>
+  </div>
+  <div class="mb-3">
+    <label class="survey-label" for="dropdownId">Czy boli cię gardło?</label>
+    <p-dropdown
+      class="dropdown-select"
+      [options]="haveThroatAche"
+      [(ngModel)]="haveThroatAcheChoosen"
+      optionLabel="name"
+      [showClear]="true"
+      placeholder="Powód wizyty"
+      id="dropdownId"
+    ></p-dropdown>
+  </div>
+  <div class="mb-3">
+    <label class="survey-label" for="dropdownId">Czy masz katar?</label>
+    <p-dropdown
+      class="dropdown-select"
+      [options]="haveRunnyNose"
+      [(ngModel)]="haveRunnyNoseChoosen"
+      optionLabel="name"
+      [showClear]="true"
+      placeholder="Powód wizyty"
+      id="dropdownId"
+    ></p-dropdown>
+  </div>
+  <div class="mb-3">
+    <label class="survey-label" for="dropdownId"
+      >Czy masz problemy z brzuchem? Jeśli tak to jakie?</label
+    >
+    <p-dropdown
+      class="dropdown-select"
+      [options]="haveStomachAche"
+      [(ngModel)]="haveStomachAcheChoosen"
+      optionLabel="name"
+      [showClear]="true"
+      placeholder="Powód wizyty"
+      id="dropdownId"
+    ></p-dropdown>
+  </div>
+  <div class="mb-3">
+    <label class="survey-label" for="dropdownId"
+      >Czy odczuwasz inne dolegliwości?, Jesli tak to jakie?</label
+    >
+    <p-dropdown
+      class="dropdown-select"
+      [options]="haveOtherSymptoms"
+      [(ngModel)]="haveOtherSymptomsChoosen"
+      optionLabel="name"
+      [showClear]="true"
+      placeholder="Powód wizyty"
+      id="dropdownId"
+    ></p-dropdown>
+  </div>
+  } @if(step===2){
+  <div class="mb-3">
+    <label class="survey-label" for="dropdownId"
+      >Czy przyjmujesz jakieś leki?</label
+    >
+    <p-dropdown
+      class="dropdown-select"
+      [options]="takeMedications"
+      [(ngModel)]="takeMedicationsChoosen"
+      optionLabel="name"
+      [showClear]="true"
+      placeholder="Powód wizyty"
+      id="dropdownId"
+    ></p-dropdown>
+  </div>
+
+  <div class="mb-3">
+    <label class="survey-label" for="dropdownId"
+      >Czy masz alergię na jakieś leki?</label
+    >
+    <p-dropdown
+      class="dropdown-select"
+      [options]="hasAllergy"
+      [(ngModel)]="hasAllergyChoosen"
+      optionLabel="name"
+      [showClear]="true"
+      placeholder="Powód wizyty"
+      id="dropdownId"
+    ></p-dropdown>
+  </div>
+
+  <div class="mb-3">
+    <label class="survey-label" for="dropdownId"
+      >Czy chorujesz na choroby przewlekłe?</label
+    >
+    <p-dropdown
+      class="dropdown-select"
+      [options]="hasChronicDiseases"
+      [(ngModel)]="hasChronicDiseasesChoosen"
+      optionLabel="name"
+      [showClear]="true"
+      placeholder="Powód wizyty"
+      id="dropdownId"
+    ></p-dropdown>
+  </div>
+  }
+</div>
 <div class="modal-footer">
+  @if(step < 4) {
+  <div class="btn-navigation">
+    <button type="button" class="btn btn-secondary" (click)="previousStep()">
+      Wróć
+    </button>
+    <button type="button" class="btn btn-primary ms-3" (click)="nextStep()">
+      Dalej
+    </button>
+  </div>
+  } @if(step === 4) {
   <button
     type="button"
     class="btn btn-outline-dark"
@@ -13,8 +192,10 @@
   <button
     type="button"
     class="btn btn-primary"
+    [disabled]="surveyFull"
     (click)="activeModal.close('Close click')"
   >
     Zapisz
   </button>
+  }
 </div>

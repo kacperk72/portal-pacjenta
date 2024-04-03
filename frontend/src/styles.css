@@ -10,3 +10,12 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.tabview-custom .p-tabview-nav li a {
+  text-decoration: none;
+}
+
+.tabview-custom .p-tabview-nav li a:after,
+.tabview-custom .p-tabview-nav li a:before {
+  display: none;
+}
