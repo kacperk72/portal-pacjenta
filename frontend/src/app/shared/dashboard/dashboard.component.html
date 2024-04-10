@@ -1,6 +1,8 @@
 <div class="container">
   <div class="content">
     <div class="profile-img">
+      <div class="header-info">Karta pacjenta - Jan Kowalski</div>
+
       <img src="../../../assets/img/user_icon.png" />
       <div class="user-data">
         <span class="p-float-label">
@@ -38,37 +40,59 @@
       <p-tabView styleClass="tabview-custom">
         <p-tabPanel>
           <ng-template pTemplate="header">
-            <i class="pi pi-calendar"></i>
             <span>Nadchodzące wizyty</span>
           </ng-template>
-          oś czasu pokazująca nadchodzące wizyty z możliwością wypełnienia
-          ankiety
-          <p-button
-            label="Wypełnij ankietę przed wizytą"
-            [text]="true"
-            (onClick)="open()"
-          ></p-button>
+          <div class="timeline">
+            <p-timeline
+              [value]="events"
+              align="alternate"
+              styleClass="customized-timeline"
+            >
+              <ng-template pTemplate="marker" let-event>
+                <span
+                  class="custom-marker shadow-2"
+                  [style.backgroundColor]="event.color"
+                >
+                  <i [ngClass]="event.icon" [ngStyle]="{ color: 'white' }"></i>
+                </span>
+              </ng-template>
+              <ng-template pTemplate="content" let-event>
+                <p-card [header]="event.status" [subheader]="event.date">
+                  <p>{{ event.description }}</p>
+                  <button
+                    pButton
+                    style="width: 100%"
+                    label="Szczegóły"
+                    class="p-button-text"
+                  ></button>
+                  @if(event.status === 'Zaplanowana' || event.status ===
+                  'Nadchodząca') {
+                  <p-button
+                    label="Wypełnij ankietę przed wizytą"
+                    [text]="true"
+                    (onClick)="open()"
+                  ></p-button>
+                  }
+                </p-card>
+              </ng-template>
+            </p-timeline>
+          </div>
         </p-tabPanel>
         <p-tabPanel header="Header II">
           <ng-template pTemplate="header">
-            <i class="pi pi-user"></i>
             <span>Historia wizyt i badań</span>
           </ng-template>
           oś czasu przeszłych wizyt z możliwoścą przejścia do ich zaleceń
         </p-tabPanel>
         <p-tabPanel header="Header III">
           <ng-template pTemplate="header">
-            <i class="pi pi-search"></i>
             <span>Skierowania</span>
-            <i class="pi pi-cog"></i>
           </ng-template>
           karty ze skierowaniami
         </p-tabPanel>
         <p-tabPanel header="Header III">
           <ng-template pTemplate="header">
-            <i class="pi pi-search"></i>
             <span>Recepty</span>
-            <i class="pi pi-cog"></i>
           </ng-template>
           karty z recepatmi
         </p-tabPanel>

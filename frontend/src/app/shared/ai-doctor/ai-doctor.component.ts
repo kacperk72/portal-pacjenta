@@ -29,4 +29,20 @@ export class AiDoctorComponent {
     age: '0',
     weight: '0',
   };
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+
+    if (file) {
+      const fileReader = new FileReader();
+
+      fileReader.onload = (e) => {
+        // Tutaj masz dostęp do zawartości pliku jako fileReader.result
+        console.log(fileReader.result);
+        // Możesz dalej przetwarzać zawartość pliku, jak potrzebujesz
+      };
+
+      fileReader.readAsText(file); // Czytanie pliku jako tekst
+    }
+  }
 }

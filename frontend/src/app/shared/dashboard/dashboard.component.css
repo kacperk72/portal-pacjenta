@@ -14,6 +14,14 @@
   display: flex;
 }
 
+.header-info {
+  width: 100%;
+  text-align: left;
+  font-size: 24px;
+  margin-bottom: 40px;
+  margin-top: 20px;
+}
+
 .profile-img {
   width: 40%;
   padding: 10px;
@@ -41,4 +49,22 @@
 
 .p-float-label {
   margin-bottom: 20px;
+}
+
+.timeline {
+  margin-top: 20px;
+}
+
+.custom-marker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* Tworzy kolisty kształt */
+  /* Dodatkowe style, takie jak cień, mogą być tu zdefiniowane */
+}
+
+.shadow-2 {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Przykładowy cień */
 }

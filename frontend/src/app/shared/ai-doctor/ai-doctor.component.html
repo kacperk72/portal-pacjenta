@@ -5,7 +5,6 @@
     <p-tabView styleClass="tabview-custom">
       <p-tabPanel>
         <ng-template pTemplate="header">
-          <i class="pi pi-calendar"></i>
           <span>Skonsultuj swoje objawy</span>
         </ng-template>
         @if(aiResponseSick) {
@@ -31,7 +30,6 @@
       </p-tabPanel>
       <p-tabPanel header="Header II">
         <ng-template pTemplate="header">
-          <i class="pi pi-user"></i>
           <span>Skonsultuj wyniki badań</span>
         </ng-template>
         <div class="info-panel">
@@ -41,56 +39,77 @@
           celu pewnej analizy umów się do lekarza specjalisty.
         </div>
         <div>
-          <label>Dodaj plik</label>
-          <textarea></textarea>
+          <label class="me-2">Dodaj plik</label>
+          <input type="file" (change)="onFileSelected($event)" accept=".txt" />
         </div>
       </p-tabPanel>
       <p-tabPanel header="Header III">
         <ng-template pTemplate="header">
-          <i class="pi pi-search"></i>
           <span>Zobacz swoje zdrowotne zalecenia</span>
-          <i class="pi pi-cog"></i>
         </ng-template>
         <div class="header-info">
           Podaj swoje parametry w celu wygenerowania zaleceń.
         </div>
         <div class="user-data-form">
-          <span class="p-float-label">
-            <input
-              class="user-data-input"
-              pInputText
-              id="gender"
-              [(ngModel)]="userParams.gender"
-            />
-            <label for="gender">Płeć</label>
-          </span>
-          <span class="p-float-label">
-            <input
-              class="user-data-input"
-              pInputText
-              id="age"
-              [(ngModel)]="userParams.age"
-            />
-            <label for="age">Wiek</label>
-          </span>
-          <span class="p-float-label">
-            <input
-              class="user-data-input"
-              pInputText
-              id="weight"
-              [(ngModel)]="userParams.weight"
-            />
-            <label for="weight">Waga</label>
-          </span>
-          <p-button label="Generuj zalecenia" [text]="true"></p-button>
+          <div>
+            <div class="p-float-label">
+              <input
+                class="user-data-input"
+                pInputText
+                id="gender"
+                [(ngModel)]="userParams.gender"
+              />
+              <label for="gender">Płeć</label>
+            </div>
+            <div class="p-float-label">
+              <input
+                class="user-data-input"
+                pInputText
+                id="age"
+                [(ngModel)]="userParams.age"
+              />
+              <label for="age">Wiek</label>
+            </div>
+            <div class="p-float-label">
+              <input
+                class="user-data-input"
+                pInputText
+                id="weight"
+                [(ngModel)]="userParams.weight"
+              />
+              <label for="weight">Waga</label>
+            </div>
+          </div>
+          <div class="generate-btn">
+            <p-button label="Generuj zalecenia" [text]="true"></p-button>
+          </div>
         </div>
         <div class="ai-response-health">
-          <input
-            class="ai-response-input"
-            pInputText
-            id="aiResponseHealth"
-            [(ngModel)]="aiResponseHealth"
-          />
+          <div class="textarea-container">
+            <label for="recommendations">Zalecenia AI</label>
+            <textarea
+              [(ngModel)]="aiResponseHealth"
+              id="recommendations"
+            ></textarea>
+          </div>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Header IV">
+        <ng-template pTemplate="header">
+          <span>Sprawdź zależności między lekami</span>
+        </ng-template>
+        <div class="info-panel">
+          Wypisz swoje lekarstwa wraz z dawkowaniem a zostaną przeanalizowane
+          przez AI pod kątem ewentualnych konfliktów między ich składnikami. Na
+          tej podstawie będzie można zaproponować lekarzowi zmianę leków lub
+          dopasowanie dawkowania aby nie powodować niepożądanych skutków
+          ubocznych. Pamiętaj że przedstawiona analiza nie musi być trafna. W
+          celu pewnej analizy umów się do lekarza specjalisty.
+        </div>
+        <div class="textarea-container">
+          <label for="symptoms">Opisz objawy</label>
+          <textarea id="symptoms"></textarea>
+          <p-button label="Sprawdź" [text]="true"></p-button>
         </div>
       </p-tabPanel>
     </p-tabView>

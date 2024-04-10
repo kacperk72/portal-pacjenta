@@ -40,7 +40,26 @@
 
 .user-data-form {
   width: 100%;
-  min-height: 40vh;
+  display: block;
+  /* min-height: 40vh; */
+}
+
+.user-data-form {
+  div {
+    width: 100%;
+    div {
+      width: 100%;
+      margin: 30px 0px;
+    }
+  }
+}
+
+.user-data-form p-button {
+  float: right;
+}
+
+.generate-btn {
+  height: 50px;
 }
 
 .p-float-label {
@@ -49,4 +68,29 @@
 
 .header-info {
   margin-bottom: 20px;
+}
+
+.textarea-container {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.textarea-container label {
+  display: block;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.textarea-container textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.textarea-container p-button {
+  float: right;
 }
