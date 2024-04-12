@@ -6,10 +6,17 @@
   justify-content: center;
 }
 
+.dashboard-container {
+  justify-content: center;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 90vw;
+}
+
 .content {
   margin-top: 50px;
-  width: 80vw;
-  height: 80vh;
+  width: 90vw;
   text-align: center;
   display: flex;
 }
@@ -23,16 +30,16 @@
 }
 
 .profile-img {
-  width: 40%;
+  width: 30%;
   padding: 10px;
 }
 
 .profile-img img {
-  height: 40%;
+  width: 70%;
 }
 
 .dashboard-data {
-  width: 60%;
+  width: 70%;
   min-height: 60vh;
   padding: 10px;
   font-size: 25px;
@@ -67,4 +74,17 @@
 
 .shadow-2 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Przykładowy cień */
+}
+
+.card-container {
+  display: flex;
+}
+
+.referral {
+  max-width: 250px;
+  margin-left: 50px;
+}
+
+.referral-description {
+  height: 200px;
 }

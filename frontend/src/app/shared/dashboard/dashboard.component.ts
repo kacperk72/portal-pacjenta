@@ -76,6 +76,32 @@ export class DashboardComponent {
       color: '#9C27B0',
     },
   ];
+  eventsHistory: EventItem[] = [
+    {
+      status: 'Zakończona',
+      doctor: 'Dr. Jan Kowalski',
+      description: 'Lekarz internista - konsultacje',
+      date: '10/10/2023 14:00',
+      icon: 'pi pi-check',
+      color: '#9C27B0',
+    },
+    {
+      status: 'Zakończona',
+      doctor: 'Dr. Jan Kowalski',
+      description: 'Lekarz internista - konsultacje',
+      date: '10/10/2023 14:00',
+      icon: 'pi pi-check',
+      color: '#9C27B0',
+    },
+    {
+      status: 'Zakończona',
+      doctor: 'Dr. Jan Kowalski',
+      description: 'Lekarz internista - konsultacje',
+      date: '10/10/2023 14:00',
+      icon: 'pi pi-check',
+      color: '#9C27B0',
+    },
+  ];
 
   constructor(private modalService: NgbModal) {}
 
