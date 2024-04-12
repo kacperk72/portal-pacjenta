@@ -1,12 +1,30 @@
+.modal-header {
+  justify-content: center;
+  text-align: center;
+  display: block;
+}
+
+.header-icon {
+  font-size: 48px;
+  color: #2563eb;
+}
+
+.modal-title {
+  font-size: 24px;
+}
+
 .dropdown-select {
   margin-left: 20px;
 }
+
 :host ::ng-deep .dropdown-select .p-dropdown {
   min-width: 400px !important;
 }
+
 .survey-label {
   font-size: 16px;
 }
+
 .btn-navigation {
   display: flex;
   justify-content: space-between;

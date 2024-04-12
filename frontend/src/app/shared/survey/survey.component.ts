@@ -2,10 +2,22 @@ import { Component, inject } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-survey',
   standalone: true,
-  imports: [DropdownModule, FormsModule],
+  imports: [
+    DropdownModule,
+    FormsModule,
+    MatIconModule,
+    InputTextModule,
+    ButtonModule,
+    CommonModule,
+  ],
   templateUrl: './survey.component.html',
   styleUrl: './survey.component.css',
 })
@@ -64,10 +76,14 @@ export class SurveyComponent {
   constructor() {}
 
   nextStep() {
-    this.step++;
+    if (this.step < 4) {
+      this.step++;
+    }
   }
 
   previousStep() {
-    this.step--;
+    if (this.step > 0 && this.step < 5) {
+      this.step--;
+    }
   }
 }

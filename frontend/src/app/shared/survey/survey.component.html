@@ -1,10 +1,13 @@
 <div class="modal-header">
-  <h4 class="modal-title">Wypełnij ankietę przed wizytą</h4>
+  <div><i class="header-icon pi pi-user-edit"></i></div>
+  <div>
+    <p class="modal-title">Wypełnij ankietę przed wizytą</p>
+  </div>
 </div>
 <div class="modal-body">
   @if(step===0){
   <div class="mb-3">
-    <label class="survey-label" for="dropdownId">Powód wizyty</label>
+    <label class="survey-label mb-2" for="dropdownId">Powód wizyty</label>
     <p-dropdown
       class="dropdown-select"
       [options]="visitOptions"
@@ -17,7 +20,7 @@
   </div>
   } @if(step===1){
   <div class="mb-3">
-    <label class="survey-label" for="dropdownId"
+    <label class="survey-label mb-2" for="dropdownId"
       >Jak długo trwają objawy?</label
     >
     <p-dropdown
@@ -31,7 +34,7 @@
     ></p-dropdown>
   </div>
   <div class="mb-3">
-    <label class="survey-label" for="dropdownId"
+    <label class="survey-label mb-2" for="dropdownId"
       >Czy występowała podwyższona temperatura?</label
     >
     <p-dropdown
@@ -45,7 +48,7 @@
     ></p-dropdown>
   </div>
   <div class="mb-3">
-    <label class="survey-label" for="dropdownId"
+    <label class="survey-label mb-2" for="dropdownId"
       >Czy ma Pan/Pani kaszel? Jeśli tak to jaki?</label
     >
     <p-dropdown
@@ -59,7 +62,7 @@
     ></p-dropdown>
   </div>
   <div class="mb-3">
-    <label class="survey-label" for="dropdownId"
+    <label class="survey-label mb-2" for="dropdownId"
       >Czy odczuwasz duszności?</label
     >
     <p-dropdown
@@ -73,7 +76,9 @@
     ></p-dropdown>
   </div>
   <div class="mb-3">
-    <label class="survey-label" for="dropdownId">Czy boli cię gardło?</label>
+    <label class="survey-label mb-2" for="dropdownId"
+      >Czy boli cię gardło?</label
+    >
     <p-dropdown
       class="dropdown-select"
       [options]="haveThroatAche"
@@ -85,7 +90,7 @@
     ></p-dropdown>
   </div>
   <div class="mb-3">
-    <label class="survey-label" for="dropdownId">Czy masz katar?</label>
+    <label class="survey-label mb-2" for="dropdownId">Czy masz katar?</label>
     <p-dropdown
       class="dropdown-select"
       [options]="haveRunnyNose"
@@ -97,7 +102,7 @@
     ></p-dropdown>
   </div>
   <div class="mb-3">
-    <label class="survey-label" for="dropdownId"
+    <label class="survey-label mb-2" for="dropdownId"
       >Czy masz problemy z brzuchem? Jeśli tak to jakie?</label
     >
     <p-dropdown
@@ -111,7 +116,7 @@
     ></p-dropdown>
   </div>
   <div class="mb-3">
-    <label class="survey-label" for="dropdownId"
+    <label class="survey-label mb-2" for="dropdownId"
       >Czy odczuwasz inne dolegliwości?, Jesli tak to jakie?</label
     >
     <p-dropdown
@@ -126,7 +131,7 @@
   </div>
   } @if(step===2){
   <div class="mb-3">
-    <label class="survey-label" for="dropdownId"
+    <label class="survey-label mb-2" for="dropdownId"
       >Czy przyjmujesz jakieś leki?</label
     >
     <p-dropdown
@@ -141,7 +146,7 @@
   </div>
 
   <div class="mb-3">
-    <label class="survey-label" for="dropdownId"
+    <label class="survey-label mb-2" for="dropdownId"
       >Czy masz alergię na jakieś leki?</label
     >
     <p-dropdown
@@ -156,7 +161,7 @@
   </div>
 
   <div class="mb-3">
-    <label class="survey-label" for="dropdownId"
+    <label class="survey-label mb-2" for="dropdownId"
       >Czy chorujesz na choroby przewlekłe?</label
     >
     <p-dropdown
@@ -174,10 +179,20 @@
 <div class="modal-footer">
   @if(step < 4) {
   <div class="btn-navigation">
-    <button type="button" class="btn btn-secondary" (click)="previousStep()">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      [disabled]="this.step <= 0"
+      (click)="previousStep()"
+    >
       Wróć
     </button>
-    <button type="button" class="btn btn-primary ms-3" (click)="nextStep()">
+    <button
+      type="button"
+      class="btn btn-primary ms-3"
+      [disabled]="this.step > 4"
+      (click)="nextStep()"
+    >
       Dalej
     </button>
   </div>

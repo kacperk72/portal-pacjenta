@@ -106,6 +106,7 @@ export class DashboardComponent {
   constructor(private modalService: NgbModal) {}
 
   open() {
+    console.log('open');
     const modalRef = this.modalService.open(SurveyComponent);
   }
 }
