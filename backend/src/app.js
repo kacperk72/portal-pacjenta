@@ -3,9 +3,12 @@ const cors = require("cors");
 const patientRoutes = require("./routes/patientRoutes");
 const doctorRoutes = require("./routes/doctorRoutes");
 const userRoutes = require("./routes/authRoutes");
+const chatRoutes = require("./routes/chatRoutes");
 const sequelize = require("./config/db");
 const session = require("express-session");
 const passport = require("./config/passportConfig");
+require('dotenv').config()
+const OpenAI = require('openai');
 
 const app = express();
 
@@ -33,6 +36,7 @@ sequelize
 app.use("/patients", patientRoutes);
 app.use("/doctor", doctorRoutes);
 app.use("/user", userRoutes);
+app.use("/chat", chatRoutes);
 
 app.use((req, res, next) => {
   res.status(404).send("Nie znaleziono strony");

@@ -7,26 +7,28 @@
         <ng-template pTemplate="header">
           <span>Skonsultuj swoje objawy</span>
         </ng-template>
-        @if(aiResponseSick) {
-        <div class="ai-response-sick">
-          <input
-            class="ai-response-input"
-            pInputText
-            id="aiResponseSick"
-            [(ngModel)]="aiResponseSick"
-          />
-        </div>
-        }
+       
         <div class="chat-container">
           <input
             placeholder="Opisz szczegółowo swoje objawy"
             class="description-input"
             pInputText
             id="description"
+            (input)="descriptionChange()"
             [(ngModel)]="description"
           />
-          <p-button label="Konsultuj" [text]="true"></p-button>
+          <p-button (click)="consultSymptoms()" label="Konsultuj" [text]="true"></p-button>
         </div>
+
+        @if(aiResponseSick) {
+          <div class="textarea-container">
+            <label for="aiResponseSick">Zalecenia AI</label>
+            <textarea
+              [(ngModel)]="aiResponseSick"
+              id="aiResponseSick"
+            ></textarea>
+          </div>
+          }
       </p-tabPanel>
       <p-tabPanel header="Header II">
         <ng-template pTemplate="header">
@@ -107,8 +109,8 @@
           celu pewnej analizy umów się do lekarza specjalisty.
         </div>
         <div class="textarea-container">
-          <label for="symptoms">Opisz objawy</label>
-          <textarea id="symptoms"></textarea>
+          <label for="symptoms">Wypisz nazwy leków oraz dawkowanie</label>
+          <textarea placeholder="np. Witamina D 1 tabletka raz dziennie" id="symptoms"></textarea>
           <p-button label="Sprawdź" [text]="true"></p-button>
         </div>
       </p-tabPanel>

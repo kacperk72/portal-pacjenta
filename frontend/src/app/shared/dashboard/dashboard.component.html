@@ -1,39 +1,42 @@
 <div class="dashboard-container">
   <div class="content">
     <div class="profile-img">
-      <div class="header-info">Karta pacjenta - Jan Kowalski</div>
+      <div class="header-info">Karta pacjenta - {{userData.FirstName}} {{userData.LastName}}</div>
 
       <img src="../../../assets/img/user_icon.png" />
       <div class="user-data">
         <span class="p-float-label">
           <input
+            [disabled]="!isInEditMode"
             class="user-data-input"
             pInputText
             id="name"
-            [(ngModel)]="name"
+            [(ngModel)]="userData.FirstName"
           />
           <label for="name">Imię</label>
         </span>
         <span class="p-float-label">
           <input
+          [disabled]="!isInEditMode"
             class="user-data-input"
             pInputText
             id="surname"
-            [(ngModel)]="surname"
+            [(ngModel)]="userData.LastName"
           />
           <label for="surname">Nazwisko</label>
         </span>
         <span class="p-float-label">
           <input
+          [disabled]="!isInEditMode"
             class="user-data-input"
             pInputText
-            id="email"
-            [(ngModel)]="email"
+            id="adres"
+            [(ngModel)]="userData.Address"
           />
-          <label for="email">Email</label>
+          <label for="adres">Adres</label>
         </span>
-        <p-button label="Edytuj" [text]="true"></p-button>
-        <p-button label="Zapisz" [text]="true"></p-button>
+        <p-button  *ngIf="!isInEditMode" (click)="editMode()" label="Edytuj" [text]="true"></p-button>
+        <p-button *ngIf="isInEditMode" (click)="saveUserData()" label="Zapisz" [text]="true"></p-button>
       </div>
     </div>
     <div class="dashboard-data">

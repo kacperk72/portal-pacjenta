@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TabViewModule } from 'primeng/tabview';
 import { MatIconModule } from '@angular/material/icon';
 import { InputTextModule } from 'primeng/inputtext';
@@ -9,6 +9,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TimelineModule } from 'primeng/timeline';
 import { CardModule } from 'primeng/card';
 import { CommonModule } from '@angular/common';
+import { DataService } from '../../core/data.service';
+import { UserService, userLocalStorageData } from '../../core/user.service';
+import { Router } from '@angular/router';
 
 interface EventItem {
   status?: string;
@@ -37,10 +40,10 @@ interface EventItem {
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   name: string = '';
   surname: string = '';
-  email: string = '';
+  adres: string = '';
   events: EventItem[] = [
     {
       status: 'Zaplanowana',
@@ -102,11 +105,50 @@ export class DashboardComponent {
       color: '#9C27B0',
     },
   ];
+  userLocalStorageData: userLocalStorageData = {
+    id: '',
+    role: '',
+    username: '',
+    token: '',
+  };
+  userData: any;
+  isInEditMode: boolean = false;
 
-  constructor(private modalService: NgbModal) {}
+  constructor(
+    private modalService: NgbModal,
+    private userService: UserService,
+    private dataService: DataService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.userLocalStorageData = this.userService.getUserData();
+
+    this.dataService
+      .getUserProfileData(this.userLocalStorageData.id)
+      .subscribe((data) => {
+        console.log(data);
+        this.userData = data;
+      });
+
+    if (this.userLocalStorageData.id !== '') {
+      console.log('Dane użytkownika: ', this.userLocalStorageData);
+    } else {
+      // console.log('Brak danych użytkownika w local storage.');
+      this.router.navigate(['/login']);
+    }
+  }
 
   open() {
     console.log('open');
     const modalRef = this.modalService.open(SurveyComponent);
+  }
+
+  editMode() {
+    this.isInEditMode = true;
+  }
+
+  saveUserData() {
+    this.isInEditMode = false;
   }
 }
