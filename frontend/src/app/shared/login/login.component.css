@@ -25,6 +25,11 @@ mat-form-field {
   width: 100%;
 }
 
+mat-form-field {
+  width: 100%;
+  margin: -15px;
+}
+
 .input-box {
   padding-left: 20px;
 }
@@ -37,7 +42,8 @@ input[type="reset"] {
   background-color: #56baed;
   border: none;
   color: white;
-  padding: 15px 80px;
+  padding: 5px 60px;
+  margin: 5px 0px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -74,13 +80,12 @@ input[type="password"] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
-  padding: 15px 32px;
+  padding: 10px 50px;
   text-align: center;
   text-decoration: none;
   display: block;
   float: left;
   font-size: 16px;
-  margin-left: 10px;
   border: 2px solid #f6f6f6;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;

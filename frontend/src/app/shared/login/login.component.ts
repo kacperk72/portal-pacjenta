@@ -50,11 +50,14 @@ export class LoginComponent implements OnInit {
     this.subscription1$ = this.service
       .proceedLogin(this.loginData)
       .subscribe((response: any) => {
-        if (response != null) {
+        if (!response.errorCode) {
           this.responsedata = response;
           localStorage.setItem('token', this.responsedata.token);
-          localStorage.setItem('rola', this.responsedata.user.Role);
+          localStorage.setItem('role', this.responsedata.user.Role);
           localStorage.setItem('username', this.responsedata.user.Username);
+          localStorage.setItem('id', this.responsedata.user.UserID);
+          this.service.setLoggedIn(true);
+          this.service.setUsername(this.responsedata.user.Username);
           this.router.navigate(['/']);
         } else {
           window.alert('nieudana próba logowania');

@@ -4,10 +4,9 @@
       <img class="logo" src="../../../assets/img/logo2.jpg" />
       <div class="logo-text">Portal pacjenta</div>
     </a>
-    @if(username) {
-    <div class="userName">Witaj {{ username }}!</div>
-    }
-
+    <div *ngIf="username" class="userName">
+      Witaj {{ username }}!
+    </div>
     <div>
       <button class="menu-option" mat-button routerLink="/book-visit">
         <mat-icon>search</mat-icon> Umów wizytę

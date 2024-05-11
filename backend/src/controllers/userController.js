@@ -8,8 +8,7 @@ exports.login = async (req, res) => {
     const user = await userService.login(userData);
     if (!user) {
       return res
-        .status(401)
-        .json({ message: "Nieprawidłowa nazwa użytkownika lub hasło." });
+        .json({ message: "Nieprawidłowa nazwa użytkownika lub hasło.", errorCode: 401 });
     }
 
     // const isMatch = await bcrypt.compare(password, user.dataValues.Password);
@@ -22,8 +21,7 @@ exports.login = async (req, res) => {
 
     if (!isMatch) {
       return res
-        .status(401)
-        .json({ message: "Nieprawidłowa nazwa użytkownika lub hasło." });
+        .json({ message: "Nieprawidłowa nazwa użytkownika lub hasło.", errorCode: 401 });
     }
 
     // Utworzenie tokena JWT

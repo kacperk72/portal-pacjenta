@@ -4,23 +4,23 @@ const sequelize = require("../config/db");
 const Patient = sequelize.define(
   "Patient",
   {
-    profileID: {
+    ProfileID: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    userID: {
+    UserID: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
-    dateOfBirth: DataTypes.DATE,
-    contactInfo: DataTypes.STRING,
-    address: DataTypes.STRING,
+    FirstName: DataTypes.STRING,
+    LastName: DataTypes.STRING,
+    DateOfBirth: DataTypes.DATE,
+    ContactInfo: DataTypes.STRING,
+    Address: DataTypes.STRING,
   },
   {
-    tableName: "Profiles",
+    tableName: "profiles",
     timestamps: false,
   }
 );
