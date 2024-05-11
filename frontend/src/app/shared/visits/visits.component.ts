@@ -13,6 +13,7 @@ import { ButtonModule } from 'primeng/button';
 import { ToolbarModule } from 'primeng/toolbar';
 import { CardModule } from 'primeng/card';
 import { CalendarModule } from 'primeng/calendar';
+import { DataService } from '../../core/data.service';
 
 @Component({
   selector: 'app-visits',
@@ -42,11 +43,29 @@ export class VisitsComponent implements OnInit {
     appointmentType: new FormControl(true),
     date: new FormControl(''),
   });
-  specializations = ['Ginekolog'];
-  locations = ['Kraków'];
+  specializations = [{}];
+  locations = [{}];
   showDoctors: boolean = false;
 
-  ngOnInit(): void {}
+  constructor(private service: DataService) {}
+
+  ngOnInit(): void {
+    this.service.getFiltersData().subscribe((data: any) => {
+      console.log(data);
+      const specializations = new Set<string>();
+      const cities = new Set<string>();
+
+      data.forEach((el: any) => {
+        specializations.add(el.Specialization);
+        el.Cities.split(', ').forEach((city: any) => {
+          cities.add(city);
+        });
+      });
+
+      this.specializations = Array.from(specializations);
+      this.locations = Array.from(cities);
+    });
+  }
 
   onSubmit() {
     this.showDoctors = true;

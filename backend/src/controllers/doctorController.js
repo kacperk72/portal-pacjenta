@@ -29,3 +29,14 @@ exports.getDoctorScheduleById = (req, res) => {
       res.status(500).send(err);
     });
 };
+
+exports.getDataFilters = (req, res) => {
+  Doctor.getDataFilters()
+    .then(([data]) => {
+      console.log('data', data);
+      res.json(data);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+  }

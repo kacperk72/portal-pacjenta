@@ -24,6 +24,15 @@ class Doctor {
       [doctorId]
     );
   }
+
+  static getDataFilters() {
+    return db.execute(
+      `
+      SELECT DISTINCT Specialization, Cities
+      FROM Doctors;
+      `,
+    );
+  }
 }
 
 module.exports = Doctor;
