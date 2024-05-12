@@ -33,6 +33,34 @@ class Doctor {
       `,
     );
   }
+
+  static getVisits(params) {
+    return db.execute(
+      `
+      SELECT
+          ds.ScheduleID,
+          ds.DoctorID,
+          ds.AvailableDate,
+          ds.TimeSlotFrom,
+          ds.TimeSlotTill,
+          ds.Duration,
+          p.FirstName,
+          p.LastName,
+          p.ContactInfo,
+          d.Specialization,
+          d.Cities
+      FROM DoctorSchedules ds
+      JOIN Doctors d ON ds.DoctorID = d.DoctorID
+      JOIN Profiles p ON d.DoctorID = p.ProfileID
+      WHERE d.Specialization = ? AND
+            d.Cities LIKE ? AND
+            (ds.AvailableDate = ? OR ds.AvailableDate >= ?)
+      ORDER BY ds.AvailableDate, ds.TimeSlotFrom;
+      `,
+      [params.specialization, `%${params.location}%`, params.date, params.date]
+    );
+  }
+  
 }
 
 module.exports = Doctor;

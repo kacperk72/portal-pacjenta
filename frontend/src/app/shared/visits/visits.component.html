@@ -34,7 +34,7 @@
           [options]="locations"
           optionLabel="location"
           placeholder="Miasto"
-          [style]="{ width: '200px' }"
+          [style]="{ width: '200px'}"
         >
           <ng-template pTemplate="selectedItem" let-selectedOption>
             <div>{{ selectedOption }}</div>
@@ -56,7 +56,10 @@
       <div>
         @if (searchForm.get('specialization')?.value &&
         searchForm.get('location')?.value) {
-        <p-button label="Szukaj" type="submit" severity="secondary"></p-button>
+        <p-button label="Szukaj" (click)="searchVisits()" type="submit" severity="secondary"></p-button>
+        }
+        @else {
+          <p style="color: white">Wybierz specjalizację i miasto!</p>
         }
       </div>
     </form>
@@ -69,6 +72,7 @@
         <div class="p-toolbar-group-center">
           <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
             <div>
+           
               <p-dropdown
                 formControlName="specialization"
                 [options]="specializations"
@@ -90,56 +94,43 @@
                 [options]="locations"
                 optionLabel="location"
                 placeholder="Miasto"
-                [style]="{ width: '200px' }"
+                [style]="{ width: '200px'}"
               >
                 <ng-template pTemplate="selectedItem" let-selectedOption>
-                  <div>{{ selectedOption }}</div>
+                  <div >{{ selectedOption }}</div>
                 </ng-template>
                 <ng-template let-location pTemplate="item">
                   <div>{{ location }}</div>
                 </ng-template>
               </p-dropdown>
-              <span>
-                <label class="date-label" for="date">Data</label>
+              <span style="margin-left: 10px;">
+                <label style="margin-right: 10px;" for="date">Data</label>
                 <p-calendar
                   formControlName="date"
                   [showIcon]="true"
                 ></p-calendar>
               </span>
-              <mat-icon>apartment</mat-icon> W gabinecie
-              <p-inputSwitch formControlName="appointmentType"></p-inputSwitch>
-              <mat-icon>home</mat-icon> Online
+              <div class="visit-switch2">
+                <mat-icon>apartment</mat-icon> W gabinecie
+                <p-inputSwitch formControlName="appointmentType"></p-inputSwitch>
+                <mat-icon>home</mat-icon> Online
+              </div>
+          
             </div>
           </form>
         </div>
         <div class="p-toolbar-group-end"></div>
       </p-toolbar>
     </div>
-    <div class="card-container">
-      <p-card class="card" header="lek. Adam Kowalski">
+    <div *ngIf="visits.length" class="card-container">
+      <p-card *ngFor="let visit of visits" class="card" [header]="'lek. ' + visit.FirstName + ' ' + visit.LastName">
         <div class="profile-img">
           <img src="../../../assets/img/user_icon.png" />
         </div>
         <div class="doctor-text">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore
-          sed consequuntur error repudiandae numquam deserunt quisquam repellat
-          libero asperiores earum nam nobis, culpa ratione quam perferendis
-          esse, cupiditate neque quas!
+          Specjalizacja: {{ visit.Specialization }} dostępny w mieście {{ visit.Cities }}. Po więcej informacji, zadzwoń {{ visit.ContactInfo }}.
+          <p>{{ visit.TimeSlotFrom | time }} - {{ visit.TimeSlotTill | time }} dnia {{ visit.AvailableDate | customDate }}</p> 
         </div>
-        <ng-template pTemplate="footer"> </ng-template>
-      </p-card>
-
-      <p-card class="card" header="lek. Jan Nowak">
-        <div class="profile-img">
-          <img src="../../../assets/img/user_icon.png" />
-        </div>
-        <div class="doctor-text">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore
-          sed consequuntur error repudiandae numquam deserunt quisquam repellat
-          libero asperiores earum nam nobis, culpa ratione quam perferendis
-          esse, cupiditate neque quas!
-        </div>
-        <ng-template pTemplate="footer"> </ng-template>
       </p-card>
     </div>
   </div>

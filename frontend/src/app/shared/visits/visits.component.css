@@ -40,8 +40,17 @@
   justify-content: center;
 }
 
+.visit-switch2 {
+  font-size: 20px;
+  margin-left: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 p-inputSwitch,
-p-button {
+p-button,
+p-dropdown {
   margin: 10px;
 }
 
@@ -55,9 +64,8 @@ p-button {
 
 .content2 {
   width: 90vw;
-  min-height: 80vh;
+  min-height: 90vh;
   background-color: rgba(0, 0, 0, 0.4);
-  padding-top: 4vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -65,12 +73,12 @@ p-button {
 }
 
 .card-container {
-  width: 60%;
-  display: flex;
-  flex-direction: column;
+  margin-top: 20px;
+  border-radius: 10px;
+  width: 90%;
   justify-content: center;
   align-items: center;
-  height: 60vh;
+  height: 70vh;
   overflow-y: scroll;
 }
 
@@ -81,12 +89,13 @@ p-button {
 }
 
 .toolbar {
-  width: 60%;
+  width: 90%;
   height: 120px;
 }
 
 .card {
-  margin-top: 50px;
+  margin-top: 30px;
+  padding-top: 20px;
 }
 
 p-card {

@@ -14,10 +14,15 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { CardModule } from 'primeng/card';
 import { CalendarModule } from 'primeng/calendar';
 import { DataService } from '../../core/data.service';
+import { CommonModule } from '@angular/common';
+import { DatePipe } from '../date.pipe';
+import { TimePipe } from '../time.pipe';
 
 @Component({
   selector: 'app-visits',
   standalone: true,
+  templateUrl: './visits.component.html',
+  styleUrl: './visits.component.css',
   imports: [
     MatSelectModule,
     MatSlideToggleModule,
@@ -32,9 +37,10 @@ import { DataService } from '../../core/data.service';
     ToolbarModule,
     CardModule,
     CalendarModule,
+    CommonModule,
+    DatePipe,
+    TimePipe,
   ],
-  templateUrl: './visits.component.html',
-  styleUrl: './visits.component.css',
 })
 export class VisitsComponent implements OnInit {
   searchForm = new FormGroup({
@@ -46,6 +52,7 @@ export class VisitsComponent implements OnInit {
   specializations = [{}];
   locations = [{}];
   showDoctors: boolean = false;
+  visits: any = [];
 
   constructor(private service: DataService) {}
 
@@ -69,6 +76,13 @@ export class VisitsComponent implements OnInit {
 
   onSubmit() {
     this.showDoctors = true;
+    console.log(this.searchForm.value);
+  }
+
+  searchVisits() {
+    this.service.getVisits(this.searchForm.value).subscribe((visits) => {
+      this.visits = visits;
+    });
     console.log(this.searchForm.value);
   }
 }

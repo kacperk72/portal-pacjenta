@@ -7,6 +7,8 @@ router.get("/", doctorController.getAllDoctors);
 
 router.get("/filters", doctorController.getDataFilters);
 
+router.post("/visits", doctorController.getVisits);
+
 // Pobranie harmonogramu lekarza po ID lekarza
 router.get("/schedule/:doctorId", doctorController.getDoctorScheduleById);
 

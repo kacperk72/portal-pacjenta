@@ -14,4 +14,8 @@ export class DataService {
   getFiltersData() {
     return this.http.get('http://localhost:3000/doctor/filters');
   }
+
+  getVisits(body: any) {
+    return this.http.post('http://localhost:3000/doctor/visits', body);
+  }
 }

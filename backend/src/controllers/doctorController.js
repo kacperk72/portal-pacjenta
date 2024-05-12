@@ -33,7 +33,19 @@ exports.getDoctorScheduleById = (req, res) => {
 exports.getDataFilters = (req, res) => {
   Doctor.getDataFilters()
     .then(([data]) => {
-      console.log('data', data);
+      res.json(data);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+  }
+
+  
+exports.getVisits = (req, res) => {
+  console.log(req.body)
+  Doctor.getVisits(req.body)
+    .then(([data]) => {
+      console.log(data)
       res.json(data);
     })
     .catch((err) => {
