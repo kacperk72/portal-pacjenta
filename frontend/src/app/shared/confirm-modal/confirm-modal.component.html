@@ -1,0 +1,24 @@
+<div class="modal-header">
+  <h4 class="modal-title">Potwierdź wizytę</h4>
+</div>
+<div class="modal-body">
+  <p>
+    Czy na pewno chcesz potwierdzić wizytę u dr {{ visit.FirstName }}
+    {{ visit.LastName }}?
+  </p>
+  <p><strong>Specjalizacja:</strong> {{ visit.Specialization }}</p>
+  <p><strong>Data:</strong> {{ visit.AvailableDate | customDate }}</p>
+  <p>
+    <strong>Godzina:</strong> {{ visit.TimeSlotFrom }} -
+    {{ visit.TimeSlotTill }}
+  </p>
+  <p><strong>Miasto:</strong> {{ visit.Cities }}</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="cancel()">
+    Anuluj
+  </button>
+  <button type="button" class="btn btn-primary" (click)="confirmVisit()">
+    Potwierdź
+  </button>
+</div>

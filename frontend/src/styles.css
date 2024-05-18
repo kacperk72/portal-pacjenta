@@ -20,3 +20,14 @@ body {
 .tabview-custom .p-tabview-nav li a:before {
   display: none;
 }
+
+body.dark-theme {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.dark-theme .mat-toolbar {
+  background-color: #333333;
+  color: #ffffff;
+}
+

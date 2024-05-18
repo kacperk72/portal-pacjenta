@@ -17,6 +17,8 @@ import { DataService } from '../../core/data.service';
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '../date.pipe';
 import { TimePipe } from '../time.pipe';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'app-visits',
@@ -47,14 +49,14 @@ export class VisitsComponent implements OnInit {
     specialization: new FormControl(''),
     location: new FormControl(''),
     appointmentType: new FormControl(true),
-    date: new FormControl(''),
+    date: new FormControl(new Date()),
   });
   specializations = [{}];
   locations = [{}];
   showDoctors: boolean = false;
   visits: any = [];
 
-  constructor(private service: DataService) {}
+  constructor(private service: DataService, private modalService: NgbModal) {}
 
   ngOnInit(): void {
     this.service.getFiltersData().subscribe((data: any) => {
@@ -84,5 +86,17 @@ export class VisitsComponent implements OnInit {
       this.visits = visits;
     });
     console.log(this.searchForm.value);
+  }
+
+  bookVisit(visit: any) {
+    console.log(visit);
+    const modalRef = this.modalService.open(ConfirmModalComponent);
+    modalRef.componentInstance.visit = visit;
+    modalRef.result.then((res) => {
+      console.log(res);
+      if (res === 'confirmed') {
+        // zapisz wizytę w bazie
+      }
+    });
   }
 }

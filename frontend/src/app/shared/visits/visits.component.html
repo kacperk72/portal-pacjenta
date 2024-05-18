@@ -1,13 +1,4 @@
 <div class="background">
-  <!-- <div>1. filtrowanie</div>
-  <div>2. wybieranie wizyty i terminu</div>
-  <div>3. zatwierdzenie</div>
-  <div>4. ankieta przed wizytą</div>
-  <div>
-    5. przekierowanie na AI-doctor gdzie będą zalecenia wygenerowane prze AI na
-    podstawie objawów
-  </div> -->
-
   @if (!showDoctors) {
   <div class="content">
     <div class="head-text">Umów wizytę u najlepszego specjalisty</div>
@@ -34,7 +25,7 @@
           [options]="locations"
           optionLabel="location"
           placeholder="Miasto"
-          [style]="{ width: '200px'}"
+          [style]="{ width: '200px' }"
         >
           <ng-template pTemplate="selectedItem" let-selectedOption>
             <div>{{ selectedOption }}</div>
@@ -43,24 +34,33 @@
             <div>{{ location }}</div>
           </ng-template>
         </p-dropdown>
+
+        <div class="date-container">
+          <label class="date-label" for="date">Data</label>
+          <p-calendar formControlName="date" [showIcon]="true"></p-calendar>
+        </div>
       </div>
-      <div class="mt-4">
-        <label class="date-label" for="date">Data</label>
-        <p-calendar formControlName="date" [showIcon]="true"></p-calendar>
-      </div>
+
       <div class="visit-switch">
         <mat-icon>apartment</mat-icon> W gabinecie
         <p-inputSwitch formControlName="appointmentType"></p-inputSwitch>
         <mat-icon>home</mat-icon> Online
       </div>
-      <div>
-        @if (searchForm.get('specialization')?.value &&
-        searchForm.get('location')?.value) {
-        <p-button label="Szukaj" (click)="searchVisits()" type="submit" severity="secondary"></p-button>
+      <div class="search-button">
+        @if (!searchForm.get('specialization')?.value &&
+        !searchForm.get('location')?.value) {
+        <p style="color: rgb(245, 169, 169)">Wybierz specjalizację i miasto!</p>
         }
-        @else {
-          <p style="color: white">Wybierz specjalizację i miasto!</p>
-        }
+        <p-button
+          label="Szukaj"
+          [disabled]="
+            !searchForm.get('specialization')?.value &&
+            !searchForm.get('location')?.value
+          "
+          (click)="searchVisits()"
+          type="submit"
+          severity="secondary"
+        ></p-button>
       </div>
     </form>
   </div>
@@ -70,9 +70,12 @@
       <p-toolbar>
         <div class="p-toolbar-group-start"></div>
         <div class="p-toolbar-group-center">
-          <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-            <div>
-           
+          <form
+            class="toolbar-form"
+            [formGroup]="searchForm"
+            (ngSubmit)="onSubmit()"
+          >
+            <div class="toolbar-form-inner">
               <p-dropdown
                 formControlName="specialization"
                 [options]="specializations"
@@ -94,17 +97,17 @@
                 [options]="locations"
                 optionLabel="location"
                 placeholder="Miasto"
-                [style]="{ width: '200px'}"
+                [style]="{ width: '200px' }"
               >
                 <ng-template pTemplate="selectedItem" let-selectedOption>
-                  <div >{{ selectedOption }}</div>
+                  <div>{{ selectedOption }}</div>
                 </ng-template>
                 <ng-template let-location pTemplate="item">
                   <div>{{ location }}</div>
                 </ng-template>
               </p-dropdown>
-              <span style="margin-left: 10px;">
-                <label style="margin-right: 10px;" for="date">Data</label>
+              <span style="margin-left: 10px">
+                <label style="margin-right: 10px" for="date">Data</label>
                 <p-calendar
                   formControlName="date"
                   [showIcon]="true"
@@ -112,10 +115,24 @@
               </span>
               <div class="visit-switch2">
                 <mat-icon>apartment</mat-icon> W gabinecie
-                <p-inputSwitch formControlName="appointmentType"></p-inputSwitch>
+                <p-inputSwitch
+                  formControlName="appointmentType"
+                ></p-inputSwitch>
                 <mat-icon>home</mat-icon> Online
               </div>
-          
+              <div class="search-button">
+                @if (searchForm.get('specialization')?.value &&
+                searchForm.get('location')?.value) {
+                <p-button
+                  label="Szukaj"
+                  (click)="searchVisits()"
+                  type="submit"
+                  severity="secondary"
+                ></p-button>
+                } @else {
+                <p style="color: white">Wybierz specjalizację i miasto!</p>
+                }
+              </div>
             </div>
           </form>
         </div>
@@ -123,13 +140,31 @@
       </p-toolbar>
     </div>
     <div *ngIf="visits.length" class="card-container">
-      <p-card *ngFor="let visit of visits" class="card" [header]="'lek. ' + visit.FirstName + ' ' + visit.LastName">
+      <p-card
+        *ngFor="let visit of visits"
+        class="card"
+        [header]="'lek. ' + visit.FirstName + ' ' + visit.LastName"
+      >
         <div class="profile-img">
           <img src="../../../assets/img/user_icon.png" />
         </div>
         <div class="doctor-text">
-          Specjalizacja: {{ visit.Specialization }} dostępny w mieście {{ visit.Cities }}. Po więcej informacji, zadzwoń {{ visit.ContactInfo }}.
-          <p>{{ visit.TimeSlotFrom | time }} - {{ visit.TimeSlotTill | time }} dnia {{ visit.AvailableDate | customDate }}</p> 
+          <strong>Specjalizacja:</strong> {{ visit.Specialization }} <br />
+          <strong>Dostępny w mieście:</strong> {{ visit.Cities }} <br />
+          <strong>Kontakt:</strong> {{ visit.ContactInfo }} <br />
+          <p>
+            <strong>Godziny:</strong> {{ visit.TimeSlotFrom | time }} -
+            {{ visit.TimeSlotTill | time }} dnia
+            {{ visit.AvailableDate | customDate }}
+          </p>
+        </div>
+        <div class="mt-3" style="width: 100%; text-align: center">
+          <p-button
+            label="Wybierz"
+            (click)="bookVisit(visit)"
+            type="submit"
+            severity="primary"
+          ></p-button>
         </div>
       </p-card>
     </div>
