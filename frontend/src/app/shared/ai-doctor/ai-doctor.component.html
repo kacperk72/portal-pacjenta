@@ -1,6 +1,4 @@
 <div class="background">
-  <!-- <div>1. Na podstawie objawów generowanie zaleceń</div> -->
-  <!-- <div>2. konsultacja np. badań krwi - generowanie podsumowań</div> -->
   <div class="chat-window">
     <p-tabView styleClass="tabview-custom">
       <p-tabPanel>
@@ -15,10 +13,13 @@
             pInputText
             id="description"
             (input)="descriptionChange()"
-            [(ngModel)]="description"
+            [(ngModel)]="userSymptomsDescription"
           />
-          <p-button (click)="consultSymptoms()" label="Konsultuj" [text]="true"></p-button>
+          <p-button (click)="sendPrompt('Symptoms')" label="Konsultuj" [text]="true"></p-button>
         </div>
+        @if (isLoading) {
+          <div>Generowanie odpowiedzi...</div>
+        }
 
         @if(aiResponseSick) {
           <div class="textarea-container">
@@ -29,22 +30,9 @@
             ></textarea>
           </div>
           }
+
       </p-tabPanel>
-      <p-tabPanel header="Header II">
-        <ng-template pTemplate="header">
-          <span>Skonsultuj wyniki badań</span>
-        </ng-template>
-        <div class="info-panel">
-          Załaduj swoje wyniki badań w formacie pdf lub docx które zostaną
-          przeanalizowane przez AI. Na tej podstawie będzie można poznać wstępną
-          analizę, ale pamiętaj że przedstawiona analiza nie musi być trafna. W
-          celu pewnej analizy umów się do lekarza specjalisty.
-        </div>
-        <div>
-          <label class="me-2">Dodaj plik</label>
-          <input type="file" (change)="onFileSelected($event)" accept=".txt" />
-        </div>
-      </p-tabPanel>
+     
       <p-tabPanel header="Header III">
         <ng-template pTemplate="header">
           <span>Zobacz swoje zdrowotne zalecenia</span>
@@ -82,19 +70,27 @@
               <label for="weight">Waga</label>
             </div>
           </div>
+          @if(formError) {
+            <div style="color: red">Uzupełnij dane!</div>
+          }
           <div class="generate-btn">
-            <p-button label="Generuj zalecenia" [text]="true"></p-button>
+            <p-button (click)="sendPrompt('Params')" label="Generuj zalecenia" [text]="true"></p-button>
           </div>
         </div>
-        <div class="ai-response-health">
+        @if (isLoading) {
+          <div>Generowanie odpowiedzi...</div>
+        }
+
+        @if(aiResponseHealth) {
           <div class="textarea-container">
-            <label for="recommendations">Zalecenia AI</label>
+            <label for="aiResponseSick">Zalecenia AI</label>
             <textarea
               [(ngModel)]="aiResponseHealth"
-              id="recommendations"
+              id="aiResponseSick"
             ></textarea>
           </div>
-        </div>
+          }
+
       </p-tabPanel>
       <p-tabPanel header="Header IV">
         <ng-template pTemplate="header">
@@ -110,8 +106,39 @@
         </div>
         <div class="textarea-container">
           <label for="symptoms">Wypisz nazwy leków oraz dawkowanie</label>
-          <textarea placeholder="np. Witamina D 1 tabletka raz dziennie" id="symptoms"></textarea>
-          <p-button label="Sprawdź" [text]="true"></p-button>
+          <textarea style="min-height: 200px;" [(ngModel)]="userMedicineDescription" placeholder="np. Witamina D 1 tabletka raz dziennie" id="symptoms"></textarea>
+          <p-button (click)="sendPrompt('Medicines')" label="Sprawdź" [text]="true"></p-button>
+        </div>
+
+        @if (isLoading) {
+          <div>Generowanie odpowiedzi...</div>
+        }
+
+        @if(aiResponseMedicines) {
+          <div class="textarea-container">
+            <label for="aiResponseSick">Zalecenia AI</label>
+            <textarea
+              [(ngModel)]="aiResponseMedicines"
+              id="aiResponseSick"
+            ></textarea>
+          </div>
+          }
+
+      </p-tabPanel>
+
+      <p-tabPanel header="Header II">
+        <ng-template pTemplate="header">
+          <span>Skonsultuj wyniki badań</span>
+        </ng-template>
+        <div class="info-panel">
+          Załaduj swoje wyniki badań w formacie pdf lub docx które zostaną
+          przeanalizowane przez AI. Na tej podstawie będzie można poznać wstępną
+          analizę, ale pamiętaj że przedstawiona analiza nie musi być trafna. W
+          celu pewnej analizy umów się do lekarza specjalisty.
+        </div>
+        <div>
+          <label class="me-2">Dodaj plik</label>
+          <input type="file" (change)="onFileSelected($event)" accept=".txt" />
         </div>
       </p-tabPanel>
     </p-tabView>

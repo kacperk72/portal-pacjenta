@@ -20,39 +20,86 @@ import { ChatService } from '../../core/chat.service';
   styleUrl: './ai-doctor.component.css',
 })
 export class AiDoctorComponent implements OnInit {
-  description: string = '';
+  userSymptomsDescription: string = '';
+  prompt1: string = 'Na podastawie podanych objawów zaproponuj leczenie: ';
   aiResponseSick: string = '';
-  aiResponseHealth =
-    'Według twoich parametrów twój wskaźnik BMI wynosi ..., zaleca się zwiększenie aktywności i zdrowszą dietę. Zaleca się ograniczenie spożycia tłuszczy nasyconych oraz zwiększony udział warzyw w diecie';
+
+  prompt2: string =
+    'Na podastawie podanych parametrów pacjenta podaj zalecenia aby żyć w zdrowiu i minimalizować ryzyko chorób. Wylicz również wskaźnik BMI.';
+  aiResponseHealth = '';
   userParams = {
     gender: '',
-    age: '0',
-    weight: '0',
+    age: 0,
+    weight: 0,
   };
-  chatResponse: string = '';
+
+  prompt3: string =
+    'Na podstawie podanych lekarstw i dawkowania, spróbuj wskazać czy występują pomiędzy nimi jakieś niebezpieczne związki lub interakcje.';
+  aiResponseMedicines: string = '';
+  userMedicineDescription: string = '';
+
   emptyError: boolean = false;
+  formError: boolean = false;
+  isLoading: boolean = false;
 
   constructor(private chatService: ChatService) {}
 
   ngOnInit() {}
 
-  sendPrompt() {
-    if (this.description != '') {
-      this.chatService.sendMessage(this.description).subscribe((data: any) => {
-        console.log(data);
-        this.aiResponseSick = data.response.content;
-      });
-    } else {
-      this.emptyError = true;
+  sendPrompt(type: string) {
+    switch (type) {
+      case 'Symptoms':
+        if (this.userSymptomsDescription != '') {
+          this.isLoading = true;
+          this.chatService
+            .sendMessage(this.prompt1 + this.userSymptomsDescription)
+            .subscribe((data: any) => {
+              console.log(data);
+              this.aiResponseSick = data.response.content;
+              this.isLoading = false;
+            });
+        } else {
+          this.emptyError = true;
+        }
+        break;
+      case 'Params':
+        if (
+          this.userParams.gender.length > 0 &&
+          this.userParams.age > 0 &&
+          this.userParams.weight > 0
+        ) {
+          this.isLoading = true;
+          const params = `Płeć: ${this.userParams.gender}, Wiek ${this.userParams.age}, Waga ${this.userParams.weight}`;
+          this.chatService
+            .sendMessage(this.prompt2 + params)
+            .subscribe((data: any) => {
+              console.log(data);
+              this.aiResponseHealth = data.response.content;
+              this.isLoading = false;
+            });
+        } else {
+          this.formError = true;
+        }
+        break;
+      case 'Medicines':
+        if (this.userMedicineDescription != '') {
+          this.isLoading = true;
+          this.chatService
+            .sendMessage(this.prompt3 + this.userMedicineDescription)
+            .subscribe((data: any) => {
+              console.log(data);
+              this.aiResponseMedicines = data.response.content;
+              this.isLoading = false;
+            });
+        } else {
+          this.emptyError = true;
+        }
+        break;
     }
   }
 
-  consultSymptoms() {
-    this.sendPrompt();
-  }
-
   descriptionChange() {
-    if (this.description != '') {
+    if (this.userSymptomsDescription != '') {
       this.emptyError = false;
     }
   }
@@ -64,12 +111,10 @@ export class AiDoctorComponent implements OnInit {
       const fileReader = new FileReader();
 
       fileReader.onload = (e) => {
-        // Tutaj masz dostęp do zawartości pliku jako fileReader.result
         console.log(fileReader.result);
-        // Możesz dalej przetwarzać zawartość pliku, jak potrzebujesz
       };
 
-      fileReader.readAsText(file); // Czytanie pliku jako tekst
+      fileReader.readAsText(file);
     }
   }
 }
