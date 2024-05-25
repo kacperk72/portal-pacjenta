@@ -1,66 +1,69 @@
-const db = require("../config/dbmysql");
+const { Sequelize, DataTypes } = require("sequelize");
+const sequelize = require("../config/db");
 
-class Doctor {
-  constructor(doctorId, specialization, cities) {
-    this.doctorId = doctorId;
-    this.specialization = specialization;
-    this.cities = cities;
+const Doctor = sequelize.define(
+  "Doctor",
+  {
+    DoctorID: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    Specialization: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    Cities: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  {
+    tableName: "Doctors",
+    timestamps: false,
   }
+);
 
-  static findAll() {
-    return db.execute("SELECT * FROM Doctors");
+const DoctorSchedule = sequelize.define(
+  "DoctorSchedule",
+  {
+    ScheduleID: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    DoctorID: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    AvailableDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    TimeSlotFrom: {
+      type: DataTypes.TIME,
+      allowNull: false,
+    },
+    TimeSlotTill: {
+      type: DataTypes.TIME,
+      allowNull: false,
+    },
+    Duration: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    AppointmentID: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+  },
+  {
+    tableName: "DoctorSchedules",
+    timestamps: false,
   }
+);
 
-  static findById(doctorId) {
-    return db.execute("SELECT * FROM Doctors WHERE DoctorID = ?", [doctorId]);
-  }
+Doctor.hasMany(DoctorSchedule, { foreignKey: "DoctorID" });
+DoctorSchedule.belongsTo(Doctor, { foreignKey: "DoctorID" });
 
-  static findScheduleByDoctorId(doctorId) {
-    return db.execute(
-      `
-      SELECT s.ScheduleID, s.AvailableDate, s.TimeSlotFrom, s.TimeSlotTill, s.Duration
-      FROM Schedules s
-      WHERE s.DoctorID = ?`,
-      [doctorId]
-    );
-  }
-
-  static getDataFilters() {
-    return db.execute(
-      `
-      SELECT DISTINCT Specialization, Cities
-      FROM Doctors;
-      `,
-    );
-  }
-
-  static getVisits(params) {
-    return db.execute(
-      `
-      SELECT
-          ds.ScheduleID,
-          ds.DoctorID,
-          ds.AvailableDate,
-          ds.TimeSlotFrom,
-          ds.TimeSlotTill,
-          ds.Duration,
-          p.FirstName,
-          p.LastName,
-          p.ContactInfo,
-          d.Specialization,
-          d.Cities
-      FROM DoctorSchedules ds
-      JOIN Doctors d ON ds.DoctorID = d.DoctorID
-      JOIN Profiles p ON d.DoctorID = p.ProfileID
-      WHERE d.Specialization = ? AND
-            d.Cities LIKE ? AND
-            (ds.AvailableDate = ? OR ds.AvailableDate >= ?)
-      ORDER BY ds.AvailableDate, ds.TimeSlotFrom;
-      `,
-      [params.specialization, `%${params.location}%`, params.date, params.date]
-    );
-  }
-  
-}
-
-module.exports = Doctor;
+module.exports = { Doctor, DoctorSchedule };

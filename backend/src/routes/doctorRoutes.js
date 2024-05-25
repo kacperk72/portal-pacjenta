@@ -15,4 +15,6 @@ router.get("/schedule/:doctorId", doctorController.getDoctorScheduleById);
 // Pobranie lekarza po ID
 router.get("/:doctorId", doctorController.getDoctorById);
 
+router.post("/schedule", doctorController.createSchedules);
+
 module.exports = router;

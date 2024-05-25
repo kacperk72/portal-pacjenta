@@ -1,0 +1,93 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  justify-content: center;
+}
+
+.dashboard-container {
+  justify-content: center;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 90vw;
+}
+
+.content {
+  margin-top: 50px;
+  width: 90vw;
+  text-align: center;
+  display: flex;
+}
+
+.header-info {
+  width: 100%;
+  text-align: left;
+  font-size: 24px;
+  margin-bottom: 40px;
+  margin-top: 20px;
+}
+
+.profile-img {
+  width: 30%;
+  padding: 10px;
+}
+
+.profile-img img {
+  width: 70%;
+}
+
+.dashboard-data {
+  width: 70%;
+  min-height: 60vh;
+  padding: 10px;
+  font-size: 25px;
+}
+
+.user-data {
+  height: 60%;
+  padding: 30px;
+}
+
+.user-data-input {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.p-float-label {
+  margin-bottom: 20px;
+}
+
+.custom-marker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.shadow-2 {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-container {
+  display: flex;
+}
+
+.referral {
+  max-width: 250px;
+  margin-left: 50px;
+}
+
+.referral-description {
+  height: 200px;
+}
+
+.form-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 20px;
+}

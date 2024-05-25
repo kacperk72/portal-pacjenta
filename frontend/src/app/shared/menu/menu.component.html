@@ -4,9 +4,7 @@
       <img class="logo" src="../../../assets/img/logo2.jpg" />
       <div class="logo-text">Portal pacjenta</div>
     </a>
-    <div *ngIf="username" class="userName">
-      Witaj {{ username }}!
-    </div>
+    <div *ngIf="username" class="userName">Witaj {{ username }}!</div>
     <div>
       <button class="menu-option" mat-button routerLink="/book-visit">
         <mat-icon>search</mat-icon> Umów wizytę
@@ -16,6 +14,9 @@
       </button>
       <button class="menu-option" mat-button routerLink="/my-account">
         <mat-icon>person</mat-icon> Moje konto
+      </button>
+      <button class="menu-option" mat-button routerLink="/doctor-dashboard">
+        <mat-icon>person</mat-icon> Panel lekarza
       </button>
       @if(!username) {
       <button class="menu-option" mat-button routerLink="/login">
@@ -30,9 +31,10 @@
       </button>
       }
       <span style="color: black">Tryb ciemny</span>
-      <p-inputSwitch [(ngModel)]="checked" (onChange)="toggleDarkTheme()"></p-inputSwitch>
+      <p-inputSwitch
+        [(ngModel)]="checked"
+        (onChange)="toggleDarkTheme()"
+      ></p-inputSwitch>
     </div>
-    
   </mat-toolbar>
- 
 </div>
