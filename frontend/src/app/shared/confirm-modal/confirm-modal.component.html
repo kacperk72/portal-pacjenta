@@ -3,16 +3,17 @@
 </div>
 <div class="modal-body">
   <p>
-    Czy na pewno chcesz potwierdzić wizytę u dr {{ visit.FirstName }}
-    {{ visit.LastName }}?
+    Czy na pewno chcesz potwierdzić wizytę u dr
+    {{ visit?.Doctor?.Profile?.FirstName }}
+    {{ visit?.Doctor?.Profile?.LastName }}?
   </p>
-  <p><strong>Specjalizacja:</strong> {{ visit.Specialization }}</p>
-  <p><strong>Data:</strong> {{ visit.AvailableDate | customDate }}</p>
+  <p><strong>Specjalizacja:</strong> {{ visit?.Doctor?.Specialization }}</p>
+  <p><strong>Data:</strong> {{ visit?.AvailableDate | customDate }}</p>
   <p>
-    <strong>Godzina:</strong> {{ visit.TimeSlotFrom }} -
-    {{ visit.TimeSlotTill }}
+    <strong>Godzina:</strong> {{ visit?.TimeSlotFrom }} -
+    {{ visit?.TimeSlotTill }}
   </p>
-  <p><strong>Miasto:</strong> {{ visit.Cities }}</p>
+  <p><strong>Miasto:</strong> {{ visit?.Doctor?.Cities }}</p>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-secondary" (click)="cancel()">

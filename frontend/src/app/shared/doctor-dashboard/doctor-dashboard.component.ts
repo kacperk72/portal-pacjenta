@@ -14,6 +14,9 @@ import { TimelineModule } from 'primeng/timeline';
 import { TabViewModule } from 'primeng/tabview';
 import { DoctorService } from '../../core/doctor.service';
 import { CalendarModule } from 'primeng/calendar';
+import { TimePipe } from '../time.pipe';
+import { DatePipe } from '../date.pipe';
+import { CapitalizePipe } from '../capitalize.pipe';
 
 interface EventItem {
   status?: string;
@@ -28,6 +31,8 @@ interface EventItem {
 @Component({
   selector: 'app-doctor-dashboard',
   standalone: true,
+  templateUrl: './doctor-dashboard.component.html',
+  styleUrl: './doctor-dashboard.component.css',
   imports: [
     SurveyComponent,
     TabViewModule,
@@ -39,9 +44,10 @@ interface EventItem {
     CardModule,
     CommonModule,
     CalendarModule,
+    TimePipe,
+    DatePipe,
+    CapitalizePipe,
   ],
-  templateUrl: './doctor-dashboard.component.html',
-  styleUrl: './doctor-dashboard.component.css',
 })
 export class DoctorDashboardComponent implements OnInit {
   name: string = '';
@@ -64,22 +70,13 @@ export class DoctorDashboardComponent implements OnInit {
   today: Date = new Date();
   duration: number = 0;
   events: EventItem[] = [
-    {
-      status: 'Zaplanowana',
-      patient: 'Dr. Jan Kowalski',
-      description: 'konsultacje wyników badań',
-      date: '16/05/2024 10:00-10:30',
-      icon: 'pi pi-calendar',
-      color: '#607D8B',
-    },
-    {
-      status: 'Zaplanowana',
-      patient: 'Dr. Jan Kowalski',
-      description: 'konsultacje wyników badań',
-      date: '16/05/2024 10:00-10:30',
-      icon: 'pi pi-calendar',
-      color: '#607D8B',
-    },
+    // {
+    //   status: 'Zaplanowana',
+    //   patient: 'Dr. Jan Kowalski',
+    //   description: 'konsultacje wyników badań',
+    //   date: '16/05/2024 10:00-10:30',
+    //   icon: 'pi pi-calendar',
+    //   color: '#607D8B',
   ];
 
   constructor(
@@ -112,10 +109,27 @@ export class DoctorDashboardComponent implements OnInit {
       });
 
     this.dataService
-      .getDocrotSchedule(this.userLocalStorageData.id)
+      .getDoctorSchedule(this.userLocalStorageData.id)
       .subscribe((data: any) => {
         console.log('Grafik lekarza', data);
       });
+
+    this.doctorService
+      .getScheduledVisits(this.userLocalStorageData.id)
+      .subscribe(
+        (data) => {
+          data.forEach((event: any) => {
+            event.icon = 'pi pi-calendar';
+            event.color = '#607D8B';
+            this.events.push(event);
+          });
+          // this.events = data;
+          console.log('zarezerwowane wizyty', this.events);
+        },
+        (error) => {
+          console.error('Error fetching scheduled visits', error);
+        }
+      );
 
     if (this.userLocalStorageData.id !== '') {
       console.log('Dane użytkownika: ', this.userLocalStorageData);

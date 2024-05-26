@@ -143,19 +143,25 @@
       <p-card
         *ngFor="let visit of visits"
         class="card"
-        [header]="'lek. ' + visit.FirstName + ' ' + visit.LastName"
+        [header]="
+          'lek. ' +
+          visit.Doctor.DoctorProfile.FirstName +
+          ' ' +
+          visit.Doctor.DoctorProfile.LastName
+        "
       >
         <div class="profile-img">
           <img src="../../../assets/img/user_icon.png" />
         </div>
         <div class="doctor-text">
-          <strong>Specjalizacja:</strong> {{ visit.Specialization }} <br />
-          <strong>Dostępny w mieście:</strong> {{ visit.Cities }} <br />
-          <strong>Kontakt:</strong> {{ visit.ContactInfo }} <br />
+          <strong>Specjalizacja:</strong> {{ visit?.Doctor?.Specialization }}
+          <br />
+          <strong>Dostępny w mieście:</strong> {{ visit?.Doctor?.Cities }}
+          <br />
           <p>
-            <strong>Godziny:</strong> {{ visit.TimeSlotFrom | time }} -
-            {{ visit.TimeSlotTill | time }} dnia
-            {{ visit.AvailableDate | customDate }}
+            <strong>Godziny:</strong> {{ visit?.TimeSlotFrom | time }} -
+            {{ visit?.TimeSlotTill | time }} dnia
+            {{ visit?.AvailableDate | customDate }}
           </p>
         </div>
         <div class="mt-3" style="width: 100%; text-align: center">

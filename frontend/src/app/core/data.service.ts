@@ -11,7 +11,7 @@ export class DataService {
     return this.http.get(`http://localhost:3000/patients/profile/${id}`);
   }
 
-  getDocrotSchedule(id: string) {
+  getDoctorSchedule(id: string) {
     return this.http.get(`http://localhost:3000/doctor/schedule/${id}`);
   }
 

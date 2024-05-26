@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '../date.pipe';
 
@@ -9,10 +9,14 @@ import { DatePipe } from '../date.pipe';
   styleUrl: './confirm-modal.component.css',
   imports: [DatePipe],
 })
-export class ConfirmModalComponent {
+export class ConfirmModalComponent implements OnInit {
   @Input() visit: any;
 
   constructor(public activeModal: NgbActiveModal) {}
+
+  ngOnInit(): void {
+    console.log(this.visit);
+  }
 
   confirmVisit() {
     this.activeModal.close('confirmed');

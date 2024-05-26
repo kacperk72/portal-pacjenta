@@ -77,7 +77,7 @@
           <ng-template pTemplate="header">
             <span>Mój grafik</span>
           </ng-template>
-          <div class="timeline">
+          <div *ngIf="events.length" class="timeline">
             <p-timeline
               [value]="events"
               align="alternate"
@@ -88,12 +88,24 @@
                   class="custom-marker shadow-2"
                   [style.backgroundColor]="event.color"
                 >
-                  <i [ngClass]="event.icon" [ngStyle]="{ color: 'white' }"></i>
+                  <i [ngClass]="event?.icon" [ngStyle]="{ color: 'white' }"></i>
                 </span>
               </ng-template>
               <ng-template pTemplate="content" let-event>
-                <p-card [header]="event.status" [subheader]="event.date">
-                  <p>{{ event.description }}</p>
+                <p-card
+                  [header]="event?.Appointment?.Status | capitalize"
+                  [subheader]="
+                    (event?.AvailableDate | customDate) +
+                    ' ' +
+                    (event?.TimeSlotFrom | time) +
+                    '-' +
+                    (event?.TimeSlotTill | time)
+                  "
+                >
+                  <p>
+                    Pacjent: {{ event.Appointment.PatientProfile.FirstName }}
+                    {{ event.Appointment.PatientProfile.LastName }}
+                  </p>
                   <button
                     pButton
                     style="width: 100%"

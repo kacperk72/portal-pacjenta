@@ -19,6 +19,8 @@ import { DatePipe } from '../date.pipe';
 import { TimePipe } from '../time.pipe';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
+import { AppointmentService } from '../../core/appointment.service';
+import { UserService, userLocalStorageData } from '../../core/user.service';
 
 @Component({
   selector: 'app-visits',
@@ -55,8 +57,19 @@ export class VisitsComponent implements OnInit {
   locations = [{}];
   showDoctors: boolean = false;
   visits: any = [];
+  userLocalStorageData: userLocalStorageData = {
+    id: '',
+    role: '',
+    username: '',
+    token: '',
+  };
 
-  constructor(private service: DataService, private modalService: NgbModal) {}
+  constructor(
+    private service: DataService,
+    private modalService: NgbModal,
+    private appointmentService: AppointmentService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.service.getFiltersData().subscribe((data: any) => {
@@ -90,13 +103,36 @@ export class VisitsComponent implements OnInit {
 
   bookVisit(visit: any) {
     console.log(visit);
+    this.userLocalStorageData = this.userService.getUserData();
+
     const modalRef = this.modalService.open(ConfirmModalComponent);
     modalRef.componentInstance.visit = visit;
-    modalRef.result.then((res) => {
-      console.log(res);
-      if (res === 'confirmed') {
-        // zapisz wizytę w bazie
-      }
-    });
+    modalRef.result
+      .then((res) => {
+        if (res === 'confirmed') {
+          const appointmentData = {
+            PatientID: this.userLocalStorageData.id,
+            DoctorID: visit.DoctorID,
+            AppointmentDate: visit.AvailableDate + ' ' + visit.TimeSlotFrom,
+            Status: 'zaplanowana',
+            Diagnosis: visit.Diagnosis || null, // If applicable
+            Treatment: visit.Treatment || null, // If applicable
+            SurveyID: visit.SurveyID || null, // If applicable
+            ScheduleID: visit.ScheduleID,
+          };
+
+          this.appointmentService.bookAppointment(appointmentData).subscribe(
+            (response) => {
+              console.log('Appointment booked successfully', response);
+            },
+            (error) => {
+              console.error('Error booking appointment', error);
+            }
+          );
+        }
+      })
+      .catch((error) => {
+        console.log('Modal dismissed with error:', error);
+      });
   }
 }
