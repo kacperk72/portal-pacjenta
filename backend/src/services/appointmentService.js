@@ -1,4 +1,4 @@
-const { Appointment } = require("../models/appointmentModel");
+const Appointment = require("../models/appointmentModel");
 const { DoctorSchedule } = require("../models/doctorModel");
 const { Sequelize } = require("sequelize");
 const sequelize = require("../config/db");
