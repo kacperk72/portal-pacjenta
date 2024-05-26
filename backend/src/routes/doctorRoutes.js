@@ -9,12 +9,12 @@ router.get("/filters", doctorController.getDataFilters);
 
 router.post("/visits", doctorController.getVisits);
 
-// Pobranie harmonogramu lekarza po ID lekarza
+router.get("/scheduled-visits/:doctorId", doctorController.getScheduledVisits);
+
 router.get("/schedule/:doctorId", doctorController.getDoctorScheduleById);
 
-// Pobranie lekarza po ID
-router.get("/:doctorId", doctorController.getDoctorById);
+router.post("/schedule/create", doctorController.createSchedules);
 
-router.post("/schedule", doctorController.createSchedules);
+router.get("/:doctorId", doctorController.getDoctorById);
 
 module.exports = router;
