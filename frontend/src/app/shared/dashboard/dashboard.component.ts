@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { DataService } from '../../core/data.service';
 import { UserService, userLocalStorageData } from '../../core/user.service';
 import { Router } from '@angular/router';
+import { AppointmentService } from '../../core/appointment.service';
 
 interface EventItem {
   status?: string;
@@ -118,6 +119,7 @@ export class DashboardComponent implements OnInit {
     private modalService: NgbModal,
     private userService: UserService,
     private dataService: DataService,
+    private appointmentService: AppointmentService,
     private router: Router
   ) {}
 
@@ -130,6 +132,19 @@ export class DashboardComponent implements OnInit {
         console.log(data);
         this.userData = data;
       });
+
+    if (this.userLocalStorageData && this.userLocalStorageData.id) {
+      this.appointmentService
+        .getPatientAppointments(this.userLocalStorageData.id)
+        .subscribe(
+          (data) => {
+            console.log(data);
+          },
+          (error) => {
+            console.error('Error fetching patient appointments', error);
+          }
+        );
+    }
 
     if (this.userLocalStorageData.id !== '') {
       console.log('Dane użytkownika: ', this.userLocalStorageData);

@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
-const Appointment = require("./appointmentModel"); // Ensure correct path
-const Profile = require("./profileModel"); // Ensure correct path
+const Appointment = require("./appointmentModel");
+const Profile = require("./profileModel");
 
 const Doctor = sequelize.define(
   "Doctor",
@@ -69,7 +69,6 @@ const DoctorSchedule = sequelize.define(
   }
 );
 
-// Define associations
 Doctor.hasMany(DoctorSchedule, { foreignKey: "DoctorID" });
 DoctorSchedule.belongsTo(Doctor, { foreignKey: "DoctorID" });
 
@@ -80,12 +79,14 @@ Appointment.belongsTo(Profile, {
   as: "PatientProfile",
   foreignKey: "PatientID",
   targetKey: "ProfileID",
-}); // Assuming PatientID refers to ProfileID
+});
 
 Doctor.belongsTo(Profile, {
   as: "DoctorProfile",
   foreignKey: "DoctorID",
   targetKey: "ProfileID",
-}); // Ensure correct association without adding ProfileID to Doctor
+});
+
+Appointment.belongsTo(Doctor, { foreignKey: "DoctorID" });
 
 module.exports = { Doctor, DoctorSchedule, Profile, Appointment };

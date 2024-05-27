@@ -11,3 +11,15 @@ exports.createAppointment = async (req, res) => {
     res.status(500).send(error.message);
   }
 };
+
+exports.getPatientAppointments = async (req, res) => {
+  try {
+    const patientId = req.params.patientId;
+    const appointments = await appointmentService.getPatientAppointments(
+      patientId
+    );
+    res.status(200).json(appointments);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
