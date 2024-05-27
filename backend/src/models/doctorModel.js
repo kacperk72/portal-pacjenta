@@ -69,11 +69,49 @@ const DoctorSchedule = sequelize.define(
   }
 );
 
+const Prescription = sequelize.define(
+  "Prescription",
+  {
+    PrescriptionID: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    AppointmentID: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "appointments",
+        key: "AppointmentID",
+      },
+    },
+    Medicine: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    Dosage: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    Instructions: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  {
+    tableName: "prescriptions",
+    timestamps: false,
+  }
+);
+
 Doctor.hasMany(DoctorSchedule, { foreignKey: "DoctorID" });
 DoctorSchedule.belongsTo(Doctor, { foreignKey: "DoctorID" });
 
 DoctorSchedule.belongsTo(Appointment, { foreignKey: "AppointmentID" });
 Appointment.hasOne(DoctorSchedule, { foreignKey: "AppointmentID" });
+
+Appointment.hasMany(Prescription, { foreignKey: "AppointmentID" });
+Prescription.belongsTo(Appointment, { foreignKey: "AppointmentID" });
 
 Appointment.belongsTo(Profile, {
   as: "PatientProfile",
@@ -89,4 +127,4 @@ Doctor.belongsTo(Profile, {
 
 Appointment.belongsTo(Doctor, { foreignKey: "DoctorID" });
 
-module.exports = { Doctor, DoctorSchedule, Profile, Appointment };
+module.exports = { Doctor, DoctorSchedule, Profile, Appointment, Prescription };

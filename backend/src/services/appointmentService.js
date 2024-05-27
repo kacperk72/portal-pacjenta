@@ -2,6 +2,7 @@ const Appointment = require("../models/appointmentModel");
 const { DoctorSchedule } = require("../models/doctorModel");
 const { Profile } = require("../models/doctorModel");
 const { Doctor } = require("../models/doctorModel");
+const { Prescription } = require("../models/doctorModel");
 const { Sequelize } = require("sequelize");
 const sequelize = require("../config/db");
 
@@ -51,6 +52,10 @@ const getPatientAppointments = async (patientId) => {
           model: DoctorSchedule,
           attributes: ["AvailableDate", "TimeSlotFrom", "TimeSlotTill"],
         },
+        {
+          model: Prescription,
+          attributes: ["Medicine", "Dosage", "Instructions"],
+        },
       ],
       order: [["AppointmentDate", "ASC"]],
     });
@@ -61,5 +66,6 @@ const getPatientAppointments = async (patientId) => {
 
 module.exports = {
   createAppointment,
+  getPatientAppointments,
   getPatientAppointments,
 };

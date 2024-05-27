@@ -76,6 +76,7 @@ export class DashboardComponent implements OnInit {
   userData: any;
   isInEditMode: boolean = false;
   dataLoaded: boolean = false;
+  prescriptions: any[] = [];
 
   constructor(
     private modalService: NgbModal,
@@ -101,6 +102,7 @@ export class DashboardComponent implements OnInit {
         .subscribe(
           (data) => {
             this.classifyAppointments(data);
+            this.extractPrescriptions(data);
             this.dataLoaded = true;
           },
           (error) => {
@@ -115,6 +117,21 @@ export class DashboardComponent implements OnInit {
       // console.log('Brak danych użytkownika w local storage.');
       this.router.navigate(['/login']);
     }
+  }
+
+  extractPrescriptions(appointments: any[]): void {
+    appointments.forEach((appointment) => {
+      if (appointment.Prescriptions && appointment.Prescriptions.length > 0) {
+        appointment.Prescriptions.forEach((prescription: any) => {
+          this.prescriptions.push({
+            medicine: prescription.Medicine,
+            dosage: prescription.Dosage,
+            instructions: prescription.Instructions,
+            appointmentDate: appointment.AppointmentDate,
+          });
+        });
+      }
+    });
   }
 
   classifyAppointments(appointments: any[]): void {

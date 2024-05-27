@@ -179,37 +179,23 @@
             <span>Recepty</span>
           </ng-template>
           <div class="card-container">
-            <div class="referral">
-              <p-card header="Recepta 3315">
+            <div *ngFor="let prescription of prescriptions" class="referral">
+              <p-card [header]="'Recepta na ' + prescription.medicine">
                 <ng-template pTemplate="content">
-                  <div class="m-0 referral-description">Lek na kaszel 2x1</div>
+                  <div class="m-0 referral-description">
+                    {{ prescription.dosage }} - {{ prescription.instructions }}
+                  </div>
                 </ng-template>
                 <ng-template pTemplate="footer">
-                  <div>Wystawione: 02-01-2024</div>
-                  <div>Ważne do: 02-01-2025</div>
-                </ng-template>
-              </p-card>
-            </div>
-            <div class="referral">
-              <p-card header="Recepta 2115">
-                <ng-template pTemplate="content">
-                  <div class="m-0 referral-description">Lek na ból gardła</div>
-                </ng-template>
-                <ng-template pTemplate="footer">
-                  <div>Wystawione: 02-01-2024</div>
-                  <div>Ważne do: 02-01-2025</div>
-                </ng-template>
-              </p-card>
-            </div>
-            <div class="referral">
-              <p-card header="Recepta 1234">
-                <ng-template pTemplate="content">
-                  <div class="m-0 referral-description">Antybiotyk 1x1</div>
-                </ng-template>
-
-                <ng-template pTemplate="footer">
-                  <div>Wystawione: 02-01-2024</div>
-                  <div>Ważne do: 02-01-2025</div>
+                  <div>
+                    Wystawione:
+                    {{ prescription.appointmentDate | date : "dd-MM-yyyy" }}
+                  </div>
+                  <div>
+                    Ważne do:
+                    {{ prescription.appointmentDate | date : "dd-MM-yyyy" }}
+                  </div>
+                  <!-- Adjust the expiration date logic as needed -->
                 </ng-template>
               </p-card>
             </div>

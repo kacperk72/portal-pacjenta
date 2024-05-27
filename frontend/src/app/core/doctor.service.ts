@@ -6,16 +6,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class DoctorService {
+  private apiUrl = 'http://localhost:3000/doctor';
+
   constructor(private http: HttpClient) {}
 
   createSchedules(schedules: any): Observable<any> {
-    return this.http.post(
-      `http://localhost:3000/doctor/schedule/create`,
-      schedules
-    );
+    return this.http.post(`${this.apiUrl}/schedule/create`, schedules);
   }
 
   getScheduledVisits(id: string): Observable<any> {
-    return this.http.get(`http://localhost:3000/doctor/scheduled-visits/${id}`);
+    return this.http.get(`${this.apiUrl}/scheduled-visits/${id}`);
   }
 }
