@@ -13,6 +13,7 @@ import { DataService } from '../../core/data.service';
 import { UserService, userLocalStorageData } from '../../core/user.service';
 import { Router } from '@angular/router';
 import { AppointmentService } from '../../core/appointment.service';
+import { CapitalizePipe } from '../capitalize.pipe';
 
 interface EventItem {
   status?: string;
@@ -27,6 +28,8 @@ interface EventItem {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
+  templateUrl: './dashboard.component.html',
+  styleUrl: './dashboard.component.css',
   imports: [
     SurveyComponent,
     TabViewModule,
@@ -37,74 +40,32 @@ interface EventItem {
     TimelineModule,
     CardModule,
     CommonModule,
+    CapitalizePipe,
   ],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent implements OnInit {
   name: string = '';
   surname: string = '';
   adres: string = '';
   events: EventItem[] = [
-    {
-      status: 'Zaplanowana',
-      doctor: 'Dr. Jan Kowalski',
-      description: 'Lekarz gastrolog - konsultacje wyników badań',
-      date: '16/05/2024 10:00',
-      icon: 'pi pi-calendar',
-      color: '#607D8B',
-    },
-    {
-      status: 'Nadchodząca',
-      doctor: 'Dr. Jan Kowalski',
-      description: 'Lekarz gastrolog - konsultacje',
-      date: '15/05/2024 16:15',
-      icon: 'pi pi-calendar',
-      color: '#FF9800',
-    },
-    {
-      status: 'Zakończona',
-      doctor: 'Dr. Jan Kowalski',
-      description: 'Lekarz internista - konsultacje',
-      date: '15/10/2023 10:30',
-      icon: 'pi pi-check',
-      color: '#9C27B0',
-      image: 'game-controller.jpg',
-    },
-    {
-      status: 'Zakończona',
-      doctor: 'Dr. Jan Kowalski',
-      description: 'Lekarz internista - konsultacje',
-      date: '10/10/2023 14:00',
-      icon: 'pi pi-check',
-      color: '#9C27B0',
-    },
+    // {
+    //   status: 'Zaplanowana',
+    //   doctor: 'Dr. Jan Kowalski',
+    //   description: 'Lekarz gastrolog - konsultacje wyników badań',
+    //   date: '16/05/2024 10:00',
+    //   icon: 'pi pi-calendar',
+    //   color: '#607D8B',
+    // },
   ];
   eventsHistory: EventItem[] = [
-    {
-      status: 'Zakończona',
-      doctor: 'Dr. Jan Kowalski',
-      description: 'Lekarz internista - konsultacje',
-      date: '10/10/2023 14:00',
-      icon: 'pi pi-check',
-      color: '#9C27B0',
-    },
-    {
-      status: 'Zakończona',
-      doctor: 'Dr. Jan Kowalski',
-      description: 'Lekarz internista - konsultacje',
-      date: '10/10/2023 14:00',
-      icon: 'pi pi-check',
-      color: '#9C27B0',
-    },
-    {
-      status: 'Zakończona',
-      doctor: 'Dr. Jan Kowalski',
-      description: 'Lekarz internista - konsultacje',
-      date: '10/10/2023 14:00',
-      icon: 'pi pi-check',
-      color: '#9C27B0',
-    },
+    // {
+    //   status: 'Zakończona',
+    //   doctor: 'Dr. Jan Kowalski',
+    //   description: 'Lekarz internista - konsultacje',
+    //   date: '10/10/2023 14:00',
+    //   icon: 'pi pi-check',
+    //   color: '#9C27B0',
+    // },
   ];
   userLocalStorageData: userLocalStorageData = {
     id: '',
@@ -114,6 +75,7 @@ export class DashboardComponent implements OnInit {
   };
   userData: any;
   isInEditMode: boolean = false;
+  dataLoaded: boolean = false;
 
   constructor(
     private modalService: NgbModal,
@@ -138,7 +100,8 @@ export class DashboardComponent implements OnInit {
         .getPatientAppointments(this.userLocalStorageData.id)
         .subscribe(
           (data) => {
-            console.log(data);
+            this.classifyAppointments(data);
+            this.dataLoaded = true;
           },
           (error) => {
             console.error('Error fetching patient appointments', error);
@@ -152,6 +115,45 @@ export class DashboardComponent implements OnInit {
       // console.log('Brak danych użytkownika w local storage.');
       this.router.navigate(['/login']);
     }
+  }
+
+  classifyAppointments(appointments: any[]): void {
+    const now = new Date();
+    appointments.forEach((appointment) => {
+      const eventItem = this.transformToEventItem(appointment);
+      const appointmentDate = new Date(
+        `${appointment.DoctorSchedule.AvailableDate}T${appointment.DoctorSchedule.TimeSlotFrom}`
+      );
+      if (appointmentDate < now) {
+        console.log('true');
+        this.eventsHistory.push(eventItem);
+      } else {
+        console.log('false');
+        this.events.push(eventItem);
+      }
+    });
+  }
+
+  transformToEventItem(appointment: any): EventItem {
+    return {
+      status: appointment.Status,
+      doctor: `Dr. ${appointment.Doctor.DoctorProfile.FirstName} ${appointment.Doctor.DoctorProfile.LastName}`,
+      description: `${appointment.Doctor.Specialization} - ${
+        appointment.Treatment || 'Brak wskazówek leczenia'
+      }`,
+      date: this.formatDateTime(
+        appointment.DoctorSchedule.AvailableDate,
+        appointment.DoctorSchedule.TimeSlotFrom
+      ),
+      icon:
+        appointment.Status === 'zaplanowana' ? 'pi pi-calendar' : 'pi pi-check',
+      color: appointment.Status === 'zaplanowana' ? '#607D8B' : '#FF5722',
+    };
+  }
+
+  formatDateTime(date: string, time: string): string {
+    const dateTime = new Date(`${date}T${time}`);
+    return dateTime.toLocaleString('pl-PL');
   }
 
   open() {
