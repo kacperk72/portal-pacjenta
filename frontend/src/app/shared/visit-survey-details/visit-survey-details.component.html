@@ -1,0 +1,105 @@
+<div class="modal-header">
+  <h4 class="modal-title">Szczegóły ankiety</h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="modal-body">
+  @if(event?.survey){
+  <div class="survey-detail">
+    <p><strong>Powód wizyty:</strong> {{ event.survey.VisitReason }}</p>
+    <p>
+      <strong>Jak długo trwają objawy?</strong> {{ event.survey.SymptomsTime }}
+    </p>
+    <p>
+      <strong>Czy występowała podwyższona temperatura?</strong>
+      {{ event.survey.HighTemperature }}
+    </p>
+    <p>
+      <strong>Czy ma Pan/Pani kaszel? Jeśli tak to jaki?</strong>
+      {{ event.survey.HaveCough }}
+    </p>
+    <p>
+      <strong>Czy odczuwasz duszności?</strong> {{ event.survey.HaveNoBreath }}
+    </p>
+    <p>
+      <strong>Czy boli cię gardło?</strong> {{ event.survey.HaveThroatAche }}
+    </p>
+    <p><strong>Czy masz katar?</strong> {{ event.survey.HaveRunnyNose }}</p>
+    <p>
+      <strong>Czy masz problemy z brzuchem? Jeśli tak to jakie?</strong>
+      {{ event.survey.HaveStomachAche }}
+    </p>
+    <p>
+      <strong>Czy odczuwasz inne dolegliwości?</strong>
+      {{ event.survey.HaveOtherSymptoms }}
+    </p>
+    <p>
+      <strong>Czy przyjmujesz jakieś leki?</strong>
+      {{ event.survey.TakeMedications }}
+    </p>
+    @if(event.survey.MedicationsDetails){
+    <p>
+      <strong>Opisz leki, które przyjmujesz:</strong>
+      {{ event.survey.MedicationsDetails }}
+    </p>
+    }
+    <p>
+      <strong>Czy masz alergię na jakieś leki?</strong>
+      {{ event.survey.HasAllergy }}
+    </p>
+    @if(event.survey.AllergyDetails){
+    <p><strong>Opisz alergie:</strong> {{ event.survey.AllergyDetails }}</p>
+    }
+    <p>
+      <strong>Czy chorujesz na choroby przewlekłe?</strong>
+      {{ event.survey.HasChronicDiseases }}
+    </p>
+    @if(event.survey.ChronicDiseasesDetails){
+    <p>
+      <strong>Opisz choroby przewlekłe:</strong>
+      {{ event.survey.ChronicDiseasesDetails }}
+    </p>
+    } @if(event.survey.NeededMedications){
+    <p>
+      <strong>Jakich leków potrzebujesz oraz na jaki okres czasu?</strong>
+      {{ event.survey.NeededMedications }}
+    </p>
+    } @if(event.survey.CurrentMedications){
+    <p>
+      <strong
+        >Jeśli przyjmujesz obecnie leki, opisz od kiedy i w jakiej
+        dawce:</strong
+      >
+      {{ event.survey.CurrentMedications }}
+    </p>
+    } @if(event.survey.ReferralReason){
+    <p>
+      <strong>Na co potrzebujesz skierowanie?</strong>
+      {{ event.survey.ReferralReason }}
+    </p>
+    } @if(event.survey.ReferralCause){
+    <p>
+      <strong
+        >Jaki jest powód dla którego potrzebujesz wykonać to
+        badanie/wizytę?</strong
+      >
+      {{ event.survey.ReferralCause }}
+    </p>
+    } @if(event.survey.TestResults){
+    <p>
+      <strong>Tutaj opisz wyniki które chciałbyś skonsultować:</strong>
+      {{ event.survey.TestResults }}
+    </p>
+    }
+  </div>
+  }
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="activeModal.close()">
+    Zamknij
+  </button>
+</div>

@@ -17,6 +17,10 @@
   margin-left: 20px;
 }
 
+input[type="text"] {
+  min-width: 400px !important;
+}
+
 :host ::ng-deep .dropdown-select .p-dropdown {
   min-width: 400px !important;
 }

@@ -79,7 +79,7 @@
           </ng-template>
           <div *ngIf="events.length" class="timeline">
             <p-timeline
-              [value]="events"
+              [value]="combinedData"
               align="alternate"
               styleClass="customized-timeline"
             >
@@ -108,6 +108,7 @@
                   </p>
                   <button
                     pButton
+                    (click)="showDetails(event)"
                     style="width: 100%"
                     label="Szczegóły"
                     class="p-button-text"

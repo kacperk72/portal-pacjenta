@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 import { AppointmentService } from '../../core/appointment.service';
 import { CapitalizePipe } from '../capitalize.pipe';
 
-interface EventItem {
+export interface EventItem {
   status?: string;
   doctor?: string;
   description?: string;
@@ -23,6 +23,9 @@ interface EventItem {
   icon?: string;
   color?: string;
   image?: string;
+  AppointmentID?: string;
+  PatientID?: string;
+  DoctorID?: string;
 }
 
 @Component({
@@ -152,6 +155,7 @@ export class DashboardComponent implements OnInit {
   }
 
   transformToEventItem(appointment: any): EventItem {
+    console.log('appointment', appointment);
     return {
       status: appointment.Status,
       doctor: `Dr. ${appointment.Doctor.DoctorProfile.FirstName} ${appointment.Doctor.DoctorProfile.LastName}`,
@@ -165,6 +169,9 @@ export class DashboardComponent implements OnInit {
       icon:
         appointment.Status === 'zaplanowana' ? 'pi pi-calendar' : 'pi pi-check',
       color: appointment.Status === 'zaplanowana' ? '#607D8B' : '#FF5722',
+      AppointmentID: appointment.AppointmentID,
+      PatientID: appointment.PatientID,
+      DoctorID: appointment.DoctorID,
     };
   }
 
@@ -173,9 +180,10 @@ export class DashboardComponent implements OnInit {
     return dateTime.toLocaleString('pl-PL');
   }
 
-  open() {
-    console.log('open');
+  open(visit: any) {
+    console.log('open', visit);
     const modalRef = this.modalService.open(SurveyComponent);
+    modalRef.componentInstance.visitData = visit;
   }
 
   editMode() {

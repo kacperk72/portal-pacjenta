@@ -11,14 +11,39 @@
     <p-dropdown
       class="dropdown-select"
       [options]="visitOptions"
-      [(ngModel)]="selectedVisitReason"
+      [(ngModel)]="surveyData.visitReason"
       optionLabel="name"
       [showClear]="true"
       placeholder="Powód wizyty"
       id="dropdownId"
     ></p-dropdown>
   </div>
-  } @if(step===1){
+  } @if(step===1){ @if(surveyData.visitReason.name=='Odnowienie recepty'){
+  <div class="mb-3">
+    <label class="survey-label mb-2" for="neededMedications"
+      >Jakich leków potrzebujesz oraz na jaki okres czasu?</label
+    >
+    <input
+      pInputText
+      type="text"
+      id="neededMedications"
+      [(ngModel)]="surveyData.neededMedications"
+      placeholder="Wprowadź leki i okres czasu"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="survey-label mb-2" for="currentMedications"
+      >Jeśli przyjmujesz obecnie leki, opisz od kiedy i w jakiej dawce:</label
+    >
+    <input
+      pInputText
+      type="text"
+      id="currentMedications"
+      [(ngModel)]="surveyData.currentMedications"
+      placeholder="Wprowadź obecnie przyjmowane leki"
+    />
+  </div>
+  } @if(surveyData.visitReason.name=='Objawy przeziębienia'){
   <div class="mb-3">
     <label class="survey-label mb-2" for="dropdownId"
       >Jak długo trwają objawy?</label
@@ -26,10 +51,10 @@
     <p-dropdown
       class="dropdown-select"
       [options]="symptomsTime"
-      [(ngModel)]="symptomsTimeChoosen"
+      [(ngModel)]="surveyData.symptomsTime"
       optionLabel="name"
       [showClear]="true"
-      placeholder="Powód wizyty"
+      placeholder="Wybierz czas trwania objawów"
       id="dropdownId"
     ></p-dropdown>
   </div>
@@ -40,10 +65,10 @@
     <p-dropdown
       class="dropdown-select"
       [options]="highTemperature"
-      [(ngModel)]="highTemperatureChoosen"
+      [(ngModel)]="surveyData.highTemperature"
       optionLabel="name"
       [showClear]="true"
-      placeholder="Powód wizyty"
+      placeholder="Wybierz odpowiedź"
       id="dropdownId"
     ></p-dropdown>
   </div>
@@ -54,10 +79,10 @@
     <p-dropdown
       class="dropdown-select"
       [options]="haveCough"
-      [(ngModel)]="haveCoughChoosen"
+      [(ngModel)]="surveyData.haveCough"
       optionLabel="name"
       [showClear]="true"
-      placeholder="Powód wizyty"
+      placeholder="Wybierz odpowiedź"
       id="dropdownId"
     ></p-dropdown>
   </div>
@@ -68,10 +93,10 @@
     <p-dropdown
       class="dropdown-select"
       [options]="haveNoBreath"
-      [(ngModel)]="haveNoBreathChoosen"
+      [(ngModel)]="surveyData.haveNoBreath"
       optionLabel="name"
       [showClear]="true"
-      placeholder="Powód wizyty"
+      placeholder="Wybierz odpowiedź"
       id="dropdownId"
     ></p-dropdown>
   </div>
@@ -82,10 +107,10 @@
     <p-dropdown
       class="dropdown-select"
       [options]="haveThroatAche"
-      [(ngModel)]="haveThroatAcheChoosen"
+      [(ngModel)]="surveyData.haveThroatAche"
       optionLabel="name"
       [showClear]="true"
-      placeholder="Powód wizyty"
+      placeholder="Wybierz odpowiedź"
       id="dropdownId"
     ></p-dropdown>
   </div>
@@ -94,10 +119,10 @@
     <p-dropdown
       class="dropdown-select"
       [options]="haveRunnyNose"
-      [(ngModel)]="haveRunnyNoseChoosen"
+      [(ngModel)]="surveyData.haveRunnyNose"
       optionLabel="name"
       [showClear]="true"
-      placeholder="Powód wizyty"
+      placeholder="Wybierz odpowiedź"
       id="dropdownId"
     ></p-dropdown>
   </div>
@@ -108,10 +133,10 @@
     <p-dropdown
       class="dropdown-select"
       [options]="haveStomachAche"
-      [(ngModel)]="haveStomachAcheChoosen"
+      [(ngModel)]="surveyData.haveStomachAche"
       optionLabel="name"
       [showClear]="true"
-      placeholder="Powód wizyty"
+      placeholder="Wybierz odpowiedź"
       id="dropdownId"
     ></p-dropdown>
   </div>
@@ -122,95 +147,176 @@
     <p-dropdown
       class="dropdown-select"
       [options]="haveOtherSymptoms"
-      [(ngModel)]="haveOtherSymptomsChoosen"
+      [(ngModel)]="surveyData.haveOtherSymptoms"
       optionLabel="name"
       [showClear]="true"
-      placeholder="Powód wizyty"
+      placeholder="Wybierz odpowiedź"
       id="dropdownId"
     ></p-dropdown>
   </div>
-  } @if(step===2){
+  } @if(surveyData.visitReason.name=='Wystawienie skierowania'){
   <div class="mb-3">
-    <label class="survey-label mb-2" for="dropdownId"
+    <label class="survey-label mb-2" for="referralReason"
+      >Na co potrzebujesz skierowanie?</label
+    >
+    <input
+      pInputText
+      type="text"
+      id="referralReason"
+      [(ngModel)]="surveyData.referralReason"
+      placeholder="Wprowadź powód skierowania"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="survey-label mb-2" for="referralCause"
+      >Jaki jest powód dla którego potrzebujesz wykonać to
+      badanie/wizytę?</label
+    >
+    <input
+      pInputText
+      type="text"
+      id="referralCause"
+      [(ngModel)]="surveyData.referralCause"
+      placeholder="Wprowadź powód badania/wizyty"
+    />
+  </div>
+  } @if(surveyData.visitReason.name=='Konsultacja wyników badań'){
+  <div class="mb-3">
+    <label class="survey-label mb-2" for="testResults"
+      >Tutaj opisz wyniki które chciałbyś skonsultować:</label
+    >
+    <input
+      pInputText
+      type="text"
+      id="testResults"
+      [(ngModel)]="surveyData.testResults"
+      placeholder="Wprowadź wyniki do konsultacji"
+    />
+  </div>
+  } } @if(step===2){
+  <!-- Te pytania są ogólne dla każdego powodu wizyty -->
+  <div class="mb-3">
+    <label class="survey-label mb-2" for="takeMedications"
       >Czy przyjmujesz jakieś leki?</label
     >
     <p-dropdown
       class="dropdown-select"
       [options]="takeMedications"
-      [(ngModel)]="takeMedicationsChoosen"
+      [(ngModel)]="surveyData.takeMedications"
       optionLabel="name"
       [showClear]="true"
-      placeholder="Powód wizyty"
-      id="dropdownId"
+      placeholder="Wybierz odpowiedź"
+      id="takeMedications"
     ></p-dropdown>
   </div>
+  @if(surveyData.takeMedications?.name === 'Tak') {
+  <div class="mb-3">
+    <label class="survey-label mb-2" for="medicationsDetails"
+      >Opisz leki, które przyjmujesz:</label
+    >
+    <input
+      pInputText
+      type="text"
+      id="medicationsDetails"
+      [(ngModel)]="surveyData.medicationsDetails"
+      placeholder="Wprowadź szczegóły leków"
+    />
+  </div>
+  }
 
   <div class="mb-3">
-    <label class="survey-label mb-2" for="dropdownId"
+    <label class="survey-label mb-2" for="hasAllergy"
       >Czy masz alergię na jakieś leki?</label
     >
     <p-dropdown
       class="dropdown-select"
       [options]="hasAllergy"
-      [(ngModel)]="hasAllergyChoosen"
+      [(ngModel)]="surveyData.hasAllergy"
       optionLabel="name"
       [showClear]="true"
-      placeholder="Powód wizyty"
-      id="dropdownId"
+      placeholder="Wybierz odpowiedź"
+      id="hasAllergy"
     ></p-dropdown>
   </div>
+  @if(surveyData.hasAllergy?.name === 'Tak') {
+  <div class="mb-3">
+    <label class="survey-label mb-2" for="allergyDetails">Opisz alergie:</label>
+    <input
+      pInputText
+      type="text"
+      id="allergyDetails"
+      [(ngModel)]="surveyData.allergyDetails"
+      placeholder="Wprowadź szczegóły alergii"
+    />
+  </div>
+  }
 
   <div class="mb-3">
-    <label class="survey-label mb-2" for="dropdownId"
+    <label class="survey-label mb-2" for="hasChronicDiseases"
       >Czy chorujesz na choroby przewlekłe?</label
     >
     <p-dropdown
       class="dropdown-select"
       [options]="hasChronicDiseases"
-      [(ngModel)]="hasChronicDiseasesChoosen"
+      [(ngModel)]="surveyData.hasChronicDiseases"
       optionLabel="name"
       [showClear]="true"
-      placeholder="Powód wizyty"
-      id="dropdownId"
+      placeholder="Wybierz odpowiedź"
+      id="hasChronicDiseases"
     ></p-dropdown>
   </div>
-  }
+  @if(surveyData.hasChronicDiseases?.name === 'Tak') {
+  <div class="mb-3">
+    <label class="survey-label mb-2" for="chronicDiseasesDetails"
+      >Opisz choroby przewlekłe:</label
+    >
+    <input
+      pInputText
+      type="text"
+      id="chronicDiseasesDetails"
+      [(ngModel)]="surveyData.chronicDiseasesDetails"
+      placeholder="Wprowadź szczegóły chorób przewlekłych"
+    />
+  </div>
+  } }
 </div>
 <div class="modal-footer">
-  @if(step < 4) {
   <div class="btn-navigation">
     <button
       type="button"
-      class="btn btn-secondary"
+      class="btn btn-secondary me-3"
       [disabled]="this.step <= 0"
       (click)="previousStep()"
     >
       Wróć
     </button>
+    @if(step < 2) {
+    <div class="btn-navigation">
+      <button
+        type="button"
+        class="btn btn-primary"
+        [disabled]="this.step > 2"
+        (click)="nextStep()"
+      >
+        Dalej
+      </button>
+    </div>
+    } @if(step === 2) {
     <button
       type="button"
-      class="btn btn-primary ms-3"
-      [disabled]="this.step > 4"
-      (click)="nextStep()"
+      class="btn btn-outline-dark me-3"
+      (click)="activeModal.close('Close click')"
     >
-      Dalej
+      Anuluj
     </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      [disabled]="surveyFull"
+      (click)="saveSurvey()"
+    >
+      Zapisz
+    </button>
+    }
   </div>
-  } @if(step === 4) {
-  <button
-    type="button"
-    class="btn btn-outline-dark"
-    (click)="activeModal.close('Close click')"
-  >
-    Zamknij
-  </button>
-  <button
-    type="button"
-    class="btn btn-primary"
-    [disabled]="surveyFull"
-    (click)="activeModal.close('Close click')"
-  >
-    Zapisz
-  </button>
-  }
 </div>

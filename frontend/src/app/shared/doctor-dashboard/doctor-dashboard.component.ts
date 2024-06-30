@@ -17,16 +17,14 @@ import { CalendarModule } from 'primeng/calendar';
 import { TimePipe } from '../time.pipe';
 import { DatePipe } from '../date.pipe';
 import { CapitalizePipe } from '../capitalize.pipe';
-
-interface EventItem {
-  status?: string;
-  patient?: string;
-  description?: string;
-  date?: string;
-  icon?: string;
-  color?: string;
-  image?: string;
-}
+import { SurveyService } from '../../core/survey.service';
+import {
+  CombinedData,
+  EventItem,
+  Survey,
+  UserLocalStorageData,
+} from '../../types/surveyTypes';
+import { VisitSurveyDetailsComponent } from '../visit-survey-details/visit-survey-details.component';
 
 @Component({
   selector: 'app-doctor-dashboard',
@@ -58,7 +56,7 @@ export class DoctorDashboardComponent implements OnInit {
   date: Date = new Date();
   startTime: Date = new Date();
   endTime: Date = new Date();
-  userLocalStorageData: userLocalStorageData = {
+  userLocalStorageData: UserLocalStorageData = {
     id: '',
     role: '',
     username: '',
@@ -69,22 +67,17 @@ export class DoctorDashboardComponent implements OnInit {
   isInEditMode: boolean = false;
   today: Date = new Date();
   duration: number = 0;
-  events: EventItem[] = [
-    // {
-    //   status: 'Zaplanowana',
-    //   patient: 'Dr. Jan Kowalski',
-    //   description: 'konsultacje wyników badań',
-    //   date: '16/05/2024 10:00-10:30',
-    //   icon: 'pi pi-calendar',
-    //   color: '#607D8B',
-  ];
+  events: EventItem[] = [];
+  surveys: Survey[] = [];
+  combinedData: CombinedData[] = [];
 
   constructor(
     private modalService: NgbModal,
     private userService: UserService,
     private dataService: DataService,
     private doctorService: DoctorService,
-    private router: Router
+    private router: Router,
+    private surveyService: SurveyService
   ) {}
 
   ngOnInit(): void {
@@ -117,14 +110,14 @@ export class DoctorDashboardComponent implements OnInit {
     this.doctorService
       .getScheduledVisits(this.userLocalStorageData.id)
       .subscribe(
-        (data) => {
-          data.forEach((event: any) => {
+        (data: EventItem[]) => {
+          data.forEach((event) => {
             event.icon = 'pi pi-calendar';
             event.color = '#607D8B';
             this.events.push(event);
           });
-          // this.events = data;
           console.log('zarezerwowane wizyty', this.events);
+          this.combineVisitsAndSurveys();
         },
         (error) => {
           console.error('Error fetching scheduled visits', error);
@@ -136,6 +129,33 @@ export class DoctorDashboardComponent implements OnInit {
     } else {
       this.router.navigate(['/login']);
     }
+
+    this.loadSurveysByDoctorID(this.userLocalStorageData.id);
+  }
+
+  loadSurveysByDoctorID(doctorID: string): void {
+    this.surveyService.getSurveysByDoctorID(doctorID).subscribe({
+      next: (data: Survey[]) => {
+        this.surveys = data;
+        console.log('Surveys for doctor:', this.surveys);
+        this.combineVisitsAndSurveys();
+      },
+      error: (err) => {
+        console.error('Error loading surveys by DoctorID:', err);
+      },
+    });
+  }
+
+  combineVisitsAndSurveys(): void {
+    if (this.events.length && this.surveys.length) {
+      this.combinedData = this.events.map((event) => {
+        const survey = this.surveys.find(
+          (s) => s.AppointmentID === event.AppointmentID
+        );
+        return survey ? { ...event, survey } : event;
+      });
+      console.log('Combined Data:', this.combinedData);
+    }
   }
 
   editMode() {
@@ -144,6 +164,11 @@ export class DoctorDashboardComponent implements OnInit {
 
   saveUserData() {
     this.isInEditMode = false;
+  }
+
+  showDetails(details: any) {
+    const modalRef = this.modalService.open(VisitSurveyDetailsComponent);
+    modalRef.componentInstance.event = details;
   }
 
   // HISTORY
