@@ -67,7 +67,8 @@ export class DoctorDashboardComponent implements OnInit {
   isInEditMode: boolean = false;
   today: Date = new Date();
   duration: number = 0;
-  events: EventItem[] = [];
+  events: any[] = [];
+  historyEvents: any[] = [];
   surveys: Survey[] = [];
   combinedData: CombinedData[] = [];
 
@@ -110,14 +111,20 @@ export class DoctorDashboardComponent implements OnInit {
     this.doctorService
       .getScheduledVisits(this.userLocalStorageData.id)
       .subscribe(
-        (data: EventItem[]) => {
-          data.forEach((event) => {
+        (data: any) => {
+          data.forEach((event: any) => {
             event.icon = 'pi pi-calendar';
             event.color = '#607D8B';
-            this.events.push(event);
+            if (event.Appointment?.Status === 'zaplanowana') {
+              this.events.push(event);
+            } else if (event.Appointment?.Status === 'zakończona') {
+              this.historyEvents.push(event);
+            }
           });
-          console.log('zarezerwowane wizyty', this.events);
+
           this.combineVisitsAndSurveys();
+          console.log('zarezerwowane wizyty', this.events);
+          console.log('historia  wizyty', this.historyEvents);
         },
         (error) => {
           console.error('Error fetching scheduled visits', error);
@@ -137,7 +144,7 @@ export class DoctorDashboardComponent implements OnInit {
     this.surveyService.getSurveysByDoctorID(doctorID).subscribe({
       next: (data: Survey[]) => {
         this.surveys = data;
-        console.log('Surveys for doctor:', this.surveys);
+        // console.log('Surveys for doctor:', this.surveys);
         this.combineVisitsAndSurveys();
       },
       error: (err) => {
@@ -154,7 +161,7 @@ export class DoctorDashboardComponent implements OnInit {
         );
         return survey ? { ...event, survey } : event;
       });
-      console.log('Combined Data:', this.combinedData);
+      // console.log('Combined Data:', this.combinedData);
     }
   }
 

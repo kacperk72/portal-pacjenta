@@ -141,8 +141,9 @@ export class DashboardComponent implements OnInit {
     const now = new Date();
     appointments.forEach((appointment) => {
       const eventItem = this.transformToEventItem(appointment);
+      console.log('eventItem', eventItem);
       const appointmentDate = new Date(
-        `${appointment.DoctorSchedule.AvailableDate}T${appointment.DoctorSchedule.TimeSlotFrom}`
+        `${appointment.DoctorSchedule?.AvailableDate}T${appointment.DoctorSchedule?.TimeSlotFrom}`
       );
       if (appointmentDate < now) {
         console.log('true');
@@ -157,21 +158,25 @@ export class DashboardComponent implements OnInit {
   transformToEventItem(appointment: any): EventItem {
     console.log('appointment', appointment);
     return {
-      status: appointment.Status,
-      doctor: `Dr. ${appointment.Doctor.DoctorProfile.FirstName} ${appointment.Doctor.DoctorProfile.LastName}`,
-      description: `${appointment.Doctor.Specialization} - ${
-        appointment.Treatment || 'Brak wskazówek leczenia'
+      status: appointment?.Status || '',
+      doctor: `Dr. ${appointment?.Doctor?.DoctorProfile?.FirstName || ''} ${
+        appointment?.Doctor?.DoctorProfile?.LastName || ''
+      }`,
+      description: `${appointment?.Doctor?.Specialization || ''} - ${
+        appointment?.Treatment || 'Brak wskazówek leczenia'
       }`,
       date: this.formatDateTime(
-        appointment.DoctorSchedule.AvailableDate,
-        appointment.DoctorSchedule.TimeSlotFrom
+        appointment?.DoctorSchedule?.AvailableDate || 'N/A',
+        appointment?.DoctorSchedule?.TimeSlotFrom || 'N/A'
       ),
       icon:
-        appointment.Status === 'zaplanowana' ? 'pi pi-calendar' : 'pi pi-check',
-      color: appointment.Status === 'zaplanowana' ? '#607D8B' : '#FF5722',
-      AppointmentID: appointment.AppointmentID,
-      PatientID: appointment.PatientID,
-      DoctorID: appointment.DoctorID,
+        appointment?.Status === 'zaplanowana'
+          ? 'pi pi-calendar'
+          : 'pi pi-check',
+      color: appointment?.Status === 'zaplanowana' ? '#607D8B' : '#FF5722',
+      AppointmentID: appointment?.AppointmentID || 'N/A',
+      PatientID: appointment?.PatientID || 'N/A',
+      DoctorID: appointment?.DoctorID || 'N/A',
     };
   }
 

@@ -24,7 +24,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class MenuComponent implements OnInit {
   username: string = '';
-  checked: boolean = true;
+  checked: boolean = false;
 
   ngOnInit(): void {
     this.toggleDarkTheme();
