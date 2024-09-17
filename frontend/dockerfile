@@ -1,0 +1,32 @@
+FROM node:latest as build-stage
+
+WORKDIR /app
+
+# Kopiowanie package.json i package-lock.json
+COPY package*.json ./
+
+# Instalowanie zależności
+RUN npm install
+
+# Kopiowanie reszty aplikacji
+COPY . .
+
+# Budowanie aplikacji na środowisko produkcyjne
+RUN npm run build --prod
+
+# Etap 2: Serwowanie za pomocą Nginx
+FROM nginx:alpine
+# Usuwanie domyślnych plików Nginx
+RUN rm -rf /usr/share/nginx/html/*
+
+# Kopiowanie zbudowanej aplikacji Angular do katalogu Nginx
+COPY --from=build-stage /app/dist/frontend /usr/share/nginx/html
+
+# Kopiowanie niestandardowej konfiguracji Nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Ustawianie portu, na którym Nginx będzie nasłuchiwał
+EXPOSE 80
+
+# Start Nginx w trybie "daemon off"
+CMD ["nginx", "-g", "daemon off;"]
