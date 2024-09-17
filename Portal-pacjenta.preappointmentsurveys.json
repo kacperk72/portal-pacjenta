@@ -1,0 +1,171 @@
+[{
+  "_id": {
+    "$oid": "668173a1e12247fcbcfd1ad9"
+  },
+  "PatientID": 2,
+  "AppointmentID": 16,
+  "VisitReason": "Odnowienie recepty",
+  "SymptomsTime": "",
+  "HighTemperature": "",
+  "HaveCough": "",
+  "HaveNoBreath": "",
+  "HaveThroatAche": "",
+  "HaveRunnyNose": "",
+  "HaveStomachAche": "",
+  "HaveOtherSymptoms": "",
+  "TakeMedications": "Nie",
+  "MedicationsDetails": "",
+  "HasAllergy": "Nie",
+  "AllergyDetails": "",
+  "HasChronicDiseases": "Nie",
+  "ChronicDiseasesDetails": "",
+  "NeededMedications": "a",
+  "CurrentMedications": "a",
+  "ReferralReason": "",
+  "ReferralCause": "",
+  "TestResults": "",
+  "createdAt": {
+    "$date": "2024-06-30T15:02:57.107Z"
+  },
+  "updatedAt": {
+    "$date": "2024-06-30T15:02:57.107Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668173cfe12247fcbcfd1adb"
+  },
+  "PatientID": 2,
+  "AppointmentID": 17,
+  "VisitReason": "Objawy przeziębienia",
+  "SymptomsTime": "1 tydzień",
+  "HighTemperature": "Nie",
+  "HaveCough": "Tak, mokry",
+  "HaveNoBreath": "Tak",
+  "HaveThroatAche": "Tak",
+  "HaveRunnyNose": "Tak",
+  "HaveStomachAche": "Nie",
+  "HaveOtherSymptoms": "Nie",
+  "TakeMedications": "Nie",
+  "MedicationsDetails": "",
+  "HasAllergy": "Nie",
+  "AllergyDetails": "",
+  "HasChronicDiseases": "Nie",
+  "ChronicDiseasesDetails": "",
+  "NeededMedications": "",
+  "CurrentMedications": "",
+  "ReferralReason": "",
+  "ReferralCause": "",
+  "TestResults": "",
+  "createdAt": {
+    "$date": "2024-06-30T15:03:43.217Z"
+  },
+  "updatedAt": {
+    "$date": "2024-06-30T15:03:43.217Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6681784c3a574d67a582cba1"
+  },
+  "PatientID": 2,
+  "AppointmentID": 17,
+  "VisitReason": "Konsultacja wyników badań",
+  "SymptomsTime": "",
+  "HighTemperature": "",
+  "HaveCough": "",
+  "HaveNoBreath": "",
+  "HaveThroatAche": "",
+  "HaveRunnyNose": "",
+  "HaveStomachAche": "",
+  "HaveOtherSymptoms": "",
+  "TakeMedications": "Nie",
+  "MedicationsDetails": "",
+  "HasAllergy": "Nie",
+  "AllergyDetails": "",
+  "HasChronicDiseases": "Tak",
+  "ChronicDiseasesDetails": "zapalenie jelita",
+  "NeededMedications": "",
+  "CurrentMedications": "",
+  "ReferralReason": "",
+  "ReferralCause": "",
+  "TestResults": "dddd",
+  "createdAt": {
+    "$date": "2024-06-30T15:22:52.642Z"
+  },
+  "updatedAt": {
+    "$date": "2024-06-30T15:22:52.642Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66817eb07d18f6f5ff53cba7"
+  },
+  "PatientID": 2,
+  "AppointmentID": 16,
+  "VisitReason": "Objawy przeziębienia",
+  "SymptomsTime": "1 tydzień",
+  "HighTemperature": "Tak",
+  "HaveCough": "Tak, suchy",
+  "HaveNoBreath": "Nie",
+  "HaveThroatAche": "Tak",
+  "HaveRunnyNose": "Nie",
+  "HaveStomachAche": "Tak, cały brzuch",
+  "HaveOtherSymptoms": "Nie",
+  "TakeMedications": "Tak",
+  "MedicationsDetails": "",
+  "HasAllergy": "Tak",
+  "AllergyDetails": "",
+  "HasChronicDiseases": "Nie",
+  "ChronicDiseasesDetails": "",
+  "NeededMedications": "",
+  "CurrentMedications": "",
+  "ReferralReason": "",
+  "ReferralCause": "",
+  "TestResults": "",
+  "createdAt": {
+    "$date": "2024-06-30T15:50:08.321Z"
+  },
+  "updatedAt": {
+    "$date": "2024-06-30T15:50:08.321Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66817f3d07802f2d19beddb7"
+  },
+  "PatientID": 2,
+  "DoctorID": 2,
+  "AppointmentID": 16,
+  "VisitReason": "Objawy przeziębienia",
+  "SymptomsTime": "1 tydzień",
+  "HighTemperature": "Nie",
+  "HaveCough": "Tak, mokry",
+  "HaveNoBreath": "Nie",
+  "HaveThroatAche": "Tak",
+  "HaveRunnyNose": "Nie",
+  "HaveStomachAche": "Tak, cały brzuch",
+  "HaveOtherSymptoms": "Nie",
+  "TakeMedications": "Nie",
+  "MedicationsDetails": "",
+  "HasAllergy": "Nie",
+  "AllergyDetails": "",
+  "HasChronicDiseases": "Nie",
+  "ChronicDiseasesDetails": "",
+  "NeededMedications": "",
+  "CurrentMedications": "",
+  "ReferralReason": "",
+  "ReferralCause": "",
+  "TestResults": "",
+  "createdAt": {
+    "$date": "2024-06-30T15:52:29.125Z"
+  },
+  "updatedAt": {
+    "$date": "2024-06-30T15:52:29.125Z"
+  },
+  "__v": 0
+}]
