@@ -4,8 +4,11 @@
       <img class="logo" src="../../../assets/img/logo2.jpg" />
       <div class="logo-text">Portal pacjenta</div>
     </a>
-    <div *ngIf="username" class="userName">Witaj {{ username }}!</div>
+    @if(username) {
+    <div class="userName">Witaj {{ username }}!</div>
+    }
     <div>
+      @if(username) {
       <button class="menu-option" mat-button routerLink="/book-visit">
         <mat-icon>search</mat-icon> Umów wizytę
       </button>
@@ -18,7 +21,7 @@
       <button class="menu-option" mat-button routerLink="/doctor-dashboard">
         <mat-icon>person</mat-icon> Panel lekarza
       </button>
-      @if(!username) {
+      } @if(!username) {
       <button class="menu-option" mat-button routerLink="/login">
         <mat-icon aria-hidden="false">login</mat-icon> Zaloguj
       </button>

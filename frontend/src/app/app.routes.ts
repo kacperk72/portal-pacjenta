@@ -5,11 +5,13 @@ import { DashboardComponent } from './shared/dashboard/dashboard.component';
 import { VisitsComponent } from './shared/visits/visits.component';
 import { AiDoctorComponent } from './shared/ai-doctor/ai-doctor.component';
 import { DoctorDashboardComponent } from './shared/doctor-dashboard/doctor-dashboard.component';
+import { FillProfileComponent } from './shared/fill-profile/fill-profile.component';
 
 export const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'fill-profile', component: FillProfileComponent },
   { path: 'book-visit', component: VisitsComponent },
   { path: 'ai-doctor', component: AiDoctorComponent },
   { path: 'my-account', component: DashboardComponent },

@@ -53,6 +53,7 @@ export class LoginService {
     localStorage.clear();
     this.loggedIn.next(false);
     this.username.next('');
+    window.location.reload();
   }
 
   proceedLogin(userData: User): Observable<any> {

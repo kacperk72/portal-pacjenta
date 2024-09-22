@@ -4,6 +4,7 @@ exports.getPatientProfile = async (req, res) => {
   try {
     const patientId = req.params.patientId;
     const patient = await patientService.getPatientById(patientId);
+    console.log("Patient:", patient);
     if (!patient) {
       return res.status(404).send("Profil pacjenta nie został znaleziony.");
     }
@@ -15,9 +16,9 @@ exports.getPatientProfile = async (req, res) => {
 
 exports.updatePatientProfile = async (req, res) => {
   try {
-    const patientId = req.params.userId;
-    await patientService.updatePatientProfile(patientId, req.body);
-    res.send(`Profil pacjenta o ID ${patientId} został zaktualizowany.`);
+    const id = req.params.id;
+    await patientService.updatePatientProfile(id, req.body); // Aktualizacja danych pacjenta
+    res.send(`Profil pacjenta o ID ${id} został zaktualizowany.`);
   } catch (error) {
     res.status(500).send(error.message);
   }

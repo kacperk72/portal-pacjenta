@@ -7,7 +7,7 @@ const patientController = require("../controllers/patientController2");
 router.get("/profile/:patientId", patientController.getPatientProfile);
 
 // Aktualizacja profilu pacjenta
-router.put("/profile/:userId", patientController.updatePatientProfile);
+router.put("/profile/:id", patientController.updatePatientProfile);
 
 // Utworzenie nowego profilu pacjenta
 router.post("/profile", patientController.createPatientProfile);

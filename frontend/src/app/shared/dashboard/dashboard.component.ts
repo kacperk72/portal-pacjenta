@@ -14,6 +14,7 @@ import { UserService, userLocalStorageData } from '../../core/user.service';
 import { Router } from '@angular/router';
 import { AppointmentService } from '../../core/appointment.service';
 import { CapitalizePipe } from '../capitalize.pipe';
+import { catchError, of } from 'rxjs';
 
 export interface EventItem {
   status?: string;
@@ -92,14 +93,24 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.userLocalStorageData = this.userService.getUserData();
 
-    this.dataService
-      .getUserProfileData(this.userLocalStorageData.id)
-      .subscribe((data) => {
-        console.log(data);
-        this.userData = data;
-      });
-
     if (this.userLocalStorageData && this.userLocalStorageData.id) {
+      this.dataService
+        .getUserProfileData(this.userLocalStorageData.id)
+        .pipe(
+          catchError((error) => {
+            if (error.status === 404) {
+              console.error('Profil pacjenta nie został znaleziony.');
+              this.router.navigate(['/fill-profile']);
+            }
+            return of(null);
+          })
+        )
+        .subscribe((data) => {
+          if (data) {
+            this.userData = data;
+          }
+        });
+
       this.appointmentService
         .getPatientAppointments(this.userLocalStorageData.id)
         .subscribe(
@@ -197,5 +208,14 @@ export class DashboardComponent implements OnInit {
 
   saveUserData() {
     this.isInEditMode = false;
+
+    this.dataService.updateUserProfile(this.userData).subscribe(
+      (response) => {
+        console.log('Dane użytkownika zostały zaktualizowane:', response);
+      },
+      (error) => {
+        console.error('Wystąpił błąd podczas aktualizacji danych:', error);
+      }
+    );
   }
 }

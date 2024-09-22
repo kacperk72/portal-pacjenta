@@ -1,0 +1,76 @@
+<div class="content">
+  <div class="form-container">
+    <h2 style="color: red">Uzupełnij profil!</h2>
+    <p>Jest to niezbędne do umawiania wizyt u specjalistów!</p>
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="FirstName">Imię</label>
+        <input id="FirstName" formControlName="FirstName" type="text" />
+        <div
+          *ngIf="
+            profileForm.controls['FirstName'].invalid &&
+            profileForm.controls['FirstName'].touched
+          "
+        >
+          Imię jest wymagane.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="LastName">Nazwisko</label>
+        <input id="LastName" formControlName="LastName" type="text" />
+        <div
+          *ngIf="
+            profileForm.controls['LastName'].invalid &&
+            profileForm.controls['LastName'].touched
+          "
+        >
+          Nazwisko jest wymagane.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="DateOfBirth">Data urodzenia</label>
+        <input id="DateOfBirth" formControlName="DateOfBirth" type="date" />
+        <div
+          *ngIf="
+            profileForm.controls['DateOfBirth'].invalid &&
+            profileForm.controls['DateOfBirth'].touched
+          "
+        >
+          Data urodzenia jest wymagana.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="ContactInfo">Numer telefonu</label>
+        <input id="ContactInfo" formControlName="ContactInfo" type="text" />
+        <div
+          *ngIf="
+            profileForm.controls['ContactInfo'].invalid &&
+            profileForm.controls['ContactInfo'].touched
+          "
+        >
+          Numer telefonu jest wymagany.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="Address">Adres</label>
+        <input id="Address" formControlName="Address" type="text" />
+        <div
+          *ngIf="
+            profileForm.controls['Address'].invalid &&
+            profileForm.controls['Address'].touched
+          "
+        >
+          Adres jest wymagany.
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="profileForm.invalid">
+        Zapisz profil
+      </button>
+    </form>
+  </div>
+</div>

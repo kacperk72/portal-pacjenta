@@ -2,16 +2,18 @@ const Patient = require("../models/patientModel2");
 
 const getPatientById = async (id) => {
   try {
-    const patient = await Patient.findByPk(id);
+    const patient = await Patient.findOne({
+      where: { UserID: id },
+    });
     return patient;
   } catch (error) {
     throw error;
   }
 };
 
-const updatePatientProfile = async (patientId, updateData) => {
+const updatePatientProfile = async (id, updateData) => {
   try {
-    const patient = await Patient.findByPk(patientId);
+    const patient = await Patient.findOne({ where: { UserID: id } });
     if (!patient) {
       throw new Error("Pacjent nie został znaleziony");
     }

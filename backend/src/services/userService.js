@@ -13,7 +13,6 @@ const login = async (body) => {
 
 const registerUser = async ({ username, password, email }) => {
   const hashedPassword = await bcrypt.hash(password, 12);
-
   const newUser = await User.create({
     UserID: uuidv4(),
     Username: username,

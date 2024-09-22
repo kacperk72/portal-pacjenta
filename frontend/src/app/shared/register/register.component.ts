@@ -61,9 +61,10 @@ export class RegisterComponent implements OnInit {
     this.service.registerUser(this.daneUsera).subscribe((res) => {
       if (res != null) {
         this.responsedata = res;
-        localStorage.setItem('token', this.responsedata.token);
-        localStorage.setItem('rola', this.responsedata.user.Role);
-        localStorage.setItem('username', this.responsedata.user.Username);
+        // localStorage.setItem('token', this.responsedata.token);
+        // localStorage.setItem('rola', this.responsedata.user.Role);
+        // localStorage.setItem('username', this.responsedata.user.Username);
+        window.alert('Utworzono profil użytkownika, zaloguj się na konto');
         this.router.navigate(['/']);
       }
     });

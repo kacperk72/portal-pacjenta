@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -28,5 +29,14 @@ export class DataService {
 
   getVisits(body: any) {
     return this.http.post(`${this.apiUrl2}/visits`, body);
+  }
+
+  saveUserProfile(profileData: any) {
+    return this.http.post(`${this.apiUrl}/profile`, profileData);
+  }
+
+  updateUserProfile(userData: any): Observable<any> {
+    const id = userData.UserID;
+    return this.http.put(`${this.apiUrl}/profile/${id}`, userData);
   }
 }
