@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 16 Wrz 2024, 21:21
+-- Czas generowania: 27 Wrz 2024, 19:35
 -- Wersja serwera: 10.4.25-MariaDB
 -- Wersja PHP: 8.1.10
 
@@ -57,13 +57,13 @@ CREATE TABLE `appointments` (
 --
 
 INSERT INTO `appointments` (`AppointmentID`, `PatientID`, `DoctorID`, `AppointmentDate`, `Status`, `Diagnosis`, `Treatment`, `SurveyID`) VALUES
-(1, 1, 2, '2023-12-15 08:00:00', 'zaplanowana', NULL, NULL, NULL),
-(2, 1, 2, '2023-10-10 10:00:00', 'zakończona', 'Przeziębienie', 'Odpoczynek i leki przeciwwirusowe', NULL),
-(3, 1, 2, '2023-11-12 11:00:00', 'zakończona', 'Alergia', 'Leki antyhistaminowe', NULL),
-(4, 1, 3, '2023-12-20 14:00:00', 'zaplanowana', NULL, NULL, NULL),
 (16, 2, 2, '2024-12-15 07:30:00', 'zaplanowana', NULL, NULL, NULL),
 (17, 2, 2, '2024-12-15 10:30:00', 'zaplanowana', NULL, NULL, NULL),
-(18, 2, 1, '2024-07-15 12:00:00', 'zakończona', 'Covid', 'teraflu 2x1, witamina C 1x1', NULL);
+(18, 2, 1, '2025-07-15 12:00:00', 'zakończona', 'Covid', 'teraflu 2x1, witamina C 1x1', NULL),
+(19, 2, 2, '2025-05-25 23:11:00', 'zaplanowana', NULL, NULL, NULL),
+(20, 1, 2, '2024-12-16 08:00:00', 'zaplanowana', NULL, NULL, NULL),
+(21, 1, 2, '2023-05-25 22:35:00', 'zakończona', 'Podejrzenie arytmii', 'leki antyarytmiczne', NULL),
+(22, 1, 2, '2024-12-16 09:45:00', 'zaplanowana', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -82,8 +82,7 @@ CREATE TABLE `doctors` (
 --
 
 INSERT INTO `doctors` (`DoctorID`, `Specialization`, `Cities`) VALUES
-(2, 'Kardiolog', 'Warszawa, Kraków'),
-(3, 'Dermatolog', 'Gdańsk, Gdynia');
+(2, 'Kardiolog', 'Warszawa, Kraków');
 
 -- --------------------------------------------------------
 
@@ -107,7 +106,7 @@ CREATE TABLE `doctorschedules` (
 
 INSERT INTO `doctorschedules` (`ScheduleID`, `DoctorID`, `AvailableDate`, `TimeSlotFrom`, `TimeSlotTill`, `Duration`, `AppointmentID`) VALUES
 (5, 2, '2024-12-15', '08:00:00', '08:30:00', 30, NULL),
-(6, 2, '2024-12-16', '09:00:00', '09:15:00', 15, NULL),
+(6, 2, '2024-12-16', '09:00:00', '09:15:00', 15, 20),
 (7, 2, '2024-12-15', '08:30:00', '09:00:00', 30, 16),
 (8, 2, '2024-12-15', '09:00:00', '09:30:00', 30, NULL),
 (9, 2, '2024-12-15', '09:30:00', '10:00:00', 30, NULL),
@@ -121,26 +120,26 @@ INSERT INTO `doctorschedules` (`ScheduleID`, `DoctorID`, `AvailableDate`, `TimeS
 (17, 2, '2024-12-16', '10:00:00', '10:15:00', 15, NULL),
 (18, 2, '2024-12-16', '10:15:00', '10:30:00', 15, NULL),
 (19, 2, '2024-12-16', '10:30:00', '10:45:00', 15, NULL),
-(20, 2, '2024-12-16', '10:45:00', '11:00:00', 15, NULL),
-(32, 2, '2024-05-26', '00:05:00', '00:35:00', 30, NULL),
-(33, 2, '2024-05-26', '00:35:00', '01:05:00', 30, NULL),
-(34, 2, '2024-05-26', '01:05:00', '01:35:00', 30, NULL),
-(35, 2, '2024-05-26', '01:35:00', '02:05:00', 30, NULL),
-(36, 2, '2024-05-26', '02:05:00', '02:35:00', 30, NULL),
-(37, 2, '2024-05-26', '02:35:00', '03:05:00', 30, NULL),
-(38, 2, '2024-05-25', '00:41:00', '01:11:00', 30, NULL),
-(39, 2, '2024-05-25', '01:11:00', '01:41:00', 30, NULL),
-(40, 2, '2024-05-25', '00:41:00', '01:11:00', 30, NULL),
-(41, 2, '2024-05-25', '01:11:00', '01:41:00', 30, NULL),
-(42, 2, '2024-05-26', '00:41:00', '01:11:00', 30, NULL),
-(43, 2, '2024-05-26', '00:41:00', '01:11:00', 30, NULL),
-(44, 2, '2024-05-26', '00:41:00', '01:11:00', 30, NULL),
-(45, 2, '2024-05-26', '01:11:00', '01:41:00', 30, NULL),
-(46, 2, '2024-05-26', '01:41:00', '02:11:00', 30, NULL),
-(47, 2, '2024-05-26', '00:41:00', '01:11:00', 30, NULL),
-(48, 2, '2024-05-26', '01:11:00', '01:41:00', 30, NULL),
-(49, 2, '2024-05-26', '01:41:00', '02:11:00', 30, NULL),
-(50, 2, '2024-07-15', '12:00:00', '12:30:00', 30, 18);
+(20, 2, '2024-12-16', '10:45:00', '11:00:00', 15, 22),
+(32, 2, '2025-05-26', '00:05:00', '00:35:00', 30, NULL),
+(33, 2, '2023-05-26', '00:35:00', '01:05:00', 30, 21),
+(34, 2, '2025-05-26', '01:05:00', '01:35:00', 30, NULL),
+(35, 2, '2025-05-26', '01:35:00', '02:05:00', 30, NULL),
+(36, 2, '2025-05-26', '02:05:00', '02:35:00', 30, NULL),
+(37, 2, '2025-05-26', '02:35:00', '03:05:00', 30, NULL),
+(38, 2, '2025-05-25', '00:41:00', '01:11:00', 30, NULL),
+(39, 2, '2025-05-25', '01:11:00', '01:41:00', 30, NULL),
+(40, 2, '2025-05-25', '00:41:00', '01:11:00', 30, NULL),
+(41, 2, '2025-05-25', '01:11:00', '01:41:00', 30, NULL),
+(42, 2, '2025-05-26', '00:41:00', '01:11:00', 30, NULL),
+(43, 2, '2025-05-26', '00:41:00', '01:11:00', 30, NULL),
+(44, 2, '2025-05-26', '00:41:00', '01:11:00', 30, NULL),
+(45, 2, '2025-05-26', '01:11:00', '01:41:00', 30, NULL),
+(46, 2, '2025-05-26', '01:41:00', '02:11:00', 30, NULL),
+(47, 2, '2025-05-26', '00:41:00', '01:11:00', 30, NULL),
+(48, 2, '2025-05-26', '01:11:00', '01:41:00', 30, 19),
+(49, 2, '2025-05-26', '01:41:00', '02:11:00', 30, NULL),
+(50, 2, '2023-07-15', '12:00:00', '12:30:00', 30, 18);
 
 -- --------------------------------------------------------
 
@@ -161,10 +160,9 @@ CREATE TABLE `prescriptions` (
 --
 
 INSERT INTO `prescriptions` (`PrescriptionID`, `AppointmentID`, `Medicine`, `Dosage`, `Instructions`) VALUES
-(1, 1, 'Aspiryna', '1 tabletka', 'Raz dziennie po posiłku'),
-(2, 2, 'Tamiflu', '1 tabletka', 'Dwa razy dziennie przez 5 dni'),
-(3, 3, 'Cetirizine', '10 mg', 'Raz dziennie'),
-(4, 16, 'test', 'test', 'test');
+(1, 18, 'Syrop na kaszel (Bronchicum)', '1 tabletka', 'Dawkowanie: 10 ml 3 razy dziennie.\r\nDodatkowe zalecenia: W razie nasilenia objawów unikać przeciążenia, stosować ciepłe okłady na gardło.'),
+(2, 16, 'Ibuprofen 400 mg', '1 tabletka', 'Dawkowanie: 1 tabletka co 8 godzin po posiłku, maksymalnie 3 tabletki dziennie.\r\nDodatkowe zalecenia: Nawadniać się regularnie, stosować inhalacje z solą fizjologiczną.'),
+(3, 21, 'Nitrogliceryna (Nitromint) 0,5 mg', '10 mg', 'Dawkowanie: 1 tabletka podjęzykowa w przypadku bólu w klatce piersiowej. W razie braku poprawy, można powtórzyć dawkę po 5 minutach. \r\nDodatkowe zalecenia: W razie wystąpienia długotrwałego bólu udać się do szpitala.');
 
 -- --------------------------------------------------------
 
@@ -198,9 +196,9 @@ INSERT INTO `profiles` (`ProfileID`, `UserID`, `FirstName`, `LastName`, `DateOfB
 --
 
 CREATE TABLE `users` (
-  `UserID` int(11) NOT NULL,
+  `UserID` int(14) NOT NULL,
   `Username` varchar(50) NOT NULL,
-  `Password` varchar(50) NOT NULL,
+  `Password` varchar(100) NOT NULL,
   `Role` enum('patient','doctor','admin') NOT NULL,
   `Email` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -210,21 +208,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`UserID`, `Username`, `Password`, `Role`, `Email`) VALUES
-(1, 'patient1', 'password1', 'patient', 'patient1@example.com'),
-(2, 'doctor1', 'password2', 'doctor', 'doctor1@example.com'),
-(3, 'admin1', 'password3', 'admin', 'admin1@example.com'),
-(4, 'doctor2', 'password4', 'doctor', 'doctor2@example.com'),
-(5, 'test6', '$2a$12$VxSq4ZK72aBnPgAH6fBXC.S55EPNkIVgdxYKzA2WIEN', 'patient', 'test6@test.pl'),
-(6, 'aaa', '$2a$12$oOq/ggfU1JSTSSquTjGj9.l1dEbxEEPNpTt7mXACpnL', 'patient', 'aaa@aaa.pl'),
-(7, 'test11', '$2a$12$HGUiFx1tCctZju5bxrZxveTlylvo23A5f/Vh6buOGm7', 'patient', 'test11@test.pl'),
-(9, 'bbbb', '$2a$12$5NOwdKmQ7r76BiHIGiHlV.sU68iRmS/2AR/6u5DiaRo', 'patient', 'bbbb@bbbb.pl'),
-(56, 'test3', '$2a$12$TCRjvVvTeTGCSJo5M3m6x.OV3JcL8N32zlK.E9GITkf', 'patient', 'test3@test.pl'),
-(90, 'aatest321', '$2a$12$Ks3i7fgqw0/bYdmR.mp87OG4ApUuTVvUyAzNN/etNQL', 'patient', 'aatest3214@test.pl'),
-(583, 'test2', '$2a$12$Zq8H9XpSUQtXN64LrGVn5OZ5kzZaCpDfB/lX9SN7ify', 'patient', 'test2@test.pl'),
-(4863, 'test', '$2a$12$obv.RtIuyVq52oyHbJf/3e2/tQaL9kynluWw76ccnby', 'patient', 'test@test.pl'),
-(4864, 'test4', '$2a$12$lDeSgPY8axwDFHGAp.LIBeM3V5hCDuUMBBpUsyilUSi', 'patient', 'test4@test.pl'),
-(4865, 'test5', '$2a$12$BtIwh.hwLCTrplE7iK1dl.JcPn49ElUrD4YdyQ3VgOy', 'patient', 'test5@test.pl'),
-(2147483647, 'test7', '$2a$12$IQsAiKiAu7.7RBDNMPz5LOuX5ysOgGOPYLVvOBAASWM', 'patient', 'test7@test.pl');
+(1, 'patient1', '$2a$12$Yai8lWEnNMg2WZ5j0xgbgOr5EQ.SkBYWb3BnmSSt4le1CvW84.IIu', 'patient', 'patient1@example.com'),
+(2, 'doctor1', '$2a$12$oEwY4G/naaLzHupo0ClWIenuEoUqWUKg9aOu0iiZL9J3iHUaEXTma', 'doctor', 'doctor1@example.com'),
+(3, 'admin1', '$2a$12$Bl/XNnvnqit6u8TkrqQD/eGp4KSXUUPTc44HxpMLbDGI7CydQn3f2', 'admin', 'admin1@example.com'),
+(4, 'doctor2', '$2a$12$5Lmlz.ah69Nc9JHY3aiq1.a98ji0RIC1EZI1.XiEKQvQMkUryL48a', 'doctor', 'doctor2@example.com');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -293,7 +280,7 @@ ALTER TABLE `adminactions`
 -- AUTO_INCREMENT dla tabeli `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `AppointmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `AppointmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT dla tabeli `doctorschedules`
@@ -311,13 +298,13 @@ ALTER TABLE `prescriptions`
 -- AUTO_INCREMENT dla tabeli `profiles`
 --
 ALTER TABLE `profiles`
-  MODIFY `ProfileID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ProfileID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2147483648;
+  MODIFY `UserID` int(14) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2147483648;
 
 --
 -- Ograniczenia dla zrzutów tabel
