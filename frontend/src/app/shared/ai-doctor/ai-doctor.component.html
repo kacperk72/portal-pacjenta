@@ -65,7 +65,16 @@
                 id="weight"
                 [(ngModel)]="userParams.weight"
               />
-              <label for="weight">Waga</label>
+              <label for="weight">Waga(kg)</label>
+            </div>
+            <div class="p-float-label">
+              <input
+                class="user-data-input"
+                pInputText
+                id="height"
+                [(ngModel)]="userParams.height"
+              />
+              <label for="weight">Wzrost(cm)</label>
             </div>
           </div>
           @if(formError) {

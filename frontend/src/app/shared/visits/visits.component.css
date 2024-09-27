@@ -173,3 +173,32 @@ p-dropdown,
 p-button {
   margin: 10px;
 }
+
+.empty-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  text-align: center;
+  background-color: #f9f9f9;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+
+  .empty-state-content {
+    color: #666;
+  }
+
+  i {
+    font-size: 48px;
+    color: #007bff;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 16px;
+    color: #333;
+    margin: 5px 0;
+  }
+}

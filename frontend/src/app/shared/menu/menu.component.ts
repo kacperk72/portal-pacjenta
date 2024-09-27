@@ -3,10 +3,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { LoginService } from '../../core/login.service';
-import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { FormsModule } from '@angular/forms';
+import { UserService } from '../../core/user.service';
+import { UserLocalStorageData } from '../../types/surveyTypes';
 
 @Component({
   selector: 'app-menu',
@@ -25,17 +26,22 @@ import { FormsModule } from '@angular/forms';
 export class MenuComponent implements OnInit {
   username: string = '';
   checked: boolean = false;
-
-  ngOnInit(): void {
-    this.toggleDarkTheme();
-  }
+  userRole: string = '';
 
   constructor(
     private router: Router,
     private service: LoginService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private loginService: LoginService
   ) {
     this.getStatus();
+  }
+
+  ngOnInit(): void {
+    this.toggleDarkTheme();
+    this.loginService.getRole().subscribe((role) => {
+      this.userRole = role;
+    });
   }
 
   getStatus() {
@@ -47,6 +53,7 @@ export class MenuComponent implements OnInit {
   logout() {
     this.service.logout();
     this.getStatus();
+    this.router.navigate(['/login']);
   }
 
   toggleDarkTheme() {

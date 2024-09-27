@@ -13,7 +13,5 @@ export class VisitSurveyDetailsComponent implements OnInit {
 
   constructor(public activeModal: NgbActiveModal) {}
 
-  ngOnInit(): void {
-    console.log(this.event);
-  }
+  ngOnInit(): void {}
 }

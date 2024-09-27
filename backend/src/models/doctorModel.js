@@ -64,7 +64,7 @@ const DoctorSchedule = sequelize.define(
     },
   },
   {
-    tableName: "DoctorSchedules",
+    tableName: "Doctorschedules",
     timestamps: false,
   }
 );

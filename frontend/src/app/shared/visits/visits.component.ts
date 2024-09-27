@@ -73,7 +73,6 @@ export class VisitsComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getFiltersData().subscribe((data: any) => {
-      console.log(data);
       const specializations = new Set<string>();
       const cities = new Set<string>();
 
@@ -91,18 +90,15 @@ export class VisitsComponent implements OnInit {
 
   onSubmit() {
     this.showDoctors = true;
-    console.log(this.searchForm.value);
   }
 
   searchVisits() {
     this.service.getVisits(this.searchForm.value).subscribe((visits) => {
       this.visits = visits;
     });
-    console.log(this.searchForm.value);
   }
 
   bookVisit(visit: any) {
-    console.log(visit);
     this.userLocalStorageData = this.userService.getUserData();
 
     const modalRef = this.modalService.open(ConfirmModalComponent);

@@ -58,6 +58,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('id', this.responsedata.user.UserID);
           this.service.setLoggedIn(true);
           this.service.setUsername(this.responsedata.user.Username);
+          this.service.setRole(this.responsedata.user.Role);
           this.router.navigate(['/']);
         } else {
           window.alert('nieudana próba logowania');

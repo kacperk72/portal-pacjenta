@@ -21,7 +21,6 @@ export class UserService {
     const token = localStorage.getItem('token');
 
     if (id && role && username && token) {
-      console.log({ id, role, username, token });
       return { id, role, username, token };
     } else {
       return { id: '', role: '', username: '', token: '' };

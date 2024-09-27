@@ -51,6 +51,7 @@ const getPatientAppointments = async (patientId) => {
         {
           model: DoctorSchedule,
           attributes: ["AvailableDate", "TimeSlotFrom", "TimeSlotTill"],
+          required: false,
         },
         {
           model: Prescription,

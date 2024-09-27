@@ -136,11 +136,9 @@ export class SurveyComponent {
     }
   }
   saveSurvey() {
-    console.log('Survey data to save:', this.surveyData);
     this.surveyService
       .saveSurvey(this.surveyData, this.visitData)
       .subscribe((res: any) => {
-        console.log('Survey data saved', res);
         this.activeModal.close('Close click');
       });
   }

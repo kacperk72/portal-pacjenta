@@ -18,7 +18,12 @@
       <button class="menu-option" mat-button routerLink="/my-account">
         <mat-icon>person</mat-icon> Moje konto
       </button>
-      <button class="menu-option" mat-button routerLink="/doctor-dashboard">
+      <button
+        *ngIf="userRole === 'doctor'"
+        class="menu-option"
+        mat-button
+        routerLink="/doctor-dashboard"
+      >
         <mat-icon>person</mat-icon> Panel lekarza
       </button>
       } @if(!username) {

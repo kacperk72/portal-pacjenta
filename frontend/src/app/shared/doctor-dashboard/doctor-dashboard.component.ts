@@ -91,7 +91,6 @@ export class DoctorDashboardComponent implements OnInit {
       });
 
     if (this.userLocalStorageData.id !== '') {
-      console.log('Dane użytkownika: ', this.userLocalStorageData);
     } else {
       this.router.navigate(['/login']);
     }
@@ -104,9 +103,7 @@ export class DoctorDashboardComponent implements OnInit {
 
     this.dataService
       .getDoctorSchedule(this.userLocalStorageData.id)
-      .subscribe((data: any) => {
-        console.log('Grafik lekarza', data);
-      });
+      .subscribe((data: any) => {});
 
     this.doctorService
       .getScheduledVisits(this.userLocalStorageData.id)
@@ -123,8 +120,6 @@ export class DoctorDashboardComponent implements OnInit {
           });
 
           this.combineVisitsAndSurveys();
-          console.log('zarezerwowane wizyty', this.events);
-          console.log('historia  wizyty', this.historyEvents);
         },
         (error) => {
           console.error('Error fetching scheduled visits', error);
@@ -193,7 +188,6 @@ export class DoctorDashboardComponent implements OnInit {
   }
 
   onSubmit(form: any) {
-    console.log('Grafik lekarza', form.value);
     const { duration } = form.value;
     const date = this.formatDate(this.date);
     const startTime = this.formatTime(this.startTime);

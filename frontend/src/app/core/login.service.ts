@@ -19,6 +19,7 @@ export interface UserRegister {
 export class LoginService {
   private loggedIn = new BehaviorSubject<boolean>(false);
   private username = new BehaviorSubject<string>('');
+  private role = new BehaviorSubject<string>('');
 
   constructor(private http: HttpClient) {
     this.loadInitialState();
@@ -27,9 +28,14 @@ export class LoginService {
   loadInitialState() {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('username');
+    const role = localStorage.getItem('role');
+
     this.loggedIn.next(!!token);
     if (username) {
       this.username.next(username);
+    }
+    if (role) {
+      this.role.next(role);
     }
   }
 
@@ -47,6 +53,15 @@ export class LoginService {
 
   getUsername(): Observable<string> {
     return this.username.asObservable();
+  }
+
+  setRole(role: string) {
+    this.role.next(role);
+    localStorage.setItem('role', role);
+  }
+
+  getRole(): Observable<string> {
+    return this.role.asObservable();
   }
 
   logout() {

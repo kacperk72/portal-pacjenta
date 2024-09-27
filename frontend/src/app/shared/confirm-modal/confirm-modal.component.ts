@@ -14,9 +14,7 @@ export class ConfirmModalComponent implements OnInit {
 
   constructor(public activeModal: NgbActiveModal) {}
 
-  ngOnInit(): void {
-    console.log(this.visit);
-  }
+  ngOnInit(): void {}
 
   confirmVisit() {
     this.activeModal.close('confirmed');

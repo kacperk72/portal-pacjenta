@@ -78,12 +78,12 @@
                 >
                   <p>{{ event.doctor }}</p>
                   <p>{{ event.description }}</p>
-                  <button
+                  <!-- <button
                     pButton
                     style="width: 100%"
                     label="Szczegóły"
                     class="p-button-text"
-                  ></button>
+                  ></button> -->
                   <ng-container
                     *ngIf="
                       event.status === 'zaplanowana' ||
@@ -124,12 +124,12 @@
               <ng-template pTemplate="content" let-event>
                 <p-card [header]="event.status" [subheader]="event.date">
                   <p>{{ event.description }}</p>
-                  <button
+                  <!-- <button
                     pButton
                     style="width: 100%"
                     label="Szczegóły"
                     class="p-button-text"
-                  ></button>
+                  ></button> -->
                 </p-card>
               </ng-template>
             </p-timeline>
@@ -142,9 +142,17 @@
           </ng-template>
           <div class="card-container">
             <div class="referral">
-              <p-card header="Skierowanie 1">
+              <p-card header="Laryngolog">
                 <div class="m-0 referral-description">
-                  Skierowanie na rezonans
+                  <p>
+                    Powód skierowania: Przewlekłe zapalenie zatok, utrzymujące
+                    się bóle głowy oraz zatkany nos mimo leczenia
+                    farmakologicznego.
+                  </p>
+                  <p>
+                    Zalecenie: Proszę o dalszą diagnostykę i rozważenie leczenia
+                    zabiegowego.
+                  </p>
                 </div>
                 <ng-template pTemplate="footer">
                   <div>Wystawione: 02-01-2024</div>
@@ -153,8 +161,18 @@
               </p-card>
             </div>
             <div class="referral">
-              <p-card header="Skierowanie 2">
-                <div class="m-0 referral-description">Skierowanie na TK</div>
+              <p-card header="Pulmonolog">
+                <div class="m-0 referral-description">
+                  <p>
+                    Powód skierowania: Nawracające infekcje górnych dróg
+                    oddechowych oraz duszności. Konieczność wykluczenia astmy
+                    oskrzelowej.
+                  </p>
+                  <p>
+                    Zalecenie: Proszę o wykonanie badania spirometrycznego oraz
+                    ocenę stanu płuc.
+                  </p>
+                </div>
                 <ng-template pTemplate="footer">
                   <div>Wystawione: 02-01-2024</div>
                   <div>Ważne do: 02-01-2025</div>
@@ -162,9 +180,16 @@
               </p-card>
             </div>
             <div class="referral">
-              <p-card header="Skierowanie 3">
+              <p-card header="Kardiolog">
                 <div class="m-0 referral-description">
-                  Skierowanie na badania krwi
+                  <p>
+                    Powód skierowania: Utrzymujące się uczucie kołatania serca
+                    oraz zmęczenie. Podejrzenie arytmii.
+                  </p>
+                  <p>
+                    Zalecenie: Proszę o wykonanie EKG oraz monitorowanie
+                    ciśnienia krwi.
+                  </p>
                 </div>
                 <ng-template pTemplate="footer">
                   <div>Wystawione: 02-01-2024</div>
@@ -195,9 +220,14 @@
                     Ważne do:
                     {{ prescription.appointmentDate | date : "dd-MM-yyyy" }}
                   </div>
-                  <!-- Adjust the expiration date logic as needed -->
                 </ng-template>
               </p-card>
+            </div>
+            <div
+              style="width: 100%; text-align: center"
+              *ngIf="!prescriptions.length"
+            >
+              Brak recept
             </div>
           </div>
         </p-tabPanel>

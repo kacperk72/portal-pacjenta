@@ -25,12 +25,13 @@ export class AiDoctorComponent implements OnInit {
   aiResponseSick: string = '';
 
   prompt2: string =
-    'Na podastawie podanych parametrów pacjenta podaj zalecenia aby żyć w zdrowiu i minimalizować ryzyko chorób. Wylicz również wskaźnik BMI.';
+    'Na podastawie podanych parametrów pacjenta podaj zalecenia aby żyć w zdrowiu i minimalizować ryzyko chorób. Wylicz również wskaźnik BMI. Waga podana jest w kilogramach, a wzrost w centymetrach.';
   aiResponseHealth = '';
   userParams = {
     gender: '',
     age: 0,
     weight: 0,
+    height: 0,
   };
 
   prompt3: string =
@@ -54,7 +55,6 @@ export class AiDoctorComponent implements OnInit {
           this.chatService
             .sendMessage(this.prompt1 + this.userSymptomsDescription)
             .subscribe((data: any) => {
-              console.log(data);
               this.aiResponseSick = data.response.content;
               this.isLoading = false;
             });
@@ -73,7 +73,6 @@ export class AiDoctorComponent implements OnInit {
           this.chatService
             .sendMessage(this.prompt2 + params)
             .subscribe((data: any) => {
-              console.log(data);
               this.aiResponseHealth = data.response.content;
               this.isLoading = false;
             });
@@ -87,7 +86,6 @@ export class AiDoctorComponent implements OnInit {
           this.chatService
             .sendMessage(this.prompt3 + this.userMedicineDescription)
             .subscribe((data: any) => {
-              console.log(data);
               this.aiResponseMedicines = data.response.content;
               this.isLoading = false;
             });

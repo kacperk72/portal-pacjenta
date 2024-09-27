@@ -132,6 +132,7 @@ const getVisits = async (params) => {
 };
 
 const createSchedules = async (schedules) => {
+  console.log(schedules);
   try {
     await DoctorSchedule.bulkCreate(schedules);
   } catch (error) {

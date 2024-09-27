@@ -51,26 +51,8 @@ export class DashboardComponent implements OnInit {
   name: string = '';
   surname: string = '';
   adres: string = '';
-  events: EventItem[] = [
-    // {
-    //   status: 'Zaplanowana',
-    //   doctor: 'Dr. Jan Kowalski',
-    //   description: 'Lekarz gastrolog - konsultacje wyników badań',
-    //   date: '16/05/2024 10:00',
-    //   icon: 'pi pi-calendar',
-    //   color: '#607D8B',
-    // },
-  ];
-  eventsHistory: EventItem[] = [
-    // {
-    //   status: 'Zakończona',
-    //   doctor: 'Dr. Jan Kowalski',
-    //   description: 'Lekarz internista - konsultacje',
-    //   date: '10/10/2023 14:00',
-    //   icon: 'pi pi-check',
-    //   color: '#9C27B0',
-    // },
-  ];
+  events: EventItem[] = [];
+  eventsHistory: EventItem[] = [];
   userLocalStorageData: userLocalStorageData = {
     id: '',
     role: '',
@@ -128,7 +110,6 @@ export class DashboardComponent implements OnInit {
     if (this.userLocalStorageData.id !== '') {
       console.log('Dane użytkownika: ', this.userLocalStorageData);
     } else {
-      // console.log('Brak danych użytkownika w local storage.');
       this.router.navigate(['/login']);
     }
   }
@@ -152,30 +133,26 @@ export class DashboardComponent implements OnInit {
     const now = new Date();
     appointments.forEach((appointment) => {
       const eventItem = this.transformToEventItem(appointment);
-      console.log('eventItem', eventItem);
       const appointmentDate = new Date(
         `${appointment.DoctorSchedule?.AvailableDate}T${appointment.DoctorSchedule?.TimeSlotFrom}`
       );
       if (appointmentDate < now) {
-        console.log('true');
         this.eventsHistory.push(eventItem);
       } else {
-        console.log('false');
         this.events.push(eventItem);
       }
     });
   }
 
   transformToEventItem(appointment: any): EventItem {
-    console.log('appointment', appointment);
     return {
       status: appointment?.Status || '',
       doctor: `Dr. ${appointment?.Doctor?.DoctorProfile?.FirstName || ''} ${
         appointment?.Doctor?.DoctorProfile?.LastName || ''
       }`,
       description: `${appointment?.Doctor?.Specialization || ''} - ${
-        appointment?.Treatment || 'Brak wskazówek leczenia'
-      }`,
+        appointment?.Diagnosis || ' Brak diagnozy'
+      } - ${appointment?.Treatment || 'Brak wskazówek leczenia'}`,
       date: this.formatDateTime(
         appointment?.DoctorSchedule?.AvailableDate || 'N/A',
         appointment?.DoctorSchedule?.TimeSlotFrom || 'N/A'
@@ -197,7 +174,6 @@ export class DashboardComponent implements OnInit {
   }
 
   open(visit: any) {
-    console.log('open', visit);
     const modalRef = this.modalService.open(SurveyComponent);
     modalRef.componentInstance.visitData = visit;
   }
