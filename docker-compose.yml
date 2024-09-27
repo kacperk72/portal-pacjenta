@@ -22,6 +22,8 @@ services:
       - MYSQL_USER=root
       - MYSQL_DATABASE=portal_pacjenta
       - OPENAI_API_KEY=your_openai_api_key_here
+      - MYSQL_PORT=3306
+      - DB_HOST=mysql
     depends_on:
       - mongo
       - mysql
@@ -49,7 +51,8 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: portal_pacjenta
     volumes:
-      - ./data/mysql:/var/lib/mysql
+      - ./portal_pacjenta.sql:/docker-entrypoint-initdb.d/portal_pacjenta.sql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     networks:
       - app-network
 

@@ -1,7 +1,7 @@
 const { Sequelize } = require("sequelize");
 
 const sequelize = new Sequelize("portal_pacjenta", "root", "", {
-  host: "localhost",
+  host: process.env.DB_HOST || "localhost",
   dialect: "mysql",
 });
 
