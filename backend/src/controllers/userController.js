@@ -32,11 +32,9 @@ exports.login = async (req, res) => {
       Role: user.Role,
     };
 
-    const token = jwt.sign(
-      payload,
-      "secret_key_for_json_token", // Klucz powinien być przechowywany w zmiennej środowiskowej
-      { expiresIn: "1h" }
-    );
+    const token = jwt.sign(payload, "secret_key_for_json_token", {
+      expiresIn: "1h",
+    });
 
     res.json({
       token: token,

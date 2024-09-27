@@ -11,7 +11,7 @@ exports.getAllDoctors = async (req, res) => {
 
 exports.getDoctorById = async (req, res) => {
   try {
-    const doctorId = parseInt(req.params.doctorId, 10); // Ensure doctorId is a number
+    const doctorId = parseInt(req.params.doctorId, 10);
     if (isNaN(doctorId)) {
       throw new Error("Invalid doctor ID");
     }
@@ -24,7 +24,7 @@ exports.getDoctorById = async (req, res) => {
 
 exports.getDoctorScheduleById = async (req, res) => {
   try {
-    const doctorId = parseInt(req.params.doctorId, 10); // Ensure doctorId is a number
+    const doctorId = parseInt(req.params.doctorId, 10);
     if (isNaN(doctorId)) {
       throw new Error("Invalid doctor ID");
     }
@@ -66,7 +66,7 @@ exports.createSchedules = async (req, res) => {
 
 exports.getScheduledVisits = async (req, res) => {
   try {
-    const doctorId = parseInt(req.params.doctorId, 10); // Ensure doctorId is a number
+    const doctorId = parseInt(req.params.doctorId, 10);
     if (isNaN(doctorId)) {
       throw new Error("Invalid doctor ID");
     }

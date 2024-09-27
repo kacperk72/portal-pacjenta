@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-// Upewnij się, że korzystasz ze zmiennej środowiskowej DB_URI
 const mongoURI = process.env.DB_URI || "mongodb://mongo:27017/portal_pacjenta";
 
 mongoose
