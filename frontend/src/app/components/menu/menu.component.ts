@@ -2,11 +2,11 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { LoginService } from '../../core/login.service';
+import { LoginService } from '../../services/login.service';
 import { CommonModule } from '@angular/common';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { FormsModule } from '@angular/forms';
-import { UserService } from '../../core/user.service';
+import { UserService } from '../../services/user.service';
 import { UserLocalStorageData } from '../../types/surveyTypes';
 
 @Component({

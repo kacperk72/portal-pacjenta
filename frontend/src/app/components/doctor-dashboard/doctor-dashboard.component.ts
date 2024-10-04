@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService, userLocalStorageData } from '../../core/user.service';
+import { UserService, userLocalStorageData } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DataService } from '../../core/data.service';
+import { DataService } from '../../services/data.service';
 import { SurveyComponent } from '../survey/survey.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -12,12 +12,12 @@ import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { TimelineModule } from 'primeng/timeline';
 import { TabViewModule } from 'primeng/tabview';
-import { DoctorService } from '../../core/doctor.service';
+import { DoctorService } from '../../services/doctor.service';
 import { CalendarModule } from 'primeng/calendar';
-import { TimePipe } from '../time.pipe';
-import { DatePipe } from '../date.pipe';
-import { CapitalizePipe } from '../capitalize.pipe';
-import { SurveyService } from '../../core/survey.service';
+import { TimePipe } from '../../pipes/time.pipe';
+import { DatePipe } from '../../pipes/date.pipe';
+import { CapitalizePipe } from '../../pipes/capitalize.pipe';
+import { SurveyService } from '../../services/survey.service';
 import {
   CombinedData,
   EventItem,

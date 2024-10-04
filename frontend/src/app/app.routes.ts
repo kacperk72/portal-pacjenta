@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './shared/login/login.component';
-import { RegisterComponent } from './shared/register/register.component';
-import { DashboardComponent } from './shared/dashboard/dashboard.component';
-import { VisitsComponent } from './shared/visits/visits.component';
-import { AiDoctorComponent } from './shared/ai-doctor/ai-doctor.component';
-import { DoctorDashboardComponent } from './shared/doctor-dashboard/doctor-dashboard.component';
-import { FillProfileComponent } from './shared/fill-profile/fill-profile.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { VisitsComponent } from './components/visits/visits.component';
+import { AiDoctorComponent } from './components/ai-doctor/ai-doctor.component';
+import { DoctorDashboardComponent } from './components/doctor-dashboard/doctor-dashboard.component';
+import { FillProfileComponent } from './components/fill-profile/fill-profile.component';
 
 export const routes: Routes = [
   { path: '', component: DashboardComponent },

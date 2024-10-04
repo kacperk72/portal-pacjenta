@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { ChatService } from '../../core/chat.service';
+import { ChatService } from '../../services/chat.service';
 
 @Component({
   selector: 'app-ai-doctor',

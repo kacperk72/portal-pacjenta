@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MenuComponent } from './shared/menu/menu.component';
-import { LoginService } from './core/login.service';
+import { MenuComponent } from './components/menu/menu.component';
+import { LoginService } from './services/login.service';
 import { Observable } from 'rxjs';
 
 @Component({

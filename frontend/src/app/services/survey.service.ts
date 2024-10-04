@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { SurveyData } from '../shared/survey/survey.component';
-import { EventItem } from '../shared/dashboard/dashboard.component';
+import { SurveyData } from '../components/survey/survey.component';
+import { EventItem } from '../components/dashboard/dashboard.component';
 import { Observable } from 'rxjs';
 
 @Injectable({

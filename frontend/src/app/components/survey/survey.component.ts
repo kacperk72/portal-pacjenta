@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
-import { SurveyService } from '../../core/survey.service';
+import { SurveyService } from '../../services/survey.service';
 import { EventItem } from '../dashboard/dashboard.component';
 
 export interface SurveyData {

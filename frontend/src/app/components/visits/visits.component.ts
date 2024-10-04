@@ -13,14 +13,14 @@ import { ButtonModule } from 'primeng/button';
 import { ToolbarModule } from 'primeng/toolbar';
 import { CardModule } from 'primeng/card';
 import { CalendarModule } from 'primeng/calendar';
-import { DataService } from '../../core/data.service';
+import { DataService } from '../../services/data.service';
 import { CommonModule } from '@angular/common';
-import { DatePipe } from '../date.pipe';
-import { TimePipe } from '../time.pipe';
+import { DatePipe } from '../../pipes/date.pipe';
+import { TimePipe } from '../../pipes/time.pipe';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
-import { AppointmentService } from '../../core/appointment.service';
-import { UserService, userLocalStorageData } from '../../core/user.service';
+import { AppointmentService } from '../../services/appointment.service';
+import { UserService, userLocalStorageData } from '../../services/user.service';
 
 @Component({
   selector: 'app-visits',

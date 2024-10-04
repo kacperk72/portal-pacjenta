@@ -9,11 +9,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TimelineModule } from 'primeng/timeline';
 import { CardModule } from 'primeng/card';
 import { CommonModule } from '@angular/common';
-import { DataService } from '../../core/data.service';
-import { UserService, userLocalStorageData } from '../../core/user.service';
+import { DataService } from '../../services/data.service';
+import { UserService, userLocalStorageData } from '../../services/user.service';
 import { Router } from '@angular/router';
-import { AppointmentService } from '../../core/appointment.service';
-import { CapitalizePipe } from '../capitalize.pipe';
+import { AppointmentService } from '../../services/appointment.service';
+import { CapitalizePipe } from '../../pipes/capitalize.pipe';
 import { catchError, of } from 'rxjs';
 
 export interface EventItem {

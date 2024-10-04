@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { RegisterService } from '../../core/register.service';
+import { RegisterService } from '../../services/register.service';
 import { Router } from '@angular/router';
 
 @Component({

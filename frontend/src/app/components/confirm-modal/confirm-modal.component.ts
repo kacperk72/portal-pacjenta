@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { DatePipe } from '../date.pipe';
+import { DatePipe } from '../../pipes/date.pipe';
 
 @Component({
   selector: 'app-confirm-modal',
