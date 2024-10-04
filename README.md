@@ -6,6 +6,10 @@
 
 Portal Pacjenta to aplikacja webowa, która umożliwia pacjentom zarządzanie wizytami lekarskimi, przeglądanie wyników badań oraz komunikację z placówkami medycznymi. Aplikacja została zaprojektowana z użyciem najnowszych technologii frontendowych i backendowych.
 
+## Zrzuty ekranu
+
+Zrzuty ekranu prezentujące główne funkcjonalności aplikacji dostępne są pod poniższym linkiem: https://drive.google.com/drive/folders/1_0nVsK_f_gcscLrdu0la1SferF7XqOEY?usp=drive_link
+
 ## Technologie
 
 - **Angular CLI** v17.2.1
@@ -29,6 +33,10 @@ Projekt jest w pełni konteneryzowany za pomocą Dockera i Docker Compose. Uruch
 ## Project Description
 
 Portal Pacjenta is a web application designed to help patients manage their medical appointments, view test results, and communicate with medical institutions. The app was built using the latest frontend and backend technologies.
+
+## Screenshots
+
+Screenshots showcasing the main features of the application are available at the following link: https://drive.google.com/drive/folders/1_0nVsK_f_gcscLrdu0la1SferF7XqOEY?usp=drive_link
 
 ## Technologies
 
