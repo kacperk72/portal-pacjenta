@@ -25,9 +25,11 @@ Projekt jest w pełni konteneryzowany za pomocą Dockera i Docker Compose. Uruch
 
 1. **Skopiowanie repozytorium**:
 
-```bash
-git clone https://github.com/kacperk72/portal-pacjenta.git
+```git clone https://github.com/kacperk72/portal-pacjenta.git```
 
+2. **Uruchomienie aplikacji za pomocą Docker Compose:**
+
+```docker-compose up --build```
 
 ## Project Description
 
@@ -52,8 +54,8 @@ The project is fully containerized using Docker and Docker Compose. Launching th
 
 Clone the repository:
 
-git clone https://github.com/kacperk72/portal-pacjenta.git
+```git clone https://github.com/kacperk72/portal-pacjenta.git```
 
 Start the application using Docker Compose:
 
-docker-compose up --build
+```docker-compose up --build```
