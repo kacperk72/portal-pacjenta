@@ -6,11 +6,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-fill-profile',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './fill-profile.component.html',
-  styleUrl: './fill-profile.component.css',
+    selector: 'app-fill-profile',
+    imports: [ReactiveFormsModule, CommonModule],
+    templateUrl: './fill-profile.component.html',
+    styleUrl: './fill-profile.component.css'
 })
 export class FillProfileComponent {
   profileForm: FormGroup = this.fb.group({});

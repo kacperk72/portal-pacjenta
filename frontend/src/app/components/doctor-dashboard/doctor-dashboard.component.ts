@@ -27,25 +27,24 @@ import {
 import { VisitSurveyDetailsComponent } from '../visit-survey-details/visit-survey-details.component';
 
 @Component({
-  selector: 'app-doctor-dashboard',
-  standalone: true,
-  templateUrl: './doctor-dashboard.component.html',
-  styleUrl: './doctor-dashboard.component.css',
-  imports: [
-    SurveyComponent,
-    TabViewModule,
-    MatIconModule,
-    InputTextModule,
-    FormsModule,
-    ButtonModule,
-    TimelineModule,
-    CardModule,
-    CommonModule,
-    CalendarModule,
-    TimePipe,
-    DatePipe,
-    CapitalizePipe,
-  ],
+    selector: 'app-doctor-dashboard',
+    templateUrl: './doctor-dashboard.component.html',
+    styleUrl: './doctor-dashboard.component.css',
+    imports: [
+        SurveyComponent,
+        TabViewModule,
+        MatIconModule,
+        InputTextModule,
+        FormsModule,
+        ButtonModule,
+        TimelineModule,
+        CardModule,
+        CommonModule,
+        CalendarModule,
+        TimePipe,
+        DatePipe,
+        CapitalizePipe,
+    ]
 })
 export class DoctorDashboardComponent implements OnInit {
   name: string = '';

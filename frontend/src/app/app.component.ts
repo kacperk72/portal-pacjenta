@@ -5,11 +5,10 @@ import { LoginService } from './services/login.service';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
-  imports: [RouterOutlet, MenuComponent],
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css',
+    imports: [RouterOutlet, MenuComponent]
 })
 export class AppComponent implements OnInit {
   isLoggedIn$: Observable<boolean>;

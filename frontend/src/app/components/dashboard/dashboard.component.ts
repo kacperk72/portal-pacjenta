@@ -30,22 +30,21 @@ export interface EventItem {
 }
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css',
-  imports: [
-    SurveyComponent,
-    TabViewModule,
-    MatIconModule,
-    InputTextModule,
-    FormsModule,
-    ButtonModule,
-    TimelineModule,
-    CardModule,
-    CommonModule,
-    CapitalizePipe,
-  ],
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrl: './dashboard.component.css',
+    imports: [
+        SurveyComponent,
+        TabViewModule,
+        MatIconModule,
+        InputTextModule,
+        FormsModule,
+        ButtonModule,
+        TimelineModule,
+        CardModule,
+        CommonModule,
+        CapitalizePipe,
+    ]
 })
 export class DashboardComponent implements OnInit {
   name: string = '';

@@ -23,28 +23,27 @@ import { AppointmentService } from '../../services/appointment.service';
 import { UserService, userLocalStorageData } from '../../services/user.service';
 
 @Component({
-  selector: 'app-visits',
-  standalone: true,
-  templateUrl: './visits.component.html',
-  styleUrl: './visits.component.css',
-  imports: [
-    MatSelectModule,
-    MatSlideToggleModule,
-    MatInputModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    InputTextModule,
-    DropdownModule,
-    InputSwitchModule,
-    MatIconModule,
-    ButtonModule,
-    ToolbarModule,
-    CardModule,
-    CalendarModule,
-    CommonModule,
-    DatePipe,
-    TimePipe,
-  ],
+    selector: 'app-visits',
+    templateUrl: './visits.component.html',
+    styleUrl: './visits.component.css',
+    imports: [
+        MatSelectModule,
+        MatSlideToggleModule,
+        MatInputModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        InputTextModule,
+        DropdownModule,
+        InputSwitchModule,
+        MatIconModule,
+        ButtonModule,
+        ToolbarModule,
+        CardModule,
+        CalendarModule,
+        CommonModule,
+        DatePipe,
+        TimePipe,
+    ]
 })
 export class VisitsComponent implements OnInit {
   searchForm = new FormGroup({

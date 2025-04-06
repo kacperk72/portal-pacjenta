@@ -7,17 +7,16 @@ import { ButtonModule } from 'primeng/button';
 import { ChatService } from '../../services/chat.service';
 
 @Component({
-  selector: 'app-ai-doctor',
-  standalone: true,
-  imports: [
-    TabViewModule,
-    MatIconModule,
-    InputTextModule,
-    FormsModule,
-    ButtonModule,
-  ],
-  templateUrl: './ai-doctor.component.html',
-  styleUrl: './ai-doctor.component.css',
+    selector: 'app-ai-doctor',
+    imports: [
+        TabViewModule,
+        MatIconModule,
+        InputTextModule,
+        FormsModule,
+        ButtonModule,
+    ],
+    templateUrl: './ai-doctor.component.html',
+    styleUrl: './ai-doctor.component.css'
 })
 export class AiDoctorComponent implements OnInit {
   userSymptomsDescription: string = '';

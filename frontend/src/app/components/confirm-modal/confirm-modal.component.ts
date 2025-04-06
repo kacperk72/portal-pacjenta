@@ -3,11 +3,10 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '../../pipes/date.pipe';
 
 @Component({
-  selector: 'app-confirm-modal',
-  standalone: true,
-  templateUrl: './confirm-modal.component.html',
-  styleUrl: './confirm-modal.component.css',
-  imports: [DatePipe],
+    selector: 'app-confirm-modal',
+    templateUrl: './confirm-modal.component.html',
+    styleUrl: './confirm-modal.component.css',
+    imports: [DatePipe]
 })
 export class ConfirmModalComponent implements OnInit {
   @Input() visit: any;

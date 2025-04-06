@@ -10,18 +10,17 @@ import { UserService } from '../../services/user.service';
 import { UserLocalStorageData } from '../../types/surveyTypes';
 
 @Component({
-  selector: 'app-menu',
-  standalone: true,
-  imports: [
-    RouterModule,
-    MatToolbarModule,
-    MatIconModule,
-    CommonModule,
-    InputSwitchModule,
-    FormsModule,
-  ],
-  templateUrl: './menu.component.html',
-  styleUrl: './menu.component.css',
+    selector: 'app-menu',
+    imports: [
+        RouterModule,
+        MatToolbarModule,
+        MatIconModule,
+        CommonModule,
+        InputSwitchModule,
+        FormsModule,
+    ],
+    templateUrl: './menu.component.html',
+    styleUrl: './menu.component.css'
 })
 export class MenuComponent implements OnInit {
   username: string = '';

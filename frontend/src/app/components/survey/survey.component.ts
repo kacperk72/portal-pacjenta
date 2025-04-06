@@ -33,18 +33,17 @@ export interface SurveyData {
 }
 
 @Component({
-  selector: 'app-survey',
-  standalone: true,
-  imports: [
-    DropdownModule,
-    FormsModule,
-    MatIconModule,
-    InputTextModule,
-    ButtonModule,
-    CommonModule,
-  ],
-  templateUrl: './survey.component.html',
-  styleUrl: './survey.component.css',
+    selector: 'app-survey',
+    imports: [
+        DropdownModule,
+        FormsModule,
+        MatIconModule,
+        InputTextModule,
+        ButtonModule,
+        CommonModule,
+    ],
+    templateUrl: './survey.component.html',
+    styleUrl: './survey.component.css'
 })
 export class SurveyComponent {
   @Input() visitData: EventItem = {};
