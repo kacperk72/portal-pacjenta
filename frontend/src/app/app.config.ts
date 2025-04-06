@@ -3,18 +3,32 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { providePrimeNG } from 'primeng/config';
-import Lara from '@primeng/themes/lara';
+import Aura from '@primeng/themes/aura';
+import { definePreset } from '@primeng/themes';
+
+const MyPreset = definePreset(Aura, {
+  semantic: {
+    colorScheme: {
+      light: {
+        primaryColor: '#007bff',
+      },
+      dark: {
+        primaryColor: '#007bff',
+      },
+    },
+  },
+});
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideAnimationsAsync(),
-    importProvidersFrom(HttpClientModule),
+    provideHttpClient(),
     providePrimeNG({
       theme: {
-        preset: Lara,
+        preset: MyPreset,
         options: {
           darkModeSelector: '.app',
         },

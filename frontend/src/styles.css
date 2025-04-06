@@ -1,8 +1,13 @@
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 @import 'primeicons/primeicons.css';
 
+html {
+  font-size: 14px;
+}
+
 body {
   margin: 0;
+  font-size: 14px;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
