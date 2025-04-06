@@ -9,40 +9,18 @@
     }
     <div>
       @if(username) {
-      <button class="menu-option" mat-button routerLink="/book-visit">
-        <mat-icon>search</mat-icon> Umów wizytę
-      </button>
-      <button class="menu-option" mat-button routerLink="/ai-doctor">
-        <mat-icon>developer_board</mat-icon> AI-Doctor
-      </button>
-      <button class="menu-option" mat-button routerLink="/my-account">
-        <mat-icon>person</mat-icon> Moje konto
-      </button>
-      <button
-        *ngIf="userRole === 'doctor'"
-        class="menu-option"
-        mat-button
-        routerLink="/doctor-dashboard"
-      >
-        <mat-icon>person</mat-icon> Panel lekarza
-      </button>
+      <button class="menu-option" mat-button routerLink="/book-visit"><mat-icon>search</mat-icon> Umów wizytę</button>
+      <button class="menu-option" mat-button routerLink="/ai-doctor"><mat-icon>developer_board</mat-icon> AI-Doctor</button>
+      <button class="menu-option" mat-button routerLink="/my-account"><mat-icon>person</mat-icon> Moje konto</button>
+      <button *ngIf="userRole === 'doctor'" class="menu-option" mat-button routerLink="/doctor-dashboard"><mat-icon>person</mat-icon> Panel lekarza</button>
       } @if(!username) {
-      <button class="menu-option" mat-button routerLink="/login">
-        <mat-icon aria-hidden="false">login</mat-icon> Zaloguj
-      </button>
-      <button class="menu-option" mat-button routerLink="/register">
-        <mat-icon aria-hidden="false">person_add</mat-icon>Zarejestruj się
-      </button>
+      <button class="menu-option" mat-button routerLink="/login"><mat-icon aria-hidden="false">login</mat-icon> Zaloguj</button>
+      <button class="menu-option" mat-button routerLink="/register"><mat-icon aria-hidden="false">person_add</mat-icon>Zarejestruj się</button>
       } @else {
-      <button class="menu-option" mat-button (click)="logout()">
-        <mat-icon aria-hidden="false">logout</mat-icon> Wyloguj się
-      </button>
+      <button class="menu-option" mat-button (click)="logout()"><mat-icon aria-hidden="false">logout</mat-icon> Wyloguj się</button>
       }
-      <!-- <span style="color: black">Tryb ciemny</span>
-      <p-inputSwitch
-        [(ngModel)]="checked"
-        (onChange)="toggleDarkTheme()"
-      ></p-inputSwitch> -->
+      <span style="color: black">Tryb ciemny</span>
+      <p-inputSwitch [(ngModel)]="checked" (onChange)="toggleDarkTheme()"></p-inputSwitch>
     </div>
   </mat-toolbar>
 </div>

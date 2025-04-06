@@ -18,33 +18,27 @@ import { TimePipe } from '../../pipes/time.pipe';
 import { DatePipe } from '../../pipes/date.pipe';
 import { CapitalizePipe } from '../../pipes/capitalize.pipe';
 import { SurveyService } from '../../services/survey.service';
-import {
-  CombinedData,
-  EventItem,
-  Survey,
-  UserLocalStorageData,
-} from '../../types/surveyTypes';
+import { CombinedData, EventItem, Survey, UserLocalStorageData } from '../../types/surveyTypes';
 import { VisitSurveyDetailsComponent } from '../visit-survey-details/visit-survey-details.component';
 
 @Component({
-    selector: 'app-doctor-dashboard',
-    templateUrl: './doctor-dashboard.component.html',
-    styleUrl: './doctor-dashboard.component.css',
-    imports: [
-        SurveyComponent,
-        TabViewModule,
-        MatIconModule,
-        InputTextModule,
-        FormsModule,
-        ButtonModule,
-        TimelineModule,
-        CardModule,
-        CommonModule,
-        CalendarModule,
-        TimePipe,
-        DatePipe,
-        CapitalizePipe,
-    ]
+  selector: 'app-doctor-dashboard',
+  templateUrl: './doctor-dashboard.component.html',
+  styleUrl: './doctor-dashboard.component.css',
+  imports: [
+    TabViewModule,
+    MatIconModule,
+    InputTextModule,
+    FormsModule,
+    ButtonModule,
+    TimelineModule,
+    CardModule,
+    CommonModule,
+    CalendarModule,
+    TimePipe,
+    DatePipe,
+    CapitalizePipe,
+  ],
 })
 export class DoctorDashboardComponent implements OnInit {
   name: string = '';
@@ -83,47 +77,39 @@ export class DoctorDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.userLocalStorageData = this.userService.getUserData();
 
-    this.dataService
-      .getUserProfileData(this.userLocalStorageData.id)
-      .subscribe((data) => {
-        this.userData = data;
-      });
+    this.dataService.getUserProfileData(this.userLocalStorageData.id).subscribe((data) => {
+      this.userData = data;
+    });
 
     if (this.userLocalStorageData.id !== '') {
     } else {
       this.router.navigate(['/login']);
     }
 
-    this.dataService
-      .getDoctorProfileData(this.userLocalStorageData.id)
-      .subscribe((data: any) => {
-        this.doctorData = data;
-      });
+    this.dataService.getDoctorProfileData(this.userLocalStorageData.id).subscribe((data: any) => {
+      this.doctorData = data;
+    });
 
-    this.dataService
-      .getDoctorSchedule(this.userLocalStorageData.id)
-      .subscribe((data: any) => {});
+    this.dataService.getDoctorSchedule(this.userLocalStorageData.id).subscribe((data: any) => {});
 
-    this.doctorService
-      .getScheduledVisits(this.userLocalStorageData.id)
-      .subscribe(
-        (data: any) => {
-          data.forEach((event: any) => {
-            event.icon = 'pi pi-calendar';
-            event.color = '#607D8B';
-            if (event.Appointment?.Status === 'zaplanowana') {
-              this.events.push(event);
-            } else if (event.Appointment?.Status === 'zakończona') {
-              this.historyEvents.push(event);
-            }
-          });
+    this.doctorService.getScheduledVisits(this.userLocalStorageData.id).subscribe(
+      (data: any) => {
+        data.forEach((event: any) => {
+          event.icon = 'pi pi-calendar';
+          event.color = '#607D8B';
+          if (event.Appointment?.Status === 'zaplanowana') {
+            this.events.push(event);
+          } else if (event.Appointment?.Status === 'zakończona') {
+            this.historyEvents.push(event);
+          }
+        });
 
-          this.combineVisitsAndSurveys();
-        },
-        (error) => {
-          console.error('Error fetching scheduled visits', error);
-        }
-      );
+        this.combineVisitsAndSurveys();
+      },
+      (error) => {
+        console.error('Error fetching scheduled visits', error);
+      }
+    );
 
     if (this.userLocalStorageData.id !== '') {
       console.log('Dane użytkownika: ', this.userLocalStorageData);
@@ -150,9 +136,7 @@ export class DoctorDashboardComponent implements OnInit {
   combineVisitsAndSurveys(): void {
     if (this.events.length && this.surveys.length) {
       this.combinedData = this.events.map((event) => {
-        const survey = this.surveys.find(
-          (s) => s.AppointmentID === event.AppointmentID
-        );
+        const survey = this.surveys.find((s) => s.AppointmentID === event.AppointmentID);
         return survey ? { ...event, survey } : event;
       });
       // console.log('Combined Data:', this.combinedData);

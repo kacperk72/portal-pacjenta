@@ -30,21 +30,10 @@ export interface EventItem {
 }
 
 @Component({
-    selector: 'app-dashboard',
-    templateUrl: './dashboard.component.html',
-    styleUrl: './dashboard.component.css',
-    imports: [
-        SurveyComponent,
-        TabViewModule,
-        MatIconModule,
-        InputTextModule,
-        FormsModule,
-        ButtonModule,
-        TimelineModule,
-        CardModule,
-        CommonModule,
-        CapitalizePipe,
-    ]
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrl: './dashboard.component.css',
+  imports: [TabViewModule, MatIconModule, InputTextModule, FormsModule, ButtonModule, TimelineModule, CardModule, CommonModule, CapitalizePipe],
 })
 export class DashboardComponent implements OnInit {
   name: string = '';
@@ -92,18 +81,16 @@ export class DashboardComponent implements OnInit {
           }
         });
 
-      this.appointmentService
-        .getPatientAppointments(this.userLocalStorageData.id)
-        .subscribe(
-          (data) => {
-            this.classifyAppointments(data);
-            this.extractPrescriptions(data);
-            this.dataLoaded = true;
-          },
-          (error) => {
-            console.error('Error fetching patient appointments', error);
-          }
-        );
+      this.appointmentService.getPatientAppointments(this.userLocalStorageData.id).subscribe(
+        (data) => {
+          this.classifyAppointments(data);
+          this.extractPrescriptions(data);
+          this.dataLoaded = true;
+        },
+        (error) => {
+          console.error('Error fetching patient appointments', error);
+        }
+      );
     }
 
     if (this.userLocalStorageData.id !== '') {
@@ -132,9 +119,7 @@ export class DashboardComponent implements OnInit {
     const now = new Date();
     appointments.forEach((appointment) => {
       const eventItem = this.transformToEventItem(appointment);
-      const appointmentDate = new Date(
-        `${appointment.DoctorSchedule?.AvailableDate}T${appointment.DoctorSchedule?.TimeSlotFrom}`
-      );
+      const appointmentDate = new Date(`${appointment.DoctorSchedule?.AvailableDate}T${appointment.DoctorSchedule?.TimeSlotFrom}`);
       if (appointmentDate < now) {
         this.eventsHistory.push(eventItem);
       } else {
@@ -146,20 +131,12 @@ export class DashboardComponent implements OnInit {
   transformToEventItem(appointment: any): EventItem {
     return {
       status: appointment?.Status || '',
-      doctor: `Dr. ${appointment?.Doctor?.DoctorProfile?.FirstName || ''} ${
-        appointment?.Doctor?.DoctorProfile?.LastName || ''
+      doctor: `Dr. ${appointment?.Doctor?.DoctorProfile?.FirstName || ''} ${appointment?.Doctor?.DoctorProfile?.LastName || ''}`,
+      description: `${appointment?.Doctor?.Specialization || ''} - ${appointment?.Diagnosis || ' Brak diagnozy'} - ${
+        appointment?.Treatment || 'Brak wskazówek leczenia'
       }`,
-      description: `${appointment?.Doctor?.Specialization || ''} - ${
-        appointment?.Diagnosis || ' Brak diagnozy'
-      } - ${appointment?.Treatment || 'Brak wskazówek leczenia'}`,
-      date: this.formatDateTime(
-        appointment?.DoctorSchedule?.AvailableDate || 'N/A',
-        appointment?.DoctorSchedule?.TimeSlotFrom || 'N/A'
-      ),
-      icon:
-        appointment?.Status === 'zaplanowana'
-          ? 'pi pi-calendar'
-          : 'pi pi-check',
+      date: this.formatDateTime(appointment?.DoctorSchedule?.AvailableDate || 'N/A', appointment?.DoctorSchedule?.TimeSlotFrom || 'N/A'),
+      icon: appointment?.Status === 'zaplanowana' ? 'pi pi-calendar' : 'pi pi-check',
       color: appointment?.Status === 'zaplanowana' ? '#607D8B' : '#FF5722',
       AppointmentID: appointment?.AppointmentID || 'N/A',
       PatientID: appointment?.PatientID || 'N/A',
