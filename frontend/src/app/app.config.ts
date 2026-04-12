@@ -5,8 +5,8 @@ import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient } from '@angular/common/http';
 import { providePrimeNG } from 'primeng/config';
-import Aura from '@primeng/themes/aura';
-import { definePreset } from '@primeng/themes';
+import Aura from '@primeuix/themes/aura';
+import { definePreset } from '@primeuix/themes';
 
 const MyPreset = definePreset(Aura, {
   semantic: {
