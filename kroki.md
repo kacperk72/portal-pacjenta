@@ -132,7 +132,7 @@ kolejności. To wciąż **eksploracja** — żadnej decyzji ani kodu.
 Cel: tam, gdzie problem to **pojęcia biznesowe**, a nie tylko struktura kodu. Produkt to
 **mapy i plany**, nie kod produkcyjny.
 
-- [ ] **4.1 Destylacja domeny** — prompt `.claude/prompts/m4l5-1-domain-distillation.md`.
+- [x] **4.1 Destylacja domeny** — prompt `.claude/prompts/m4l5-1-domain-distillation.md`.
   - Zbuduj Ubiquitous Language (pojęcia z dokumentów + kodu, z cytatami `plik:linia`).
   - Sklasyfikuj subdomeny: Core / Supporting / Generic (dla portal-pacjenta rdzeniem są
     najpewniej **wizyty + ankieta przedwizytowa**, a uwierzytelnianie/SSO to Generic).
