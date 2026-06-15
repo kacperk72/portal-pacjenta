@@ -117,7 +117,7 @@ kolejności. To wciąż **eksploracja** — żadnej decyzji ani kodu.
     biznesowych — powiedz to i zatrzymaj się (to materiał na Fazę 4).
   - → zapis do `context/changes/refactor-opportunities/research.md`.
 
-- [ ] **3.3 Weryfikacja rankingu ast-grep** — prompt `.claude/prompts/m4l4-3-ranking-ast-grep-verification.md`.
+- [x] **3.3 Weryfikacja rankingu ast-grep** — prompt `.claude/prompts/m4l4-3-ranking-ast-grep-verification.md`.
   - Zweryfikuj twierdzenia strukturalne, na których stoi ranking (każde „zero” potwierdź klasycznym grepem).
   - Dodaj sekcję **„## Weryfikacja twierdzeń (ast-grep)”**, popraw liczby w miejscu w formacie
     `150 (raport: 145)`, zaktualizuj frontmatter (`last_updated`, tag `verified`).

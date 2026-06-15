@@ -5,9 +5,10 @@ git_commit: 70963c0b8db719665822193b82591a0266328ae2
 branch: master
 repository: portal-pacjenta
 topic: "Refactor opportunities — które problemy długu naprawić, w jakim kształcie i kolejności"
-tags: [research, refactor-opportunities, ranking, exploration, m4l4]
+tags: [research, refactor-opportunities, ranking, exploration, m4l4, verified]
 status: complete
 last_updated: 2026-06-15
+verified_commit: "92486cc (stan kodu: 70963c0 — fazy 1–3 nie zmieniały kodu)"
 phase: "Faza 3 — Refactor opportunities (Lekcja 4)"
 inputs:
   - context/changes/appointment-booking-analysis/research.md
@@ -127,3 +128,39 @@ tylko po stronie frontu. To determinuje kolejność: najpierw to, co potwierdzal
 Naturalna sekwencja wynikająca z dowodów: **K5 → K4a (warm-up) → K1 (klarowność, ~zero ryzyka) →
 K2 (buduje osłonę typową) → K3 (po osłonach/testach)**. D1 i N1 to osobne tory (Faza 4 / plan testów).
 Decyzja, co realizujemy, należy do `/10x-plan` — ten dokument jest tylko propozycją popartą dowodami.
+
+---
+
+## Weryfikacja twierdzeń (ast-grep)
+
+Krok 3.3 (m4l4). Zweryfikowano twierdzenia STRUKTURALNE, na których stoi ranking — szczególnie K1
+(podstawa „blast radius ~zero") i K2 (podstawa „buduje osłonę"). Każde „zero" potwierdzone klasycznym
+grepem. Werdykty: ✅ potwierdzone · 🔁 doprecyzowane · ❌ obalone.
+
+| Twierdzenie | Werdykt | Dowód (plik:linia) | Metoda |
+|---|---|---|---|
+| K1: `patientController.js` zakomentowany, żywy `patientController2` | ✅ | `patientRoutes.js:3` (`//`), `:4` (live) | grep -n |
+| K1: `patientController.js` ma 0 żywych importerów | ✅ | jedyny ref to zakomentowany `patientRoutes.js:3` | grep require |
+| K1: `patientModel.js` importowany tylko przez martwego rodzica | ✅ | `patientController.js:1` (sam martwy) | grep require |
+| K1: `dbmysql.js` tylko przez `patientModel.js` | ✅ | `patientModel.js:1` | grep require |
+| K1: `dbmongo.js` 0 importerów (Mongo żyje inline) | ✅ | require=0; inline `app.js:12,19-20` `mongoose.connect(MONGO_URI)` | grep (zero + drugie narzędzie) |
+| K1: `adminRoutes.js` pusty (blob `e69de29`) | ✅ | 0 linii; `git hash-object` = `e69de29bb2d1…` (git empty-blob) | wc + hash-object |
+| K1: `userDataService.js` 0 importerów | ✅ | require=0 w `backend/src` | grep (zero) |
+| K2: `appointment.service.ts` URL hardcoded + `any` | ✅ | `:9` apiUrl localhost, `:13` `appointmentData: any` | grep -n |
+| K2: wzorzec `any` szerszy | ✅ | `data.service.ts:30,34,38`, `doctor.service.ts:13` | grep -n |
+| K2: brak typu `Appointment` w `types/` | ✅ | grep `interface/type Appointment` = 0 | grep (zero) |
+| K2: backend bez biblioteki walidacji | ✅ (z 2.2) | brak w `backend/package.json`; 0 `validationResult` | grep (zero) |
+| K3: brak interceptora HTTP na FE | ✅ | `app.config.ts:28` `provideHttpClient()` bez `withInterceptors` | grep -n |
+| K3: `passport.authenticate` nie jest guardem żadnej trasy | ✅ (z 2.2) | 0 trafień w `backend/src/routes` | grep (zero) |
+| K4: 4× osobne `require("../models/doctorModel")` | ✅ | `appointmentService.js:2,3,4,5` | grep -n |
+| K4: dwukierunkowość (`doctorModel`→`appointmentModel`) | ✅ | `doctorModel.js:3` `require("./appointmentModel")` | grep -n |
+| K4: asocjacje skupione w `doctorModel` | ✅ | pierwsza `:107`, ostatnia `:128` | grep -n |
+| K5: podwójny eksport `getPatientAppointments` | ✅ (z 2.2) | `appointmentService.js:70,71` | grep -n |
+
+**Wynik:** wszystkie twierdzenia strukturalne **potwierdzone**, żadne nie obalone ani nie wymagało
+korekty liczby/linii (format `X (raport: Y)` nie był potrzebny — numery zgadzały się co do linii).
+Ranking (#1 K1, #2 K2, #3 K3) **nie wymaga rewizji** — jego strukturalne podstawy stoją na dowodach
+narzędziowych. Brak rozbieżności „do decyzji na etapie planowania".
+
+> Sekcji „🏆 Refactor opportunities (ranked)" oraz werdyktów intencjonalności celowo nie zmieniono
+> (reguła kroku 3.3 — werdykty należą do sesji planowania, weryfikacja dotyczy tylko faktów strukturalnych).
