@@ -139,7 +139,7 @@ Cel: tam, gdzie problem to **pojęcia biznesowe**, a nie tylko struktura kodu. P
   - Kandydaci na agregaty + ich niezmienniki; tabela **rozjazdów MODEL vs KOD**.
   - → zapis do `context/domain/01-domain-distillation.md`.
 
-- [ ] **4.2 Agregat-strażnik niezmiennika** — prompt `.claude/prompts/m4l5-2-invariant-aggregate-refactor.md`.
+- [x] **4.2 Agregat-strażnik niezmiennika** — prompt `.claude/prompts/m4l5-2-invariant-aggregate-refactor.md`.
   - Wybierz niezmiennik **najbardziej rdzeniowy I najsłabiej egzekwowany** (np. reguła
     walidacji ankiety / warunki przejścia statusu wizyty — sprawdź czy egzekwuje to tylko UI Angulara).
   - Zaprojektuj agregat-root jako jedyne miejsce egzekwowania (metody z preconditions,
