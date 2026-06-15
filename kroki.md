@@ -147,7 +147,7 @@ Cel: tam, gdzie problem to **pojęcia biznesowe**, a nie tylko struktura kodu. P
   - Before/after, plan faz, przypadki testowe (legalne/nielegalne przejścia).
   - → zapis do `context/domain/02-invariant-aggregate-refactor.md`.
 
-- [ ] **4.3 Anti-Corruption Layer** — prompt `.claude/prompts/m4l5-3-anti-corruption-layer.md`.
+- [x] **4.3 Anti-Corruption Layer** — prompt `.claude/prompts/m4l5-3-anti-corruption-layer.md`.
   - Znajdź przeciekającą zależność zewnętrzną (kandydaci tutaj: klient AI w `ai-doctor` /
     `chatController`, mieszanie Mongoose + MySQL, SDK używany po obu stronach granicy).
   - Zaprojektuj wąski port domenowy + adapter; **kryterium sukcesu:** `grep` po nazwie pakietu
