@@ -1,3 +1,6 @@
 /backend/node_modules
 /data
 .env
+
+# Skopiowane materiały kursu 10xDevs (źródło: ../10xdevs/dokumentacja kursu/) — nie wersjonujemy
+/context/reference/10xdevs-m4/
