@@ -190,10 +190,10 @@ Brak zmian schematu/DB. `ScheduleID` pozostaje polem transportowym (bez migracji
 
 ### Phase 1: Definicja kontraktu (typy FE)
 #### Automated
-- [ ] 1.1 `cd frontend && npm run build` przechodzi (nowy plik kompiluje się)
-- [ ] 1.2 `appointmentTypes.ts` istnieje i eksportuje 3 nazwane typy
+- [x] 1.1 `cd frontend && npm run build` przechodzi (nowy plik kompiluje się)
+- [x] 1.2 `appointmentTypes.ts` istnieje i eksportuje 3 nazwane typy
 #### Manual
-- [ ] 1.3 Pola typu odpowiadają kształtowi z `appointmentService.js:34-66`
+- [x] 1.3 Pola typu odpowiadają kształtowi z `appointmentService.js:34-66`
 
 ### Phase 2: Podstawienie typów (FE)
 #### Automated
