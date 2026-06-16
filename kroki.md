@@ -163,7 +163,7 @@ Cel: tam, gdzie problem to **pojęcia biznesowe**, a nie tylko struktura kodu. P
 Dopiero teraz zapada decyzja CO realizujemy i powstaje kod.
 
 - [x] **5.1 Plan** — `/10x-plan` dla wybranej możliwości z rankingu (faza 3) lub planu DDD (faza 4). → change-id: `appointment-contract-types` (K2)
-- [ ] **5.2 Przegląd planu** — `/10x-plan-review` (substancja, wykonalność, dopasowanie architektoniczne).
+- [x] **5.2 Przegląd planu** — `/10x-plan-review` (substancja, wykonalność, dopasowanie architektoniczne). → REVISE→SOUND; F1/F2/F3 fixed; raport: `reviews/plan-review.md`
 - [ ] **5.3 Implementacja** — `/10x-implement` (lub `/10x-tdd` dla faz test-first; `/10x-e2e` dla ryzyk wymagających przeglądarki).
 - [ ] **5.4 Przegląd implementacji** — `/10x-impl-review` (drift względem planu, zgodność wzorców).
 - [ ] **5.5 Lekcje i archiwizacja** — `/10x-lesson` (powtarzalne reguły) → `/10x-archive` po zamknięciu zmiany.

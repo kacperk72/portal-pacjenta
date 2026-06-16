@@ -31,6 +31,9 @@ odrzucana po stronie serwera przy niepoprawnym wejściu.
   oznaczonym), pełne rozplecenie należy do agregatu (plan `context/domain/02-...`).
 - Backend to CommonJS JS — **nie da się literalnie współdzielić** typu TS; FE dostaje typ, BE dostaje
   niezależny ręczny walidator (mirror kontraktu).
+- `userLocalStorageData.id` jest typu `string` (`user.service.ts:5,17`), a dziś `visits.component.ts:109`
+  wysyła `PatientID` jako string. Decyzja (F1): koercujemy do `number` w miejscu budowy payloadu, a guard
+  BE sprawdza **koercowalność**, nie surowy `typeof` — Faza 2 i 3 muszą trzymać tę samą umowę.
 
 ## Desired End State
 
@@ -45,7 +48,12 @@ komunikatem; dla poprawnego wejścia zachowanie bez zmian (`201`). `ng build` pr
 - Nie przenosimy `ScheduleID` do modelu ani nie wyprowadzamy danych serwerowo (to agregat, plan 02).
 - Nie dodajemy biblioteki walidacji (zod/joi/express-validator) — ręczny guard, bez nowej zależności.
 - Nie dodajemy auth/interceptora (to K3) ani nie zmieniamy logiki double-booking (to agregat/D1).
+- Nie ruszamy podwójnego eksportu `getPatientAppointments` w `appointmentService.js:70-71` (F3/K5) — leży
+  w szwie, ale to osobny kandydat; przy edycji backendu w Fazie 3 nie „przy okazji" go naprawiamy.
 - Nie wprowadzamy runnera testów backendu w tej zmianie (osobny tor — N1).
+- Nie typujemy strony wyszukiwania (`bookVisit(visit: any)`, `getVisits` → `any`) — osobny krok. Skutek
+  (F2): w Fazie 2 kompilator realnie sprawdza tylko `PatientID` i literał `Status`; `DoctorID`/`ScheduleID`/
+  `AppointmentDate` lecą z `any` i nie są weryfikowane statycznie. Pełna osłona payloadu wymaga otypowania źródła `visit`.
 
 ## Implementation Approach
 
@@ -101,7 +109,11 @@ Wpięcie typów w serwis i konsumentów; tu kompilator zaczyna pilnować kontrak
 **File**: `frontend/src/app/components/visits/visits.component.ts` (l. 106-117)
 **Intent**: Otypować budowany obiekt jako `BookAppointmentPayload`, by kompilator wymusił zgodność
 nazw/typów pól (wychwytuje m.in. rozjazd, gdyby pole zniknęło/zmieniło typ).
-**Contract**: Lokalna zmienna payloadu anotowana typem `BookAppointmentPayload`; brak zmian zachowania.
+**Contract**: Lokalna zmienna payloadu anotowana typem `BookAppointmentPayload`.
+**Uwaga (F1)**: `userLocalStorageData.id` jest typu `string` (`user.service.ts:5,17`), a payload wymaga
+`PatientID: number` → koercja w miejscu budowy: `PatientID: Number(this.userLocalStorageData.id)`.
+Świadoma zmiana zachowania na drucie (number zamiast string); kolumna PatientID jest liczbowa, Sequelize
+i tak koercował. To jedyne pole realnie sprawdzane przez kompilator (pozostałe lecą z `visit: any` — patrz F2).
 
 #### 3. Konsumpcja odpowiedzi na dashboardzie
 **File**: `frontend/src/app/components/dashboard/dashboard.component.ts`
@@ -134,8 +146,10 @@ Lustrzany walidator kontraktu po stronie serwera — nazwany błąd `400` zamias
 **Intent**: Przed `Appointment.create` sprawdzić obecność i podstawowy typ wymaganych pól payloadu;
 przy braku/niepoprawności zwrócić `400` z czytelnym komunikatem (nazwany błąd walidacji), zamiast
 przepuszczać surowy `req.body` i kończyć generycznym `500`.
-**Contract**: Wymagane pola: `PatientID` (number), `DoctorID` (number), `AppointmentDate` (string/parsowalna data),
-`Status` (string), `ScheduleID` (number). Niepoprawne → `res.status(400).json({ error: 'Invalid appointment payload', details: [...] })`.
+**Contract**: Wymagane pola: `PatientID`, `DoctorID`, `ScheduleID` — sprawdzane jako **obecne i koercowalne
+do liczby** (`!Number.isNaN(Number(x))`), **nie** surowe `typeof === 'number'` (F1: FE może przysłać liczbę,
+guard nie może wywrócić realnego ruchu); `AppointmentDate` (obecna, parsowalna data); `Status` (niepusty string).
+Niepoprawne → `res.status(400).json({ error: 'Invalid appointment payload', details: [...] })`.
 Poprawne → ścieżka bez zmian (`201`). Opcjonalnie wydzielić `validateBookAppointmentBody(body)` jako lokalną funkcję/util.
 
 ### Success Criteria:
