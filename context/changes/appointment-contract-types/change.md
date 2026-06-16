@@ -1,7 +1,7 @@
 ---
 change_id: appointment-contract-types
 title: Typy/DTO i walidacja na szwie kontraktu FE↔BE dla umawiania wizyty (K2)
-status: implemented
+status: impl_reviewed
 created: 2026-06-15
 updated: 2026-06-16
 archived_at: null

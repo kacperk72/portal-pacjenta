@@ -164,8 +164,8 @@ Dopiero teraz zapada decyzja CO realizujemy i powstaje kod.
 
 - [x] **5.1 Plan** — `/10x-plan` dla wybranej możliwości z rankingu (faza 3) lub planu DDD (faza 4). → change-id: `appointment-contract-types` (K2)
 - [x] **5.2 Przegląd planu** — `/10x-plan-review` (substancja, wykonalność, dopasowanie architektoniczne). → REVISE→SOUND; F1/F2/F3 fixed; raport: `reviews/plan-review.md`
-- [ ] **5.3 Implementacja** — `/10x-implement` (lub `/10x-tdd` dla faz test-first; `/10x-e2e` dla ryzyk wymagających przeglądarki).
-- [ ] **5.4 Przegląd implementacji** — `/10x-impl-review` (drift względem planu, zgodność wzorców).
+- [x] **5.3 Implementacja** — `/10x-implement` (3 fazy: typy FE → podstawienie → guard BE). Commity: 2cad473, 4d188e0, 3fcc369, epilog e13aa95. Manual e2e zweryfikowane (seed slotów dla DoctorID=2).
+- [x] **5.4 Przegląd implementacji** — `/10x-impl-review` (drift względem planu, zgodność wzorców). → APPROVED (0 crit/0 warn/2 obs, oba skipped); raport: `reviews/impl-review.md`
 - [ ] **5.5 Lekcje i archiwizacja** — `/10x-lesson` (powtarzalne reguły) → `/10x-archive` po zamknięciu zmiany.
 
 ---
