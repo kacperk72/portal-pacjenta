@@ -190,18 +190,18 @@ Brak zmian schematu/DB. `ScheduleID` pozostaje polem transportowym (bez migracji
 
 ### Phase 1: Definicja kontraktu (typy FE)
 #### Automated
-- [x] 1.1 `cd frontend && npm run build` przechodzi (nowy plik kompiluje się)
-- [x] 1.2 `appointmentTypes.ts` istnieje i eksportuje 3 nazwane typy
+- [x] 1.1 `cd frontend && npm run build` przechodzi (nowy plik kompiluje się) — 2cad473
+- [x] 1.2 `appointmentTypes.ts` istnieje i eksportuje 3 nazwane typy — 2cad473
 #### Manual
-- [x] 1.3 Pola typu odpowiadają kształtowi z `appointmentService.js:34-66`
+- [x] 1.3 Pola typu odpowiadają kształtowi z `appointmentService.js:34-66` — 2cad473
 
 ### Phase 2: Podstawienie typów (FE)
 #### Automated
-- [ ] 2.1 `cd frontend && npm run build` przechodzi
-- [ ] 2.2 `grep ": any"` w `appointment.service.ts` = 0 na ścieżce booka/odczytu
+- [x] 2.1 `cd frontend && npm run build` przechodzi
+- [x] 2.2 `grep ": any"` w `appointment.service.ts` = 0 na ścieżce booka/odczytu
 #### Manual
-- [ ] 2.3 Umówienie wizyty działa end-to-end (`201`)
-- [ ] 2.4 Dashboard renderuje wizyty bez regresji
+- [x] 2.3 Umówienie wizyty działa end-to-end (`201`)
+- [x] 2.4 Dashboard renderuje wizyty bez regresji
 
 ### Phase 3: Lekki guard walidacji (BE)
 #### Automated

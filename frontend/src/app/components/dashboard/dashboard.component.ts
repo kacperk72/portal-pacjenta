@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 import { AppointmentService } from '../../services/appointment.service';
 import { CapitalizePipe } from '../../pipes/capitalize.pipe';
 import { catchError, of } from 'rxjs';
+import { PatientAppointment } from '../../types/appointmentTypes';
 
 export interface EventItem {
   status?: string;
@@ -100,7 +101,7 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  extractPrescriptions(appointments: any[]): void {
+  extractPrescriptions(appointments: PatientAppointment[]): void {
     appointments.forEach((appointment) => {
       if (appointment.Prescriptions && appointment.Prescriptions.length > 0) {
         appointment.Prescriptions.forEach((prescription: any) => {
@@ -115,7 +116,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  classifyAppointments(appointments: any[]): void {
+  classifyAppointments(appointments: PatientAppointment[]): void {
     const now = new Date();
     appointments.forEach((appointment) => {
       const eventItem = this.transformToEventItem(appointment);

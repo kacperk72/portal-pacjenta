@@ -21,6 +21,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 import { AppointmentService } from '../../services/appointment.service';
 import { UserService, userLocalStorageData } from '../../services/user.service';
+import { BookAppointmentPayload } from '../../types/appointmentTypes';
 
 @Component({
     selector: 'app-visits',
@@ -105,8 +106,9 @@ export class VisitsComponent implements OnInit {
     modalRef.result
       .then((res) => {
         if (res === 'confirmed') {
-          const appointmentData = {
-            PatientID: this.userLocalStorageData.id,
+          const appointmentData: BookAppointmentPayload = {
+            // F1: userLocalStorageData.id jest typu string — koercja do number wymaganego przez kontrakt
+            PatientID: Number(this.userLocalStorageData.id),
             DoctorID: visit.DoctorID,
             AppointmentDate: visit.AvailableDate + ' ' + visit.TimeSlotFrom,
             Status: 'zaplanowana',
