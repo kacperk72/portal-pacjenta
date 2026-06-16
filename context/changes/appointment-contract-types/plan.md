@@ -197,16 +197,16 @@ Brak zmian schematu/DB. `ScheduleID` pozostaje polem transportowym (bez migracji
 
 ### Phase 2: Podstawienie typów (FE)
 #### Automated
-- [x] 2.1 `cd frontend && npm run build` przechodzi
-- [x] 2.2 `grep ": any"` w `appointment.service.ts` = 0 na ścieżce booka/odczytu
+- [x] 2.1 `cd frontend && npm run build` przechodzi — 4d188e0
+- [x] 2.2 `grep ": any"` w `appointment.service.ts` = 0 na ścieżce booka/odczytu — 4d188e0
 #### Manual
-- [x] 2.3 Umówienie wizyty działa end-to-end (`201`)
-- [x] 2.4 Dashboard renderuje wizyty bez regresji
+- [x] 2.3 Umówienie wizyty działa end-to-end (`201`) — 4d188e0
+- [x] 2.4 Dashboard renderuje wizyty bez regresji — 4d188e0
 
 ### Phase 3: Lekki guard walidacji (BE)
 #### Automated
-- [ ] 3.1 `node --check appointmentController.js` przechodzi
-- [ ] 3.2 Request bez wymaganego pola → `400`
-- [ ] 3.3 Poprawny request → `201` (bez zmian zachowania)
+- [x] 3.1 `node --check appointmentController.js` przechodzi
+- [x] 3.2 Request bez wymaganego pola → `400`
+- [x] 3.3 Poprawny request → `201` (bez zmian zachowania)
 #### Manual
-- [ ] 3.4 Umówienie z UI działa; niepoprawny payload → `400` z komunikatem, nie `500`
+- [x] 3.4 Umówienie z UI działa; niepoprawny payload → `400` z komunikatem, nie `500`
