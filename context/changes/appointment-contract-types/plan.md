@@ -205,8 +205,8 @@ Brak zmian schematu/DB. `ScheduleID` pozostaje polem transportowym (bez migracji
 
 ### Phase 3: Lekki guard walidacji (BE)
 #### Automated
-- [x] 3.1 `node --check appointmentController.js` przechodzi
-- [x] 3.2 Request bez wymaganego pola → `400`
-- [x] 3.3 Poprawny request → `201` (bez zmian zachowania)
+- [x] 3.1 `node --check appointmentController.js` przechodzi — 3fcc369
+- [x] 3.2 Request bez wymaganego pola → `400` — 3fcc369
+- [x] 3.3 Poprawny request → `201` (bez zmian zachowania) — 3fcc369
 #### Manual
-- [x] 3.4 Umówienie z UI działa; niepoprawny payload → `400` z komunikatem, nie `500`
+- [x] 3.4 Umówienie z UI działa; niepoprawny payload → `400` z komunikatem, nie `500` — 3fcc369
