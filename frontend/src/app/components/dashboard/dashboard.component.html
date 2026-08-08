@@ -14,221 +14,229 @@
             pInputText
             id="name"
             [(ngModel)]="userData.FirstName"
-          />
-          <label for="name">Imię</label>
-        </span>
-        <span class="p-float-label">
-          <input
-            [disabled]="!isInEditMode"
-            class="user-data-input"
-            pInputText
-            id="surname"
-            [(ngModel)]="userData.LastName"
-          />
-          <label for="surname">Nazwisko</label>
-        </span>
-        <span class="p-float-label">
-          <input
-            [disabled]="!isInEditMode"
-            class="user-data-input"
-            pInputText
-            id="adres"
-            [(ngModel)]="userData.Address"
-          />
-          <label for="adres">Adres</label>
-        </span>
-        <p-button
-          *ngIf="!isInEditMode"
-          (click)="editMode()"
-          label="Edytuj"
-          [text]="true"
-        ></p-button>
-        <p-button
-          *ngIf="isInEditMode"
-          (click)="saveUserData()"
-          label="Zapisz"
-          [text]="true"
-        ></p-button>
+            />
+            <label for="name">Imię</label>
+          </span>
+          <span class="p-float-label">
+            <input
+              [disabled]="!isInEditMode"
+              class="user-data-input"
+              pInputText
+              id="surname"
+              [(ngModel)]="userData.LastName"
+              />
+              <label for="surname">Nazwisko</label>
+            </span>
+            <span class="p-float-label">
+              <input
+                [disabled]="!isInEditMode"
+                class="user-data-input"
+                pInputText
+                id="adres"
+                [(ngModel)]="userData.Address"
+                />
+                <label for="adres">Adres</label>
+              </span>
+              @if (!isInEditMode) {
+                <p-button
+                  (click)="editMode()"
+                  label="Edytuj"
+                  [text]="true"
+                ></p-button>
+              }
+              @if (isInEditMode) {
+                <p-button
+                  (click)="saveUserData()"
+                  label="Zapisz"
+                  [text]="true"
+                ></p-button>
+              }
+            </div>
+          </div>
+          <div class="dashboard-data">
+            @if (dataLoaded) {
+              <p-tabs value="0" class="tabview-custom">
+                <p-tablist>
+                  <p-tab value="0"><span>Nadchodzące wizyty</span></p-tab>
+                  <p-tab value="1"><span>Historia wizyt i badań</span></p-tab>
+                  <p-tab value="2"><span>Skierowania</span></p-tab>
+                  <p-tab value="3"><span>Recepty</span></p-tab>
+                </p-tablist>
+                <p-tabpanels>
+                  <p-tabpanel value="0">
+                    <div class="timeline">
+                      <p-timeline
+                        [value]="events"
+                        align="alternate"
+                        styleClass="customized-timeline"
+                        >
+                        <ng-template pTemplate="marker" let-event>
+                          <span
+                            class="custom-marker shadow-2"
+                            [style.backgroundColor]="event.color"
+                            >
+                            <i [ngClass]="event.icon" [ngStyle]="{ color: 'white' }"></i>
+                          </span>
+                        </ng-template>
+                        <ng-template pTemplate="content" let-event>
+                          <p-card
+                            [header]="event.status | capitalize"
+                            [subheader]="event.date"
+                            >
+                            <p>{{ event.doctor }}</p>
+                            <p>{{ event.description }}</p>
+                            <!-- <button
+                            pButton
+                            style="width: 100%"
+                            label="Szczegóły"
+                            class="p-button-text"
+                          ></button> -->
+                          @if (
+                            event.status === 'zaplanowana' ||
+                            event.status === 'nadchodząca'
+                            ) {
+                            <button
+                              pButton
+                              label="Wypełnij ankietę przed wizytą"
+                              style="width: 100%"
+                              (click)="open(event)"
+                            ></button>
+                          }
+                        </p-card>
+                      </ng-template>
+                    </p-timeline>
+                    @if (!events.length) {
+                      <div>Brak wizyt</div>
+                    }
+                  </div>
+                </p-tabpanel>
+                <p-tabpanel value="1">
+                  <div class="timeline">
+                    <p-timeline
+                      [value]="eventsHistory"
+                      align="alternate"
+                      styleClass="customized-timeline"
+                      >
+                      <ng-template pTemplate="marker" let-event>
+                        <span
+                          class="custom-marker shadow-2"
+                          [style.backgroundColor]="event.color"
+                          >
+                          <i [ngClass]="event.icon" [ngStyle]="{ color: 'white' }"></i>
+                        </span>
+                      </ng-template>
+                      <ng-template pTemplate="content" let-event>
+                        <p-card [header]="event.status" [subheader]="event.date">
+                          <p>{{ event.description }}</p>
+                          <!-- <button
+                          pButton
+                          style="width: 100%"
+                          label="Szczegóły"
+                          class="p-button-text"
+                        ></button> -->
+                      </p-card>
+                    </ng-template>
+                  </p-timeline>
+                  @if (!eventsHistory.length) {
+                    <div>Brak wizyt</div>
+                  }
+                </div>
+              </p-tabpanel>
+              <p-tabpanel value="2">
+                <div class="card-container">
+                  <div class="referral">
+                    <p-card header="Laryngolog">
+                      <div class="m-0 referral-description">
+                        <p>
+                          Powód skierowania: Przewlekłe zapalenie zatok, utrzymujące
+                          się bóle głowy oraz zatkany nos mimo leczenia
+                          farmakologicznego.
+                        </p>
+                        <p>
+                          Zalecenie: Proszę o dalszą diagnostykę i rozważenie leczenia
+                          zabiegowego.
+                        </p>
+                      </div>
+                      <ng-template pTemplate="footer">
+                        <div>Wystawione: 02-01-2024</div>
+                        <div>Ważne do: 02-01-2025</div>
+                      </ng-template>
+                    </p-card>
+                  </div>
+                  <div class="referral">
+                    <p-card header="Pulmonolog">
+                      <div class="m-0 referral-description">
+                        <p>
+                          Powód skierowania: Nawracające infekcje górnych dróg
+                          oddechowych oraz duszności. Konieczność wykluczenia astmy
+                          oskrzelowej.
+                        </p>
+                        <p>
+                          Zalecenie: Proszę o wykonanie badania spirometrycznego oraz
+                          ocenę stanu płuc.
+                        </p>
+                      </div>
+                      <ng-template pTemplate="footer">
+                        <div>Wystawione: 02-01-2024</div>
+                        <div>Ważne do: 02-01-2025</div>
+                      </ng-template>
+                    </p-card>
+                  </div>
+                  <div class="referral">
+                    <p-card header="Kardiolog">
+                      <div class="m-0 referral-description">
+                        <p>
+                          Powód skierowania: Utrzymujące się uczucie kołatania serca
+                          oraz zmęczenie. Podejrzenie arytmii.
+                        </p>
+                        <p>
+                          Zalecenie: Proszę o wykonanie EKG oraz monitorowanie
+                          ciśnienia krwi.
+                        </p>
+                      </div>
+                      <ng-template pTemplate="footer">
+                        <div>Wystawione: 02-01-2024</div>
+                        <div>Ważne do: 02-01-2025</div>
+                      </ng-template>
+                    </p-card>
+                  </div>
+                </div>
+              </p-tabpanel>
+              <p-tabpanel value="3">
+                <div class="card-container">
+                  @for (prescription of prescriptions; track prescription) {
+                    <div class="referral">
+                      <p-card [header]="'Recepta na ' + prescription.medicine">
+                        <ng-template pTemplate="content">
+                          <div class="m-0 referral-description">
+                            {{ prescription.dosage }} - {{ prescription.instructions }}
+                          </div>
+                        </ng-template>
+                        <ng-template pTemplate="footer">
+                          <div>
+                            Wystawione:
+                            {{ prescription.appointmentDate | date : "dd-MM-yyyy" }}
+                          </div>
+                          <div>
+                            Ważne do:
+                            {{ prescription.appointmentDate | date : "dd-MM-yyyy" }}
+                          </div>
+                        </ng-template>
+                      </p-card>
+                    </div>
+                  }
+                  @if (!prescriptions.length) {
+                    <div
+                      style="width: 100%; text-align: center"
+                      >
+                      Brak recept
+                    </div>
+                  }
+                </div>
+              </p-tabpanel>
+            </p-tabpanels>
+          </p-tabs>
+        }
       </div>
     </div>
-    <div class="dashboard-data">
-      <p-tabs *ngIf="dataLoaded" value="0" class="tabview-custom">
-        <p-tablist>
-          <p-tab value="0"><span>Nadchodzące wizyty</span></p-tab>
-          <p-tab value="1"><span>Historia wizyt i badań</span></p-tab>
-          <p-tab value="2"><span>Skierowania</span></p-tab>
-          <p-tab value="3"><span>Recepty</span></p-tab>
-        </p-tablist>
-
-        <p-tabpanels>
-        <p-tabpanel value="0">
-          <div class="timeline">
-            <p-timeline
-              [value]="events"
-              align="alternate"
-              styleClass="customized-timeline"
-            >
-              <ng-template pTemplate="marker" let-event>
-                <span
-                  class="custom-marker shadow-2"
-                  [style.backgroundColor]="event.color"
-                >
-                  <i [ngClass]="event.icon" [ngStyle]="{ color: 'white' }"></i>
-                </span>
-              </ng-template>
-              <ng-template pTemplate="content" let-event>
-                <p-card
-                  [header]="event.status | capitalize"
-                  [subheader]="event.date"
-                >
-                  <p>{{ event.doctor }}</p>
-                  <p>{{ event.description }}</p>
-                  <!-- <button
-                    pButton
-                    style="width: 100%"
-                    label="Szczegóły"
-                    class="p-button-text"
-                  ></button> -->
-                  <ng-container
-                    *ngIf="
-                      event.status === 'zaplanowana' ||
-                      event.status === 'nadchodząca'
-                    "
-                  >
-                    <button
-                      pButton
-                      label="Wypełnij ankietę przed wizytą"
-                      style="width: 100%"
-                      (click)="open(event)"
-                    ></button>
-                  </ng-container>
-                </p-card>
-              </ng-template>
-            </p-timeline>
-            <div *ngIf="!events.length">Brak wizyt</div>
-          </div>
-        </p-tabpanel>
-        <p-tabpanel value="1">
-          <div class="timeline">
-            <p-timeline
-              [value]="eventsHistory"
-              align="alternate"
-              styleClass="customized-timeline"
-            >
-              <ng-template pTemplate="marker" let-event>
-                <span
-                  class="custom-marker shadow-2"
-                  [style.backgroundColor]="event.color"
-                >
-                  <i [ngClass]="event.icon" [ngStyle]="{ color: 'white' }"></i>
-                </span>
-              </ng-template>
-              <ng-template pTemplate="content" let-event>
-                <p-card [header]="event.status" [subheader]="event.date">
-                  <p>{{ event.description }}</p>
-                  <!-- <button
-                    pButton
-                    style="width: 100%"
-                    label="Szczegóły"
-                    class="p-button-text"
-                  ></button> -->
-                </p-card>
-              </ng-template>
-            </p-timeline>
-            <div *ngIf="!eventsHistory.length">Brak wizyt</div>
-          </div>
-        </p-tabpanel>
-        <p-tabpanel value="2">
-          <div class="card-container">
-            <div class="referral">
-              <p-card header="Laryngolog">
-                <div class="m-0 referral-description">
-                  <p>
-                    Powód skierowania: Przewlekłe zapalenie zatok, utrzymujące
-                    się bóle głowy oraz zatkany nos mimo leczenia
-                    farmakologicznego.
-                  </p>
-                  <p>
-                    Zalecenie: Proszę o dalszą diagnostykę i rozważenie leczenia
-                    zabiegowego.
-                  </p>
-                </div>
-                <ng-template pTemplate="footer">
-                  <div>Wystawione: 02-01-2024</div>
-                  <div>Ważne do: 02-01-2025</div>
-                </ng-template>
-              </p-card>
-            </div>
-            <div class="referral">
-              <p-card header="Pulmonolog">
-                <div class="m-0 referral-description">
-                  <p>
-                    Powód skierowania: Nawracające infekcje górnych dróg
-                    oddechowych oraz duszności. Konieczność wykluczenia astmy
-                    oskrzelowej.
-                  </p>
-                  <p>
-                    Zalecenie: Proszę o wykonanie badania spirometrycznego oraz
-                    ocenę stanu płuc.
-                  </p>
-                </div>
-                <ng-template pTemplate="footer">
-                  <div>Wystawione: 02-01-2024</div>
-                  <div>Ważne do: 02-01-2025</div>
-                </ng-template>
-              </p-card>
-            </div>
-            <div class="referral">
-              <p-card header="Kardiolog">
-                <div class="m-0 referral-description">
-                  <p>
-                    Powód skierowania: Utrzymujące się uczucie kołatania serca
-                    oraz zmęczenie. Podejrzenie arytmii.
-                  </p>
-                  <p>
-                    Zalecenie: Proszę o wykonanie EKG oraz monitorowanie
-                    ciśnienia krwi.
-                  </p>
-                </div>
-                <ng-template pTemplate="footer">
-                  <div>Wystawione: 02-01-2024</div>
-                  <div>Ważne do: 02-01-2025</div>
-                </ng-template>
-              </p-card>
-            </div>
-          </div>
-        </p-tabpanel>
-        <p-tabpanel value="3">
-          <div class="card-container">
-            <div *ngFor="let prescription of prescriptions" class="referral">
-              <p-card [header]="'Recepta na ' + prescription.medicine">
-                <ng-template pTemplate="content">
-                  <div class="m-0 referral-description">
-                    {{ prescription.dosage }} - {{ prescription.instructions }}
-                  </div>
-                </ng-template>
-                <ng-template pTemplate="footer">
-                  <div>
-                    Wystawione:
-                    {{ prescription.appointmentDate | date : "dd-MM-yyyy" }}
-                  </div>
-                  <div>
-                    Ważne do:
-                    {{ prescription.appointmentDate | date : "dd-MM-yyyy" }}
-                  </div>
-                </ng-template>
-              </p-card>
-            </div>
-            <div
-              style="width: 100%; text-align: center"
-              *ngIf="!prescriptions.length"
-            >
-              Brak recept
-            </div>
-          </div>
-        </p-tabpanel>
-        </p-tabpanels>
-      </p-tabs>
-    </div>
   </div>
-</div>

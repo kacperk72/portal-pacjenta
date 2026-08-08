@@ -14,7 +14,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { CardModule } from 'primeng/card';
 import { DatePickerModule } from 'primeng/datepicker';
 import { DataService } from '../../services/data.service';
-import { CommonModule } from '@angular/common';
+
 import { DatePipe } from '../../pipes/date.pipe';
 import { TimePipe } from '../../pipes/time.pipe';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -27,23 +27,22 @@ import { UserService, userLocalStorageData } from '../../services/user.service';
     templateUrl: './visits.component.html',
     styleUrl: './visits.component.css',
     imports: [
-        MatSelectModule,
-        MatSlideToggleModule,
-        MatInputModule,
-        MatButtonModule,
-        ReactiveFormsModule,
-        InputTextModule,
-        SelectModule,
-        ToggleSwitchModule,
-        MatIconModule,
-        ButtonModule,
-        ToolbarModule,
-        CardModule,
-        DatePickerModule,
-        CommonModule,
-        DatePipe,
-        TimePipe,
-    ]
+    MatSelectModule,
+    MatSlideToggleModule,
+    MatInputModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    InputTextModule,
+    SelectModule,
+    ToggleSwitchModule,
+    MatIconModule,
+    ButtonModule,
+    ToolbarModule,
+    CardModule,
+    DatePickerModule,
+    DatePipe,
+    TimePipe
+]
 })
 export class VisitsComponent implements OnInit {
   searchForm = new FormGroup({

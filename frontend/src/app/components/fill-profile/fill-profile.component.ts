@@ -3,11 +3,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
     selector: 'app-fill-profile',
-    imports: [ReactiveFormsModule, CommonModule],
+    imports: [ReactiveFormsModule],
     templateUrl: './fill-profile.component.html',
     styleUrl: './fill-profile.component.css'
 })

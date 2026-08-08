@@ -14,7 +14,7 @@
             pInputText
             id="name"
             [(ngModel)]="userData.FirstName"
-          />
+            />
           <label for="name">Imię</label>
         </span>
         <span class="p-float-label">
@@ -24,7 +24,7 @@
             pInputText
             id="surname"
             [(ngModel)]="userData.LastName"
-          />
+            />
           <label for="surname">Nazwisko</label>
         </span>
         <span class="p-float-label">
@@ -34,7 +34,7 @@
             pInputText
             id="specialization"
             [(ngModel)]="doctorData.Specialization"
-          />
+            />
           <label for="specialization">Specjalizacja</label>
         </span>
         <span class="p-float-label">
@@ -44,7 +44,7 @@
             pInputText
             id="cities"
             [(ngModel)]="doctorData.Cities"
-          />
+            />
           <label for="cities">Lista miast w których przyjmuję pacjentów</label>
         </span>
         <span class="p-float-label">
@@ -54,21 +54,23 @@
             pInputText
             id="adres"
             [(ngModel)]="userData.Address"
-          />
+            />
           <label for="adres">Adres</label>
         </span>
-        <p-button
-          *ngIf="!isInEditMode"
-          (click)="editMode()"
-          label="Edytuj"
-          [text]="true"
-        ></p-button>
-        <p-button
-          *ngIf="isInEditMode"
-          (click)="saveUserData()"
-          label="Zapisz"
-          [text]="true"
-        ></p-button>
+        @if (!isInEditMode) {
+          <p-button
+            (click)="editMode()"
+            label="Edytuj"
+            [text]="true"
+          ></p-button>
+        }
+        @if (isInEditMode) {
+          <p-button
+            (click)="saveUserData()"
+            label="Zapisz"
+            [text]="true"
+          ></p-button>
+        }
       </div>
     </div>
     <div class="dashboard-data">
@@ -81,24 +83,25 @@
         </p-tablist>
 
         <p-tabpanels>
-        <p-tabpanel value="0">
-          <div *ngIf="events.length" class="timeline">
-            <p-timeline
-              [value]="combinedData"
-              align="alternate"
-              styleClass="customized-timeline"
-            >
-              <ng-template pTemplate="marker" let-event>
-                <span
-                  class="custom-marker shadow-2"
-                  [style.backgroundColor]="event.color"
-                >
-                  <i [ngClass]="event?.icon" [ngStyle]="{ color: 'white' }"></i>
-                </span>
-              </ng-template>
-              <ng-template pTemplate="content" let-event>
-                <p-card
-                  [header]="event?.Appointment?.Status | capitalize"
+          <p-tabpanel value="0">
+            @if (events.length) {
+              <div class="timeline">
+                <p-timeline
+                  [value]="combinedData"
+                  align="alternate"
+                  styleClass="customized-timeline"
+                  >
+                  <ng-template pTemplate="marker" let-event>
+                    <span
+                      class="custom-marker shadow-2"
+                      [style.backgroundColor]="event.color"
+                      >
+                      <i [ngClass]="event?.icon" [ngStyle]="{ color: 'white' }"></i>
+                    </span>
+                  </ng-template>
+                  <ng-template pTemplate="content" let-event>
+                    <p-card
+                      [header]="event?.Appointment?.Status | capitalize"
                   [subheader]="
                     (event?.AvailableDate | customDate) +
                     ' ' +
@@ -106,101 +109,103 @@
                     '-' +
                     (event?.TimeSlotTill | time)
                   "
-                >
-                  <p>
-                    Pacjent: {{ event.Appointment.PatientProfile.FirstName }}
-                    {{ event.Appointment.PatientProfile.LastName }}
-                  </p>
-                  <button
-                    pButton
-                    (click)="showDetails(event)"
-                    style="width: 100%"
-                    label="Szczegóły"
-                    class="p-button-text"
-                  ></button>
-                </p-card>
-              </ng-template>
-            </p-timeline>
-          </div>
-        </p-tabpanel>
-        <p-tabpanel value="1">
-          <form (ngSubmit)="onSubmit(scheduleForm)" #scheduleForm="ngForm">
-            <div class="form-container">
-              <div class="me-3">
-                <label for="date" class="me-2">Data:</label>
-                <p-datePicker
-                  inputId="date"
-                  name="date"
-                  [(ngModel)]="date"
-                  dateFormat="yy-mm-dd"
-                  [minDate]="today"
-                  [required]="true"
-                ></p-datePicker>
+                      >
+                      <p>
+                        Pacjent: {{ event.Appointment.PatientProfile.FirstName }}
+                        {{ event.Appointment.PatientProfile.LastName }}
+                      </p>
+                      <button
+                        pButton
+                        (click)="showDetails(event)"
+                        style="width: 100%"
+                        label="Szczegóły"
+                        class="p-button-text"
+                      ></button>
+                    </p-card>
+                  </ng-template>
+                </p-timeline>
               </div>
-              <div class="me-3">
-                <label for="startTime" class="me-2">Od:</label>
-                <p-datePicker
-                  inputId="startTime"
-                  name="startTime"
-                  [(ngModel)]="startTime"
-                  hourFormat="24"
-                  [required]="true"
-                  [timeOnly]="true"
-                ></p-datePicker>
+            }
+          </p-tabpanel>
+          <p-tabpanel value="1">
+            <form (ngSubmit)="onSubmit(scheduleForm)" #scheduleForm="ngForm">
+              <div class="form-container">
+                <div class="me-3">
+                  <label for="date" class="me-2">Data:</label>
+                  <p-datePicker
+                    inputId="date"
+                    name="date"
+                    [(ngModel)]="date"
+                    dateFormat="yy-mm-dd"
+                    [minDate]="today"
+                    [required]="true"
+                  ></p-datePicker>
+                </div>
+                <div class="me-3">
+                  <label for="startTime" class="me-2">Od:</label>
+                  <p-datePicker
+                    inputId="startTime"
+                    name="startTime"
+                    [(ngModel)]="startTime"
+                    hourFormat="24"
+                    [required]="true"
+                    [timeOnly]="true"
+                  ></p-datePicker>
+                </div>
+                <div class="me-3">
+                  <label for="endTime" class="me-2">Do:</label>
+                  <p-datePicker
+                    inputId="endTime"
+                    name="endTime"
+                    [(ngModel)]="endTime"
+                    hourFormat="24"
+                    [required]="true"
+                    [timeOnly]="true"
+                  ></p-datePicker>
+                </div>
               </div>
-              <div class="me-3">
-                <label for="endTime" class="me-2">Do:</label>
-                <p-datePicker
-                  inputId="endTime"
-                  name="endTime"
-                  [(ngModel)]="endTime"
-                  hourFormat="24"
-                  [required]="true"
-                  [timeOnly]="true"
-                ></p-datePicker>
-              </div>
-            </div>
 
-            <div class="mb-3">
-              <label for="duration" class="me-2"
-                >Czas trwania wizyty (minuty):</label
-              >
-              <input
-                type="number"
-                id="duration"
-                pInputText
-                name="duration"
-                [(ngModel)]="duration"
-                required
-              />
-            </div>
-            <button
-              pButton
-              type="submit"
-              label="Dodaj"
-              (click)="onSubmit(scheduleForm)"
-              [disabled]="!isFormValid()"
-            ></button>
-          </form>
-        </p-tabpanel>
-        <p-tabpanel value="2">
-          <div *ngIf="historyEvents.length" class="timeline">
-            <p-timeline
-              [value]="historyEvents"
-              align="alternate"
-              styleClass="customized-timeline"
-            >
-              <ng-template pTemplate="marker" let-event>
-                <span
-                  class="custom-marker shadow-2"
-                  [style.backgroundColor]="event.color"
-                >
-                  <i [ngClass]="event?.icon" [ngStyle]="{ color: 'white' }"></i>
-                </span>
-              </ng-template>
-              <ng-template pTemplate="content" let-event>
-                <p-card
-                  [header]="event?.Appointment?.Status | capitalize"
+              <div class="mb-3">
+                <label for="duration" class="me-2"
+                  >Czas trwania wizyty (minuty):</label
+                  >
+                  <input
+                    type="number"
+                    id="duration"
+                    pInputText
+                    name="duration"
+                    [(ngModel)]="duration"
+                    required
+                    />
+                </div>
+                <button
+                  pButton
+                  type="submit"
+                  label="Dodaj"
+                  (click)="onSubmit(scheduleForm)"
+                  [disabled]="!isFormValid()"
+                ></button>
+              </form>
+            </p-tabpanel>
+            <p-tabpanel value="2">
+              @if (historyEvents.length) {
+                <div class="timeline">
+                  <p-timeline
+                    [value]="historyEvents"
+                    align="alternate"
+                    styleClass="customized-timeline"
+                    >
+                    <ng-template pTemplate="marker" let-event>
+                      <span
+                        class="custom-marker shadow-2"
+                        [style.backgroundColor]="event.color"
+                        >
+                        <i [ngClass]="event?.icon" [ngStyle]="{ color: 'white' }"></i>
+                      </span>
+                    </ng-template>
+                    <ng-template pTemplate="content" let-event>
+                      <p-card
+                        [header]="event?.Appointment?.Status | capitalize"
                   [subheader]="
                     (event?.AvailableDate | customDate) +
                     ' ' +
@@ -208,26 +213,27 @@
                     '-' +
                     (event?.TimeSlotTill | time)
                   "
-                >
-                  <p>
-                    Pacjent: {{ event.Appointment.PatientProfile.FirstName }}
-                    {{ event.Appointment.PatientProfile.LastName }}
-                  </p>
-                  <button
-                    pButton
-                    (click)="showDetails(event)"
-                    style="width: 100%"
-                    label="Szczegóły"
-                    class="p-button-text"
-                  ></button>
-                </p-card>
-              </ng-template>
-            </p-timeline>
-          </div>
-        </p-tabpanel>
-        <p-tabpanel value="3"></p-tabpanel>
-        </p-tabpanels>
-      </p-tabs>
+                        >
+                        <p>
+                          Pacjent: {{ event.Appointment.PatientProfile.FirstName }}
+                          {{ event.Appointment.PatientProfile.LastName }}
+                        </p>
+                        <button
+                          pButton
+                          (click)="showDetails(event)"
+                          style="width: 100%"
+                          label="Szczegóły"
+                          class="p-button-text"
+                        ></button>
+                      </p-card>
+                    </ng-template>
+                  </p-timeline>
+                </div>
+              }
+            </p-tabpanel>
+            <p-tabpanel value="3"></p-tabpanel>
+          </p-tabpanels>
+        </p-tabs>
+      </div>
     </div>
   </div>
-</div>

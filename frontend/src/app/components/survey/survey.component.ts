@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
-import { CommonModule } from '@angular/common';
+
 import { SurveyService } from '../../services/survey.service';
 import { EventItem } from '../dashboard/dashboard.component';
 
@@ -35,13 +35,12 @@ export interface SurveyData {
 @Component({
     selector: 'app-survey',
     imports: [
-        SelectModule,
-        FormsModule,
-        MatIconModule,
-        InputTextModule,
-        ButtonModule,
-        CommonModule,
-    ],
+    SelectModule,
+    FormsModule,
+    MatIconModule,
+    InputTextModule,
+    ButtonModule
+],
     templateUrl: './survey.component.html',
     styleUrl: './survey.component.css'
 })

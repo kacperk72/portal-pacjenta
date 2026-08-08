@@ -3,7 +3,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { LoginService } from '../../services/login.service';
-import { CommonModule } from '@angular/common';
+
 import { ToggleSwitchModule } from 'primeng/toggleswitch';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
@@ -12,13 +12,12 @@ import { UserLocalStorageData } from '../../types/surveyTypes';
 @Component({
     selector: 'app-menu',
     imports: [
-        RouterModule,
-        MatToolbarModule,
-        MatIconModule,
-        CommonModule,
-        ToggleSwitchModule,
-        FormsModule,
-    ],
+    RouterModule,
+    MatToolbarModule,
+    MatIconModule,
+    ToggleSwitchModule,
+    FormsModule
+],
     templateUrl: './menu.component.html',
     styleUrl: './menu.component.css'
 })
