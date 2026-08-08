@@ -52,11 +52,16 @@
       </div>
     </div>
     <div class="dashboard-data">
-      <p-tabView *ngIf="dataLoaded" styleClass="tabview-custom">
-        <p-tabPanel>
-          <ng-template pTemplate="header">
-            <span>Nadchodzące wizyty</span>
-          </ng-template>
+      <p-tabs *ngIf="dataLoaded" value="0" class="tabview-custom">
+        <p-tablist>
+          <p-tab value="0"><span>Nadchodzące wizyty</span></p-tab>
+          <p-tab value="1"><span>Historia wizyt i badań</span></p-tab>
+          <p-tab value="2"><span>Skierowania</span></p-tab>
+          <p-tab value="3"><span>Recepty</span></p-tab>
+        </p-tablist>
+
+        <p-tabpanels>
+        <p-tabpanel value="0">
           <div class="timeline">
             <p-timeline
               [value]="events"
@@ -102,11 +107,8 @@
             </p-timeline>
             <div *ngIf="!events.length">Brak wizyt</div>
           </div>
-        </p-tabPanel>
-        <p-tabPanel header="Header II">
-          <ng-template pTemplate="header">
-            <span>Historia wizyt i badań</span>
-          </ng-template>
+        </p-tabpanel>
+        <p-tabpanel value="1">
           <div class="timeline">
             <p-timeline
               [value]="eventsHistory"
@@ -135,11 +137,8 @@
             </p-timeline>
             <div *ngIf="!eventsHistory.length">Brak wizyt</div>
           </div>
-        </p-tabPanel>
-        <p-tabPanel header="Header III">
-          <ng-template pTemplate="header">
-            <span>Skierowania</span>
-          </ng-template>
+        </p-tabpanel>
+        <p-tabpanel value="2">
           <div class="card-container">
             <div class="referral">
               <p-card header="Laryngolog">
@@ -198,11 +197,8 @@
               </p-card>
             </div>
           </div>
-        </p-tabPanel>
-        <p-tabPanel header="Header III">
-          <ng-template pTemplate="header">
-            <span>Recepty</span>
-          </ng-template>
+        </p-tabpanel>
+        <p-tabpanel value="3">
           <div class="card-container">
             <div *ngFor="let prescription of prescriptions" class="referral">
               <p-card [header]="'Recepta na ' + prescription.medicine">
@@ -230,8 +226,9 @@
               Brak recept
             </div>
           </div>
-        </p-tabPanel>
-      </p-tabView>
+        </p-tabpanel>
+        </p-tabpanels>
+      </p-tabs>
     </div>
   </div>
 </div>

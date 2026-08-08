@@ -21,7 +21,7 @@ input[type="text"] {
   min-width: 400px !important;
 }
 
-:host ::ng-deep .dropdown-select .p-dropdown {
+:host ::ng-deep .dropdown-select .p-select {
   min-width: 400px !important;
 }
 

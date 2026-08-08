@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TabViewModule } from 'primeng/tabview';
+import { TabsModule } from 'primeng/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
@@ -33,7 +33,7 @@ export interface EventItem {
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
-  imports: [TabViewModule, MatIconModule, InputTextModule, FormsModule, ButtonModule, TimelineModule, CardModule, CommonModule, CapitalizePipe],
+  imports: [TabsModule, MatIconModule, InputTextModule, FormsModule, ButtonModule, TimelineModule, CardModule, CommonModule, CapitalizePipe],
 })
 export class DashboardComponent implements OnInit {
   name: string = '';

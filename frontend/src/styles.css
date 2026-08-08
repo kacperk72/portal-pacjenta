@@ -11,12 +11,13 @@ body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
-.tabview-custom .p-tabview-nav li a {
+/* PrimeNG 20: TabView -> Tabs. Naglowki nie sa juz <li><a>, tylko <p-tab> (button). */
+.tabview-custom .p-tab {
   text-decoration: none;
 }
 
-.tabview-custom .p-tabview-nav li a:after,
-.tabview-custom .p-tabview-nav li a:before {
+.tabview-custom .p-tab:after,
+.tabview-custom .p-tab:before {
   display: none;
 }
 

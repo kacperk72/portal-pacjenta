@@ -11,9 +11,9 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { TimelineModule } from 'primeng/timeline';
-import { TabViewModule } from 'primeng/tabview';
+import { TabsModule } from 'primeng/tabs';
 import { DoctorService } from '../../services/doctor.service';
-import { CalendarModule } from 'primeng/calendar';
+import { DatePickerModule } from 'primeng/datepicker';
 import { TimePipe } from '../../pipes/time.pipe';
 import { DatePipe } from '../../pipes/date.pipe';
 import { CapitalizePipe } from '../../pipes/capitalize.pipe';
@@ -26,7 +26,7 @@ import { VisitSurveyDetailsComponent } from '../visit-survey-details/visit-surve
   templateUrl: './doctor-dashboard.component.html',
   styleUrl: './doctor-dashboard.component.css',
   imports: [
-    TabViewModule,
+    TabsModule,
     MatIconModule,
     InputTextModule,
     FormsModule,
@@ -34,7 +34,7 @@ import { VisitSurveyDetailsComponent } from '../visit-survey-details/visit-surve
     TimelineModule,
     CardModule,
     CommonModule,
-    CalendarModule,
+    DatePickerModule,
     TimePipe,
     DatePipe,
     CapitalizePipe,

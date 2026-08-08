@@ -4,7 +4,7 @@
     <div class="head-text">Umów wizytę u najlepszego specjalisty</div>
     <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
       <div class="visit-selects">
-        <p-dropdown
+        <p-select
           formControlName="specialization"
           [options]="specializations"
           optionLabel="specialization"
@@ -18,9 +18,9 @@
           <ng-template let-specialization pTemplate="item">
             <div>{{ specialization }}</div>
           </ng-template>
-        </p-dropdown>
+        </p-select>
 
-        <p-dropdown
+        <p-select
           formControlName="location"
           [options]="locations"
           optionLabel="location"
@@ -33,17 +33,17 @@
           <ng-template let-location pTemplate="item">
             <div>{{ location }}</div>
           </ng-template>
-        </p-dropdown>
+        </p-select>
 
         <div class="date-container">
           <label class="date-label" for="date">Data</label>
-          <p-calendar formControlName="date" [showIcon]="true"></p-calendar>
+          <p-datePicker formControlName="date" [showIcon]="true"></p-datePicker>
         </div>
       </div>
 
       <div class="visit-switch">
         <mat-icon>apartment</mat-icon> W gabinecie
-        <p-inputSwitch formControlName="appointmentType"></p-inputSwitch>
+        <p-toggleSwitch formControlName="appointmentType"></p-toggleSwitch>
         <mat-icon>home</mat-icon> Online
       </div>
       <div class="search-button">
@@ -76,7 +76,7 @@
             (ngSubmit)="onSubmit()"
           >
             <div class="toolbar-form-inner">
-              <p-dropdown
+              <p-select
                 formControlName="specialization"
                 [options]="specializations"
                 optionLabel="specialization"
@@ -90,9 +90,9 @@
                 <ng-template let-specialization pTemplate="item">
                   <div>{{ specialization }}</div>
                 </ng-template>
-              </p-dropdown>
+              </p-select>
 
-              <p-dropdown
+              <p-select
                 formControlName="location"
                 [options]="locations"
                 optionLabel="location"
@@ -105,19 +105,19 @@
                 <ng-template let-location pTemplate="item">
                   <div>{{ location }}</div>
                 </ng-template>
-              </p-dropdown>
+              </p-select>
               <span style="margin-left: 10px">
                 <label style="margin-right: 10px" for="date">Data</label>
-                <p-calendar
+                <p-datePicker
                   formControlName="date"
                   [showIcon]="true"
-                ></p-calendar>
+                ></p-datePicker>
               </span>
               <div class="visit-switch2">
                 <mat-icon>apartment</mat-icon> W gabinecie
-                <p-inputSwitch
+                <p-toggleSwitch
                   formControlName="appointmentType"
-                ></p-inputSwitch>
+                ></p-toggleSwitch>
                 <mat-icon>home</mat-icon> Online
               </div>
               <div class="search-button">

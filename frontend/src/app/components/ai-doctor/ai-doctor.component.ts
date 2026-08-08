@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TabViewModule } from 'primeng/tabview';
+import { TabsModule } from 'primeng/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
@@ -9,7 +9,7 @@ import { ChatService } from '../../services/chat.service';
 @Component({
     selector: 'app-ai-doctor',
     imports: [
-        TabViewModule,
+        TabsModule,
         MatIconModule,
         InputTextModule,
         FormsModule,

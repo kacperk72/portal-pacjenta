@@ -4,7 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { LoginService } from '../../services/login.service';
 import { CommonModule } from '@angular/common';
-import { InputSwitchModule } from 'primeng/inputswitch';
+import { ToggleSwitchModule } from 'primeng/toggleswitch';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { UserLocalStorageData } from '../../types/surveyTypes';
@@ -16,7 +16,7 @@ import { UserLocalStorageData } from '../../types/surveyTypes';
         MatToolbarModule,
         MatIconModule,
         CommonModule,
-        InputSwitchModule,
+        ToggleSwitchModule,
         FormsModule,
     ],
     templateUrl: './menu.component.html',

@@ -6,13 +6,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormControl, FormGroup } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
-import { DropdownModule } from 'primeng/dropdown';
-import { InputSwitchModule } from 'primeng/inputswitch';
+import { SelectModule } from 'primeng/select';
+import { ToggleSwitchModule } from 'primeng/toggleswitch';
 import { MatIconModule } from '@angular/material/icon';
 import { ButtonModule } from 'primeng/button';
 import { ToolbarModule } from 'primeng/toolbar';
 import { CardModule } from 'primeng/card';
-import { CalendarModule } from 'primeng/calendar';
+import { DatePickerModule } from 'primeng/datepicker';
 import { DataService } from '../../services/data.service';
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '../../pipes/date.pipe';
@@ -33,13 +33,13 @@ import { UserService, userLocalStorageData } from '../../services/user.service';
         MatButtonModule,
         ReactiveFormsModule,
         InputTextModule,
-        DropdownModule,
-        InputSwitchModule,
+        SelectModule,
+        ToggleSwitchModule,
         MatIconModule,
         ButtonModule,
         ToolbarModule,
         CardModule,
-        CalendarModule,
+        DatePickerModule,
         CommonModule,
         DatePipe,
         TimePipe,

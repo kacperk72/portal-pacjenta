@@ -1,6 +1,6 @@
 import { Component, Input, inject } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { InputTextModule } from 'primeng/inputtext';
@@ -35,7 +35,7 @@ export interface SurveyData {
 @Component({
     selector: 'app-survey',
     imports: [
-        DropdownModule,
+        SelectModule,
         FormsModule,
         MatIconModule,
         InputTextModule,
