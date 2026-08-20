@@ -45,6 +45,10 @@
   "overrides": {
     "@angular/build": {
       "undici": "7.29.0"
+    },
+    "webpack-dev-server": "5.2.6",
+    "sockjs": {
+      "uuid": "^11.1.1"
     }
   }
 }
