@@ -4,3 +4,7 @@
 
 # Skopiowane materiały kursu 10xDevs (źródło: ../10xdevs/dokumentacja kursu/) — nie wersjonujemy
 /context/reference/10xdevs-m4/
+# Skille i prompty ze szkolenia 10xDevs (10x-cli) — tylko lokalnie, regulamin zabrania publikacji (issue #2)
+/.claude/skills/10x-*/
+/.claude/skills/INDEX.md
+/.claude/prompts/m4l*.md
