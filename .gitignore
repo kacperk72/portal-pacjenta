@@ -1,3 +1,9 @@
 /backend/node_modules
 /data
 .env
+
+# Materiały i skille ze szkolenia 10xDevs — tylko lokalnie, regulamin zabrania publikacji (issue #2)
+/context/reference/10xdevs-m4/
+/.claude/skills/10x-*/
+/.claude/skills/INDEX.md
+/.claude/prompts/m4l*.md
